@@ -16,7 +16,7 @@ const CompanyInformation = new Schema({
         required: [true, "Please upload Company logo"]
     },
     colorScheme: [
-        {type: Sting},
+        {type: String},
     ],
     createdAt: {
         type: Date,
