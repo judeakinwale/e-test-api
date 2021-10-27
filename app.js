@@ -2,7 +2,8 @@ require('dotenv').config({path: './.env'});
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const companyProfileRoute = require('./Routes/company_profile_routes')
+const companyProfileRoutes = require('./Routes/company_profile_routes')
+const testDetailRoutes = require('./Routes/test_details_routes')
 
 
 const app = express();
@@ -15,7 +16,9 @@ const MONGO_CLOUD_URI = process.env.MONGO_CLOUD_URI;
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use('/company', companyProfileRoute)
+app.use(express.json())
+app.use('/company', companyProfileRoutes)
+app.use('/test', testDetailRoutes)
 
 
 mongoose.connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})
