@@ -1,5 +1,4 @@
 const CompanyProfile = require('../Models/company_profile')
-const errorResponse = require("../Utils/errorResponse")
 
 // @desc    Get Company Profile
 // @route   GET /api/v1/company
