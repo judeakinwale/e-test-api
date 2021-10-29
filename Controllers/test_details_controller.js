@@ -4,7 +4,7 @@ exports.getAllTests = async (req, res, next) => {
     const tests = await Test.find()
 
     if (!tests || tests.length < 1) {
-        returnres.status(404).json({
+        return res.status(404).json({
             success: true,
             message: "There are no tests"
         })
@@ -19,7 +19,7 @@ exports.getCandidateTests = async (req, res, next) => {
     const tests = await Test.find({candidate: req.params.candidate_id})
 
     if (!tests || tests.length < 1) {
-        returnres.status(404).json({
+        return res.status(404).json({
             success: true,
             message: "There are no tests"
         })
@@ -36,7 +36,7 @@ exports.createTest = async (req, res, next) => {
     if (!test) {
         res.status(400).json({
             success: true,
-            data: "Invalid test details"
+            message: "Invalid test details"
         })
     }
     res.status(201).json({
@@ -49,7 +49,7 @@ exports.getTest = async (req, res, next) => {
     const test = await Test.findById(req.params.id)
 
     if (!test) {
-        returnres.status(404).json({
+        return res.status(404).json({
             success: true,
             message: "Test not found"
         })
@@ -61,7 +61,7 @@ exports.getTest = async (req, res, next) => {
 }
 
 exports.updateTest = async (req, res, next) => {
-    const test = Test.findByIdAndUpdate(
+    const test = await Test.findByIdAndUpdate(
         req.params.id,
         req.body,
         {
@@ -73,7 +73,7 @@ exports.updateTest = async (req, res, next) => {
     if (!test) {
         res.status(400).json({
             success: true,
-            data: "Invalid test details"
+            message: "Invalid test details"
         })
     }
     res.status(200).json({
