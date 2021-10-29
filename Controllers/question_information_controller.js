@@ -11,7 +11,7 @@ exports.getAllQuestions = async (req, res, next) => {
     }
     res.status(200).json({
         success: true,
-        data: tests
+        data: questions
     })
 }
 
@@ -41,7 +41,22 @@ exports.getQuizQuestions = async (req, res, next) => {
     }
     res.status(200).json({
         success: true,
-        data: tests
+        data: questions
+    })
+}
+
+exports.getQuestion = async (req, res, next) => {
+    const question = await Questions.findById(req.params.id)
+
+    if (!question) {
+        return res.status(404).json({
+            success: true,
+            message: "Question not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: question
     })
 }
 

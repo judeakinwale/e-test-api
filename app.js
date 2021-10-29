@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const companyProfileRoutes = require('./Routes/company_profile_routes')
 const testDetailRoutes = require('./Routes/test_details_routes')
+const questionInformationRoutes = require('./Routes/question_information_routes')
 
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(express.json())
 app.use('/company', companyProfileRoutes)
 app.use('/test', testDetailRoutes)
+app.use('/question', questionInformationRoutes)
 
 
 mongoose.connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})
