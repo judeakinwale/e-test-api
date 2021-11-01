@@ -1,7 +1,7 @@
 const Question = require('../Models/question_information')
 
 exports.getAllQuestions = async (req, res, next) => {
-    const questions = await Questions.find()
+    const questions = await Question.find()
 
     if (!questions || questions.length < 1) {
         return res.status(404).json({
@@ -16,7 +16,7 @@ exports.getAllQuestions = async (req, res, next) => {
 }
 
 exports.createQuestion = async (req, res, next) => {
-    const question = await Questions.create(req.body)
+    const question = await Question.create(req.body)
 
     if (!question) {
         return res.status(400).json({
@@ -30,8 +30,8 @@ exports.createQuestion = async (req, res, next) => {
     })
 }
 
-exports.getQuizQuestions = async (req, res, next) => {
-    const questions = await Questions.find({quiz: req.params.quiz_id})
+exports.getSectionQuestions = async (req, res, next) => {
+    const questions = await Question.find({section: req.params.section_id})
 
     if (!questions || questions.length < 1) {
         return res.status(404).json({
@@ -46,7 +46,7 @@ exports.getQuizQuestions = async (req, res, next) => {
 }
 
 exports.getQuestion = async (req, res, next) => {
-    const question = await Questions.findById(req.params.id)
+    const question = await Question.findById(req.params.id)
 
     if (!question) {
         return res.status(404).json({
@@ -61,7 +61,7 @@ exports.getQuestion = async (req, res, next) => {
 }
 
 exports.updateQuestions = async (req, res, next) => {
-    const question = await Questions.findByIdAndUpdate(
+    const question = await Question.findByIdAndUpdate(
         req.params.id,
         req.body,
         {

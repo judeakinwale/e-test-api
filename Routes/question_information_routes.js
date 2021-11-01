@@ -2,7 +2,7 @@ const express = require('express')
 const {
     getAllQuestions,
     createQuestion,
-    getQuizQuestions,
+    getSectionQuestions,
     getQuestion,
     updateQuestions
 } = require('../Controllers/question_information_controller')
@@ -13,6 +13,6 @@ router.route('/').get(getAllQuestions)
 router.route('/').post(createQuestion)
 router.route('/:id').get(getQuestion)
 router.route('/:id').put(updateQuestions)
-router.route('/:quiz_id').get(getQuizQuestions)
+router.route('/:section_id').get(getSectionQuestions)
 
 module.exports = router
