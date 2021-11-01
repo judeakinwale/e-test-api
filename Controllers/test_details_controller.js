@@ -5,7 +5,7 @@ exports.getAllTests = async (req, res, next) => {
 
     if (!tests || tests.length < 1) {
         return res.status(404).json({
-            success: true,
+            success: false,
             message: "There are no tests"
         })
     }
@@ -20,7 +20,7 @@ exports.getCandidateTests = async (req, res, next) => {
 
     if (!tests || tests.length < 1) {
         return res.status(404).json({
-            success: true,
+            success: false,
             message: "There are no tests"
         })
     }
@@ -35,7 +35,7 @@ exports.createTest = async (req, res, next) => {
 
     if (!test) {
         res.status(400).json({
-            success: true,
+            success: false,
             message: "Invalid test details"
         })
     }
@@ -50,7 +50,7 @@ exports.getTest = async (req, res, next) => {
 
     if (!test) {
         return res.status(404).json({
-            success: true,
+            success: false,
             message: "Test not found"
         })
     }
@@ -72,7 +72,7 @@ exports.updateTest = async (req, res, next) => {
 
     if (!test) {
         res.status(400).json({
-            success: true,
+            success: false,
             message: "Invalid test details"
         })
     }

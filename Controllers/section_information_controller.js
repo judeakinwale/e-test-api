@@ -6,7 +6,7 @@ exports.getAllSections = async (req, res, next) => {
 
     if (!sections || sections.length < 1) {
         return res.status(404).json({
-            success: true,
+            success: false,
             message: "There are no sections"
         })
     }
@@ -21,7 +21,7 @@ exports.createSection = async (req, res, next) => {
 
     if (!section) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "Invalid section details"
         })
     }
@@ -36,7 +36,7 @@ exports.getSection = async (req, res, next) => {
 
     if (!section) {
         return res.status(404).json({
-            success: true,
+            success: false,
             message: "Section not found"
         })
     }
@@ -58,7 +58,7 @@ exports.updateSections = async (req, res, next) => {
 
     if (!section) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "Invalid section details"
         })
     }
@@ -73,7 +73,7 @@ exports.getTestSections = async (req, res, next) => {
 
     if (!sections || sections.length < 1) {
         return res.status(404).json({
-            success: true,
+            success: false,
             message: "There are no sections"
         })
     }

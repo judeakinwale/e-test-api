@@ -5,7 +5,7 @@ exports.getAllQuestions = async (req, res, next) => {
 
     if (!questions || questions.length < 1) {
         return res.status(404).json({
-            success: true,
+            success: false,
             message: "There are no questions"
         })
     }
@@ -20,7 +20,7 @@ exports.createQuestion = async (req, res, next) => {
 
     if (!question) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "Invalid question details"
         })
     }
@@ -35,7 +35,7 @@ exports.getSectionQuestions = async (req, res, next) => {
 
     if (!questions || questions.length < 1) {
         return res.status(404).json({
-            success: true,
+            success: false,
             message: "There are no questions"
         })
     }
@@ -50,7 +50,7 @@ exports.getQuestion = async (req, res, next) => {
 
     if (!question) {
         return res.status(404).json({
-            success: true,
+            success: false,
             message: "Question not found"
         })
     }
@@ -72,7 +72,7 @@ exports.updateQuestions = async (req, res, next) => {
 
     if (!question) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "Invalid question details"
         })
     }
