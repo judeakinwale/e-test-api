@@ -1,7 +1,7 @@
 const mongoose  = require("mongoose");
 const Schema = mongoose.Schema;
 
-const AdminInformation = new Schema({
+const CandidateInformation = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
     firstName: {
         type: String,
@@ -30,4 +30,4 @@ const AdminInformation = new Schema({
     }
 });
 
-module.exports = mongoose.model('admin', AdminInformation);
+module.exports = mongoose.model('candidate', CandidateInformation);
