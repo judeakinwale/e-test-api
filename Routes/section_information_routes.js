@@ -1,4 +1,6 @@
 const express = require('express')
+const advancedResults = require('../Middleware/advancedResults')
+const Section = require('../Models/section_information')
 const {
     getAllSections,
     createSection,
@@ -9,7 +11,7 @@ const {
 
 const router = express.Router()
 
-router.route('/').get(getAllSections)
+router.route('/').get(advancedResults(Section), getAllSections)
 router.route('/').post(createSection)
 router.route('/:id').get(getSection)
 router.route('/:id').put(updateSections)

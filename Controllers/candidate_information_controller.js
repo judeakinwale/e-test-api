@@ -1,6 +1,8 @@
 const Candidate = require('../Models/candidate_information')
 
 exports.getAllCandidates = async (req, res, next) => {
+    // res.status(200).json(res.advancedResults);
+
     const candidates = await Candidate.find()
 
     if (!candidates || candidates.length < 1) {

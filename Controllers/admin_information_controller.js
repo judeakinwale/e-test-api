@@ -1,6 +1,8 @@
 const Admin = require('../Models/admin_information')
 
 exports.getAllAdmins = async (req, res, next) => {
+    // res.status(200).json(res.advancedResults);
+
     const admins = await Admin.find()
 
     if (!admins || admins.length < 1) {

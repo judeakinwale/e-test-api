@@ -2,6 +2,8 @@ const Section = require('../Models/section_information')
 const Question = require('../Models/question_information')
 
 exports.getAllSections = async (req, res, next) => {
+    // res.status(200).json(res.advancedResults);
+
     const sections = await Section.find()
 
     if (!sections || sections.length < 1) {

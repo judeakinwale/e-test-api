@@ -1,6 +1,8 @@
 const Score = require('../Models/score_details')
 
 exports.getAllScores = async (req, res, next) => {
+    // res.status(200).json(res.advancedResults);
+
     const scores = await Score.find()
 
     if (!scores || scores.length < 1) {

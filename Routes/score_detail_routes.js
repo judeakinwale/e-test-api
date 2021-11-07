@@ -1,4 +1,6 @@
 const express = require('express')
+const advancedResults = require('../Middleware/advancedResults')
+const Score = require('../Models/score_details')
 const {
     getAllScores,
     createScore,
@@ -11,7 +13,7 @@ const {
 
 const router = express.Router()
 
-router.route('/').get(getAllScores)
+router.route('/').get(advancedResults(Score), getAllScores)
 router.route('/').post(createScore)
 router.route('/:id').get(getScore)
 router.route('/:id').put(updateScore)

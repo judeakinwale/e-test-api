@@ -1,4 +1,6 @@
 const express = require('express')
+const advancedResults = require('../Middleware/advancedResults')
+const Admin = require('../Models/admin_information')
 const {
     getAllAdmins,
     createAdmin,
@@ -8,7 +10,7 @@ const {
 
 const router = express.Router()
 
-router.route('/').get(getAllAdmins)
+router.route('/').get(advancedResults(Admin), getAllAdmins)
 router.route('/').post(createAdmin)
 router.route('/:id').get(getAdmin)
 router.route('/:id').put(updateAdmin)

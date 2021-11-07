@@ -1,6 +1,8 @@
 const Question = require('../Models/question_information')
 
 exports.getAllQuestions = async (req, res, next) => {
+    // res.status(200).json(res.advancedResults);
+
     const questions = await Question.find()
 
     if (!questions || questions.length < 1) {

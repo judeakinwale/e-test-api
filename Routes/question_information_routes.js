@@ -1,4 +1,6 @@
 const express = require('express')
+const advancedResults = require('../Middleware/advancedResults')
+const Question = require('../Models/question_information')
 const {
     getAllQuestions,
     createQuestion,
@@ -9,7 +11,7 @@ const {
 
 const router = express.Router()
 
-router.route('/').get(getAllQuestions)
+router.route('/').get(advancedResults(Question), getAllQuestions)
 router.route('/').post(createQuestion)
 router.route('/:id').get(getQuestion)
 router.route('/:id').put(updateQuestions)

@@ -1,6 +1,8 @@
 const Test = require('../Models/test_details')
 
 exports.getAllTests = async (req, res, next) => {
+    // res.status(200).json(res.advancedResults);
+
     const tests = await Test.find()
 
     if (!tests || tests.length < 1) {
@@ -31,7 +33,7 @@ exports.getCandidateTests = async (req, res, next) => {
 }
 
 exports.createTest = async (req, res, next) => {
-    const test = Test.create(req.body)
+    const test = await Test.create(req.body)
 
     if (!test) {
         res.status(400).json({
