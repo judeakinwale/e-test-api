@@ -27,7 +27,9 @@ const CandidateInformation = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-    }
+    },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
 });
 
 //Encrypt password using bcrypt

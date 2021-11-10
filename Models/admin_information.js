@@ -23,7 +23,9 @@ const AdminInformation = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-    }
+    },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
 });
 
 

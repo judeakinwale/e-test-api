@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-// const asyncHandler = require("./async");
+const asyncHandler = require("./async");
 const ErrorResponse = require("../utils/errorResponse");
 const Admin = require("../Models/admin_information");
 const candidate = require("../Models/candidate_information")
@@ -51,13 +51,28 @@ const candidate = require("../Models/candidate_information")
 //   };
 // };
 
-// Grant access to admin
+// Grant access to authenticated user
 exports.authorize = () => {
   return (req, res, next) => {
-    if (!roles.includes(req.staff.role)) {
+    if (!req.admin || !req.candidate) {
       return next(
         new ErrorResponse(
-          `User role ${req.staff.role} is not authorized to access this route`,
+          `User is not authorized to access this route`,
+          403
+        )
+      );
+    }
+    next();
+  };
+};
+
+// Grant access to admin
+exports.authorizeAdmin = () => {
+  return (req, res, next) => {
+    if (!req.admin) {
+      return next(
+        new ErrorResponse(
+          `User is not authorized to access this route`,
           403
         )
       );
@@ -90,11 +105,24 @@ exports.protect = asyncHandler(async (req, res, next) => {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.candidate = await candidate.findById(decoded.id);
     req.admin = await Admin.findById(decoded.id)
 
     next();
   } catch (err) {
-    return next(new ErrorResponse("Not authorized to access this route", 401));
+
+    try {
+      // Verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  
+      req.candidate = await candidate.findById(decoded.id);
+  
+      next();
+    } catch (err) {
+      return next(new ErrorResponse("Not authorized to access this route", 401));
+    }
+
+    // return next(new ErrorResponse("Not authorized to access this route", 401));
   }
+
+  
 });
