@@ -15,6 +15,7 @@ const AdminInformation = new Schema({
         type: String,
         required: true,
     },
+    phone: String,
     email: {
         type: String,
         required: true,
