@@ -15,6 +15,7 @@ const sectionInformationRoutes = require('./Routes/section_information_routes');
 const scoreDetailRoutes = require('./Routes/score_detail_routes');
 const adminInformationRoutes = require('./Routes/admin_information_routes');
 const candidateInformationRoutes = require('./Routes/candidate_information_routes');
+const authentication = require('./Routes/authentication')
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use('/section', sectionInformationRoutes);
 app.use('/score', scoreDetailRoutes);
 app.use('/admin', adminInformationRoutes);
 app.use('/candidate', candidateInformationRoutes);
+app.use('/auth', authentication)
 
 
 mongoose.connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})
