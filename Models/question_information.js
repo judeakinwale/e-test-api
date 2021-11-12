@@ -7,11 +7,11 @@ const QuestionInformation = new Schema({
         type: String,
         required: [true, "Please enter question"],
     },  
-    correct_answer: {
+    answers: [{ type: String }],
+    correct_answers: [{
         type: String,
         required: true
-    },
-    incorrect_answers: [{ type: String }],
+    }],
     section: {
         type: mongoose.Schema.ObjectId,
         ref: "section",
