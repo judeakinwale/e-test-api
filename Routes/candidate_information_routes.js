@@ -2,6 +2,11 @@ const express = require('express')
 const advancedResults = require('../Middleware/advancedResults')
 const Candidate = require('../Models/candidate_information')
 const {
+    protect,
+    authorize,
+    authorizeAdmin
+} = require("../Middleware/auth");
+const {
     getAllCandidates,
     createCandidate,
     getCandidate,
@@ -10,9 +15,10 @@ const {
 
 const router = express.Router()
 
-router.route('/').get(advancedResults(Candidate), getAllCandidates)
-router.route('/').post(createCandidate)
-router.route('/:id').get(getCandidate)
-router.route('/:id').put(updateCandidate)
+router.route('/').get(protect, authorizeAdmin, advancedResults(Candidate), getAllCandidates)
+router.route('/').post(protect, authorize, createCandidate)
+router.route('/:id').get(protect, authorize, getCandidate)
+router.route('/:id').put(protect, authorizeAdmin, updateCandidate)
+// TODO: Add update self profile route
 
 module.exports = router
