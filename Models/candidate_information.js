@@ -1,4 +1,8 @@
 const mongoose  = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+// const slugify = require("slugify");
+const crypto = require("crypto");
 const Schema = mongoose.Schema;
 
 const CandidateInformation = new Schema({
