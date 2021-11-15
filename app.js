@@ -30,14 +30,14 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes
-app.use('/company', companyProfileRoutes);
-app.use('/test', testDetailRoutes);
-app.use('/question', questionInformationRoutes);
-app.use('/section', sectionInformationRoutes);
-app.use('/score', scoreDetailRoutes);
-app.use('/admin', adminInformationRoutes);
-app.use('/candidate', candidateInformationRoutes);
-app.use('/auth', authentication)
+app.use('/api/v1/company', companyProfileRoutes);
+app.use('/api/v1/test', testDetailRoutes);
+app.use('/api/v1/question', questionInformationRoutes);
+app.use('/api/v1/section', sectionInformationRoutes);
+app.use('/api/v1/score', scoreDetailRoutes);
+app.use('/api/v1/admin', adminInformationRoutes);
+app.use('/api/v1/candidate', candidateInformationRoutes);
+app.use('/api/v1/auth', authentication)
 
 
 mongoose.connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})
