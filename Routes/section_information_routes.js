@@ -16,10 +16,10 @@ const {
 
 const router = express.Router()
 
-router.route('/').get(protect, authorize, advancedResults(Section), getAllSections)
-router.route('/').post(protect, authorizeAdmin, createSection)
-router.route('/:id').get(protect, authorize, getSection)
-router.route('/:id').put(protect, authorizeAdmin, updateSections)
-router.route('/:test_id').get(protect, authorize, getTestSections)
+router.route('/api/v1/section/').get(protect, authorize, advancedResults(Section), getAllSections)
+router.route('/api/v1/section/').post(protect, authorizeAdmin, createSection)
+router.route('/api/v1/section/:id').get(protect, authorize, getSection)
+router.route('/api/v1/section/:id').put(protect, authorizeAdmin, updateSections)
+router.route('/api/v1/section/:test_id').get(protect, authorize, getTestSections)
 
 module.exports = router

@@ -15,10 +15,10 @@ const {
 
 const router = express.Router()
 
-router.route('/').get(protect, authorize, advancedResults(Test), getAllTests)
-router.route('/').post(protect, authorizeAdmin, createTest)
-router.route('/:id').get(protect, authorize, getTest)
-router.route('/:id').put(protect, authorizeAdmin, updateTest)
+router.route('/api/v1/test/').get(protect, authorize, advancedResults(Test), getAllTests)
+router.route('/api/v1/test/').post(protect, authorizeAdmin, createTest)
+router.route('/api/v1/test/:id').get(protect, authorize, getTest)
+router.route('/api/v1/test/:id').put(protect, authorizeAdmin, updateTest)
 
 module.exports = router
 

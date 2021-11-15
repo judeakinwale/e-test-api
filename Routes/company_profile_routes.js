@@ -12,8 +12,8 @@ const {
 
 const router = Express.Router()
 
-router.route('/').get(getCompanyProfile)
-router.route('/').post(protect, authorizeAdmin, createCompanyProfile)
-router.route('/:id').put(protect, authorizeAdmin, updateCompanyProfile)
+router.route('/api/v1/company/').get(getCompanyProfile)
+router.route('/api/v1/company/').post(protect, authorizeAdmin, createCompanyProfile)
+router.route('/api/v1/company/:id').put(protect, authorizeAdmin, updateCompanyProfile)
 
 module.exports = router

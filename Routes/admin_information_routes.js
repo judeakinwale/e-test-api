@@ -15,9 +15,9 @@ const {
 
 const router = express.Router()
 
-router.route('/').get(advancedResults(Admin), getAllAdmins)
-router.route('/').post(createAdmin)
-router.route('/:id').get(protect, authorizeAdmin, getAdmin)
-router.route('/:id').put(protect, authorizeAdmin, updateAdmin)
+router.route('/api/v1/admin/').get(advancedResults(Admin), getAllAdmins)
+router.route('/api/v1/admin/').post(createAdmin)
+router.route('/api/v1/admin/:id').get(protect, authorizeAdmin, getAdmin)
+router.route('/api/v1/admin/:id').put(protect, authorizeAdmin, updateAdmin)
 
 module.exports = router

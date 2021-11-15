@@ -18,13 +18,13 @@ const {
 
 const router = express.Router()
 
-router.route('/').get(protect, authorizeAdmin, advancedResults(Score), getAllScores)
-router.route('/').post(protect, authorize, createScore)
-router.route('/:id').get(protect, authorize, getScore)
-router.route('/:id').put(protect, authorize, updateScore)
-router.route('/:candidate_id').get(protect, authorizeAdmin, getAllCandidateScores)
-router.route('/:test_id').get(protect, authorizeAdmin, getAllTestScores)
-router.route('/:test_id/:candidate_id').get(protect, authorizeAdmin, getCandidateTestScores)
+router.route('/api/v1/score/').get(protect, authorizeAdmin, advancedResults(Score), getAllScores)
+router.route('/api/v1/score/').post(protect, authorize, createScore)
+router.route('/api/v1/score/:id').get(protect, authorize, getScore)
+router.route('/api/v1/score/:id').put(protect, authorize, updateScore)
+router.route('/api/v1/score/:candidate_id').get(protect, authorizeAdmin, getAllCandidateScores)
+router.route('/api/v1/score/:test_id').get(protect, authorizeAdmin, getAllTestScores)
+router.route('/api/v1/score/:test_id/:candidate_id').get(protect, authorizeAdmin, getCandidateTestScores)
 // TODO: 
 // Add get self score for a test
 // Add get self.score for all test

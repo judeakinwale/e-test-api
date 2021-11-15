@@ -6,6 +6,9 @@ const morgan = require('morgan');
 const fileupload = require("express-fileupload");
 const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
+// For swagger
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger-output.json')
 
 // Routes files
 const companyProfileRoutes = require('./Routes/company_profile_routes');
@@ -30,14 +33,31 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes
-app.use('/api/v1/company', companyProfileRoutes);
-app.use('/api/v1/test', testDetailRoutes);
-app.use('/api/v1/question', questionInformationRoutes);
-app.use('/api/v1/section', sectionInformationRoutes);
-app.use('/api/v1/score', scoreDetailRoutes);
-app.use('/api/v1/admin', adminInformationRoutes);
-app.use('/api/v1/candidate', candidateInformationRoutes);
-app.use('/api/v1/auth', authentication)
+app.use(
+    // '/api/v1/company', 
+    companyProfileRoutes);
+app.use(
+    // '/api/v1/test', 
+    testDetailRoutes);
+app.use(
+    // '/api/v1/question', 
+    questionInformationRoutes);
+app.use(
+    // '/api/v1/section', 
+    sectionInformationRoutes);
+app.use(
+    // '/api/v1/score', 
+    scoreDetailRoutes);
+app.use(
+    // '/api/v1/admin', 
+    adminInformationRoutes);
+app.use(
+    // '/api/v1/candidate', 
+    candidateInformationRoutes);
+app.use(
+    // '/api/v1/auth', 
+    authentication)
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 
 mongoose.connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})

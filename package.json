@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "swagger-autogen": "node ./swagger.js"
   },
   "keywords": [],
   "author": "",
@@ -29,5 +30,9 @@
     "nodemailer": "^6.7.0",
     "nodemon": "^2.0.14",
     "otp-generator": "^3.0.0"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.12.6",
+    "swagger-ui-express": "^4.1.6"
   }
 }
