@@ -1,6 +1,8 @@
 const Test = require('../Models/test_details')
+const ErrorResponse = require('../Utils/errorResponse')
+const asyncHandler = require('../Middleware/async')
 
-exports.getAllTests = async (req, res, next) => {
+exports.getAllTests = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
     const tests = await Test.find()
@@ -15,9 +17,9 @@ exports.getAllTests = async (req, res, next) => {
         success: true,
         data: tests
     })
-}
+})
 
-exports.getCandidateTests = async (req, res, next) => {
+exports.getCandidateTests = asyncHandler(async (req, res, next) => {
     const tests = await Test.find({candidate: req.params.candidate_id})
 
     if (!tests || tests.length < 1) {
@@ -30,9 +32,9 @@ exports.getCandidateTests = async (req, res, next) => {
         success: true,
         data: tests
     })
-}
+})
 
-exports.createTest = async (req, res, next) => {
+exports.createTest = asyncHandler(async (req, res, next) => {
     const test = await Test.create(req.body)
 
     if (!test) {
@@ -45,9 +47,9 @@ exports.createTest = async (req, res, next) => {
         success: true,
         data: test
     })
-}
+})
 
-exports.getTest = async (req, res, next) => {
+exports.getTest = asyncHandler(async (req, res, next) => {
     const test = await Test.findById(req.params.id)
 
     if (!test) {
@@ -60,9 +62,9 @@ exports.getTest = async (req, res, next) => {
         success: true,
         data: test
     })
-}
+})
 
-exports.updateTest = async (req, res, next) => {
+exports.updateTest = asyncHandler(async (req, res, next) => {
     const test = await Test.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -82,4 +84,4 @@ exports.updateTest = async (req, res, next) => {
         success: true,
         data: test
     })
-}
+})

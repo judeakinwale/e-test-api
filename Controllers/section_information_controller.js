@@ -1,7 +1,9 @@
 const Section = require('../Models/section_information')
 const Question = require('../Models/question_information')
+const ErrorResponse = require('../Utils/errorResponse')
+const asyncHandler = require('../Middleware/async')
 
-exports.getAllSections = async (req, res, next) => {
+exports.getAllSections = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
     const sections = await Section.find()
@@ -16,9 +18,9 @@ exports.getAllSections = async (req, res, next) => {
         success: true,
         data: sections
     })
-}
+})
 
-exports.createSection = async (req, res, next) => {
+exports.createSection = asyncHandler(async (req, res, next) => {
     const section = await Section.create(req.body)
 
     if (!section) {
@@ -31,9 +33,9 @@ exports.createSection = async (req, res, next) => {
         success: true,
         data: section
     })
-}
+})
 
-exports.getSection = async (req, res, next) => {
+exports.getSection = asyncHandler(async (req, res, next) => {
     const section = await Section.findById(req.params.id)
 
     if (!section) {
@@ -46,9 +48,9 @@ exports.getSection = async (req, res, next) => {
         success: true,
         data: section
     })
-}
+})
 
-exports.updateSections = async (req, res, next) => {
+exports.updateSections = asyncHandler(async (req, res, next) => {
     const section = await Section.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -68,9 +70,9 @@ exports.updateSections = async (req, res, next) => {
         success: true,
         data: section
     })
-}
+})
 
-exports.getTestSections = async (req, res, next) => {
+exports.getTestSections = asyncHandler(async (req, res, next) => {
     const sections = await Section.find({test: req.params.test_id})
 
     if (!sections || sections.length < 1) {
@@ -83,4 +85,4 @@ exports.getTestSections = async (req, res, next) => {
         success: true,
         data: sections
     })
-}
+})

@@ -2,7 +2,7 @@ const Score = require('../Models/score_details')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
-exports.getAllScores = async (req, res, next) => {
+exports.getAllScores = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
     const scores = await Score.find()
@@ -17,9 +17,9 @@ exports.getAllScores = async (req, res, next) => {
         success: true,
         data: scores
     })
-}
+})
 
-exports.createScore = async (req, res, next) => {
+exports.createScore = asyncHandler(async (req, res, next) => {
     const score = await Score.create(req.body)
 
     if (!score) {
@@ -32,9 +32,9 @@ exports.createScore = async (req, res, next) => {
         success: true,
         data: score
     })
-}
+})
 
-exports.getScore = async (req, res, next) => {
+exports.getScore = asyncHandler(async (req, res, next) => {
     const scores = await Score.findById(req.params.id)
 
     if (!scores || scores.length < 1) {
@@ -47,9 +47,9 @@ exports.getScore = async (req, res, next) => {
         success: true,
         data: scores
     })
-}
+})
 
-exports.updateScore = async (req, res, next) => {
+exports.updateScore = asyncHandler(async (req, res, next) => {
     const score = await Score.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -69,9 +69,9 @@ exports.updateScore = async (req, res, next) => {
         success: true,
         data: score
     })
-}
+})
 
-exports.getAllCandidateScores = async (req, res, next) => {
+exports.getAllCandidateScores = asyncHandler(async (req, res, next) => {
     const scores = await Score.find({candidate: req.params.candidate_id})
 
     if (!scores || scores.length < 1) {
@@ -84,9 +84,9 @@ exports.getAllCandidateScores = async (req, res, next) => {
         success: true,
         data: scores
     })
-}
+})
 
-exports.getAllTestScores = async (req, res, next) => {
+exports.getAllTestScores = asyncHandler(async (req, res, next) => {
     const scores = await Score.find({test: req.params.test_id})
 
     if (!scores || scores.length < 1) {
@@ -99,9 +99,9 @@ exports.getAllTestScores = async (req, res, next) => {
         success: true,
         data: scores
     })
-}
+})
 
-exports.getCandidateTestScores = async (req, res, next) => {
+exports.getCandidateTestScores = asyncHandler(async (req, res, next) => {
     const scores = await Score.find({
         candidate: req.params.candidate_id,
         test: req.params.test_id
@@ -117,9 +117,9 @@ exports.getCandidateTestScores = async (req, res, next) => {
         success: true,
         data: scores
     })
-}
+})
 
-exports.getAllSelfScores = async (req, res, next) => {
+exports.getAllSelfScores = asyncHandler(async (req, res, next) => {
     const scores = await Score.find({candidate: req.candidate._id})
 
     if (!scores || scores.length < 1) {
@@ -132,8 +132,8 @@ exports.getAllSelfScores = async (req, res, next) => {
         success: true,
         data: scores
     })
-}
-exports.getSelfTestScores = async (req, res, next) => {
+})
+exports.getSelfTestScores = asyncHandler(async (req, res, next) => {
     const scores = await Score.find({
         candidate: req.candidate._id,
         test: req.params.test_id
@@ -149,4 +149,4 @@ exports.getSelfTestScores = async (req, res, next) => {
         success: true,
         data: scores
     })
-}
+})

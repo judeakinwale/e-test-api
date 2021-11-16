@@ -1,9 +1,11 @@
 const CompanyProfile = require('../Models/company_profile')
+const ErrorResponse = require('../Utils/errorResponse')
+const asyncHandler = require('../Middleware/async')
 
 // @desc    Get Company Profile
 // @route   GET /api/v1/company
 // @access   Private/All
-exports.getCompanyProfile = async (req, res, next) => {
+exports.getCompanyProfile = asyncHandler(async (req, res, next) => {
     const company = await CompanyProfile.find({})
 
     if (!company) {
@@ -21,9 +23,9 @@ exports.getCompanyProfile = async (req, res, next) => {
         success: true,
         data: company
     })
-}
+})
 
-exports.createCompanyProfile = async (req, res, next) => {
+exports.createCompanyProfile = asyncHandler(async (req, res, next) => {
     const company = await CompanyProfile.create(req.body)
 
     if (!company) {
@@ -37,9 +39,9 @@ exports.createCompanyProfile = async (req, res, next) => {
         success: true,
         data: company
     })
-}
+})
 
-exports.updateCompanyProfile = async (req, res, next) => {
+exports.updateCompanyProfile = asyncHandler(async (req, res, next) => {
     const company = await CompanyProfile.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -60,4 +62,4 @@ exports.updateCompanyProfile = async (req, res, next) => {
         success: true,
         data: company
     })
-}
+})

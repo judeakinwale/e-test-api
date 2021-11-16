@@ -39,7 +39,7 @@ exports.createCandidate = asyncHandler(async (req, res, next) => {
     })
 })
 
-exports.getCandidate = async (req, res, next) => {
+exports.getCandidate = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findById(req.params.id)
 
     if (!candidate) {
@@ -52,9 +52,9 @@ exports.getCandidate = async (req, res, next) => {
         success: true,
         data: candidate
     })
-}
+})
 
-exports.updateCandidate = async (req, res, next) => {
+exports.updateCandidate = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -74,9 +74,9 @@ exports.updateCandidate = async (req, res, next) => {
         success: true,
         data: candidate
     })
-}
+})
 
-exports.getSelf = async (req, res, next) => {
+exports.getSelf = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findById(req.candidate._id)
 
     if (!candidate) {
@@ -89,9 +89,9 @@ exports.getSelf = async (req, res, next) => {
         success: true,
         data: candidate
     })
-}
+})
 
-exports.updateSelf = async (req, res, next) => {
+exports.updateSelf = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findByIdAndUpdate(
         req.candidate._id,
         req.body,
@@ -111,4 +111,4 @@ exports.updateSelf = async (req, res, next) => {
         success: true,
         data: candidate
     })
-}
+})

@@ -1,6 +1,8 @@
 const Question = require('../Models/question_information')
+const ErrorResponse = require('../Utils/errorResponse')
+const asyncHandler = require('../Middleware/async')
 
-exports.getAllQuestions = async (req, res, next) => {
+exports.getAllQuestions = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
     const questions = await Question.find()
@@ -15,9 +17,9 @@ exports.getAllQuestions = async (req, res, next) => {
         success: true,
         data: questions
     })
-}
+})
 
-exports.createQuestion = async (req, res, next) => {
+exports.createQuestion = asyncHandler(async (req, res, next) => {
     const question = await Question.create(req.body)
 
     if (!question) {
@@ -30,9 +32,9 @@ exports.createQuestion = async (req, res, next) => {
         success: true,
         data: question
     })
-}
+})
 
-exports.getSectionQuestions = async (req, res, next) => {
+exports.getSectionQuestions = asyncHandler(async (req, res, next) => {
     const questions = await Question.find({section: req.params.section_id})
 
     if (!questions || questions.length < 1) {
@@ -45,9 +47,9 @@ exports.getSectionQuestions = async (req, res, next) => {
         success: true,
         data: questions
     })
-}
+})
 
-exports.getQuestion = async (req, res, next) => {
+exports.getQuestion = asyncHandler(async (req, res, next) => {
     const question = await Question.findById(req.params.id)
 
     if (!question) {
@@ -60,9 +62,9 @@ exports.getQuestion = async (req, res, next) => {
         success: true,
         data: question
     })
-}
+})
 
-exports.updateQuestions = async (req, res, next) => {
+exports.updateQuestions = asyncHandler(async (req, res, next) => {
     const question = await Question.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -82,4 +84,4 @@ exports.updateQuestions = async (req, res, next) => {
         success: true,
         data: question
     })
-}
+})

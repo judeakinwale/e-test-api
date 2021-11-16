@@ -1,6 +1,8 @@
 const Admin = require('../Models/admin_information')
+const ErrorResponse = require('../Utils/errorResponse')
+const asyncHandler = require('../Middleware/async')
 
-exports.getAllAdmins = async (req, res, next) => {
+exports.getAllAdmins = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
     const admins = await Admin.find()
@@ -15,9 +17,9 @@ exports.getAllAdmins = async (req, res, next) => {
         success: true,
         data: admins
     })
-}
+})
 
-exports.createAdmin = async (req, res, next) => {
+exports.createAdmin = asyncHandler(async (req, res, next) => {
     const admin = await Admin.create(req.body)
 
     if (!admin) {
@@ -30,9 +32,9 @@ exports.createAdmin = async (req, res, next) => {
         success: true,
         data: admin
     })
-}
+})
 
-exports.getAdmin = async (req, res, next) => {
+exports.getAdmin = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findById(req.params.id)
 
     if (!admin) {
@@ -45,9 +47,9 @@ exports.getAdmin = async (req, res, next) => {
         success: true,
         data: admin
     })
-}
+})
 
-exports.updateAdmin = async (req, res, next) => {
+exports.updateAdmin = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -67,9 +69,9 @@ exports.updateAdmin = async (req, res, next) => {
         success: true,
         data: admin
     })
-}
+})
 
-exports.getSelf = async (req, res, next) => {
+exports.getSelf = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findById(req.admin._id)
 
     if (!admin) {
@@ -82,9 +84,9 @@ exports.getSelf = async (req, res, next) => {
         success: true,
         data: admin
     })
-}
+})
 
-exports.updateSelf = async (req, res, next) => {
+exports.updateSelf = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findByIdAndUpdate(
         req.admin._id,
         req.body,
@@ -104,4 +106,4 @@ exports.updateSelf = async (req, res, next) => {
         success: true,
         data: admin
     })
-}
+})
