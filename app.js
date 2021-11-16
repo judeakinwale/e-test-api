@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+const cors = require("cors");
 const fileupload = require("express-fileupload");
 const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
@@ -31,6 +32,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan('dev'));
+//enable CORS
+app.use(cors());
 
 // Routes
 app.use(
