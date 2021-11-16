@@ -10,15 +10,18 @@ const {
     getAllCandidates,
     createCandidate,
     getCandidate,
-    updateCandidate
+    updateCandidate,
+    getSelf,
+    updateSelf
 } = require('../Controllers/candidate_information_controller')
 
 const router = express.Router()
 
-router.route('/api/v1/candidate/').get(protect, authorizeAdmin, advancedResults(Candidate), getAllCandidates)
-router.route('/api/v1/candidate/').post(protect, authorize, createCandidate)
+router.route('/api/v1/candidate').get(protect, authorizeAdmin, advancedResults(Candidate), getAllCandidates)
+router.route('/api/v1/candidate').post(protect, authorize, createCandidate)
 router.route('/api/v1/candidate/:id').get(protect, authorize, getCandidate)
 router.route('/api/v1/candidate/:id').put(protect, authorizeAdmin, updateCandidate)
-// TODO: Add update self profile route
+router.route('/api/v1/candidate/self').get(protect, authorize, getSelf)
+router.route('/api/v1/candidate/self').put(protect, authorizeAdmin, updateSelf)
 
 module.exports = router

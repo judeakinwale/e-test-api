@@ -21,8 +21,3 @@ router.route('/api/v1/test/:id').get(protect, authorize, getTest)
 router.route('/api/v1/test/:id').put(protect, authorizeAdmin, updateTest)
 
 module.exports = router
-
-// protect, authorize, 
-// protect, authorizeAdmin, 
-// protect, authorize, 
-// protect, authorizeAdmin, 

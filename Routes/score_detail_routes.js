@@ -13,7 +13,9 @@ const {
     updateScore,
     getAllCandidateScores,
     getAllTestScores,
-    getCandidateTestScores
+    getCandidateTestScores,
+    getAllSelfScores,
+    getSelfTestScores
 } = require('../Controllers/score_details_controller')
 
 const router = express.Router()
@@ -25,8 +27,7 @@ router.route('/api/v1/score/:id').put(protect, authorize, updateScore)
 router.route('/api/v1/score/:candidate_id').get(protect, authorizeAdmin, getAllCandidateScores)
 router.route('/api/v1/score/:test_id').get(protect, authorizeAdmin, getAllTestScores)
 router.route('/api/v1/score/:test_id/:candidate_id').get(protect, authorizeAdmin, getCandidateTestScores)
-// TODO: 
-// Add get self score for a test
-// Add get self.score for all test
+router.route('/api/v1/score/self').get(protect, authorize, getAllSelfScores)
+router.route('/api/v1/score/self/:test_id').get(protect, authorize, getSelfTestScores)
 
 module.exports = router
