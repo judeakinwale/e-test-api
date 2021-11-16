@@ -22,10 +22,6 @@ exports.getAllCandidates = asyncHandler(async (req, res, next) => {
 exports.createCandidate = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.create(req.body)
 
-    if(Object.keys(req.body).length === 0) {
-        return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
-    }
-
     if (!candidate) {
         return res.status(400).json({
             success: false,

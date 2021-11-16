@@ -32,8 +32,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan('dev'));
+
 //enable CORS
 app.use(cors());
+
+//Set static folder
+// app.use(express.static(path.join(__dirname, "/public")));
 
 // Routes
 app.use(
