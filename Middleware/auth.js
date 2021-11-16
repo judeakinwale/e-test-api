@@ -156,7 +156,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
   req.admin = await Admin.findById(decoded.id);
   req.candidate = await candidate.findById(decoded.id);
 
-  if (req.admin || !req.candidate) {
+  if (req.admin || req.candidate) {
     next();
   } else {
     return next(new ErrorResponse("Not authorized to access this route", 401));
