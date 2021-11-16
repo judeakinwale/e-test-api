@@ -19,11 +19,13 @@ const AdminInformation = new Schema({
     email: {
         type: String,
         required: true,
+        unique: true,
     },
     password: {
         type: String,
         minLength: 6,
-        required: true
+        required: true,
+        select: false
     },
     createdAt: {
         type: Date,

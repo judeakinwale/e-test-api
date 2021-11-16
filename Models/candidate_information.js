@@ -18,6 +18,7 @@ const CandidateInformation = new Schema({
     email: {
         type: String,
         required: true,
+        unique: true,
     },
     phone: {
         type: String,
@@ -26,7 +27,8 @@ const CandidateInformation = new Schema({
     password: {
         type: String,
         minLength: 6,
-        required: true
+        required: true,
+        select: false
     },
     createdAt: {
         type: Date,
