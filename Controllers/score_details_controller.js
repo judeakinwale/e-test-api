@@ -1,4 +1,6 @@
 const Score = require('../Models/score_details')
+const ErrorResponse = require('../Utils/errorResponse')
+const asyncHandler = require('../Middleware/async')
 
 exports.getAllScores = async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
@@ -102,6 +104,38 @@ exports.getAllTestScores = async (req, res, next) => {
 exports.getCandidateTestScores = async (req, res, next) => {
     const scores = await Score.find({
         candidate: req.params.candidate_id,
+        test: req.params.test_id
+    })
+
+    if (!scores || scores.length < 1) {
+        return res.status(404).json({
+            success: false,
+            message: "Candidates scores not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: scores
+    })
+}
+
+exports.getAllSelfScores = async (req, res, next) => {
+    const scores = await Score.find({candidate: req.candidate._id})
+
+    if (!scores || scores.length < 1) {
+        return res.status(404).json({
+            success: false,
+            message: "Candidates scores not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: scores
+    })
+}
+exports.getSelfTestScores = async (req, res, next) => {
+    const scores = await Score.find({
+        candidate: req.candidate._id,
         test: req.params.test_id
     })
 
