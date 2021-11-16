@@ -10,6 +10,7 @@ const rateLimit = require("express-rate-limit");
 // For swagger
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger-output.json')
+const errorHandler = require('./Middleware/error')
 
 // Routes files
 const companyProfileRoutes = require('./Routes/company_profile_routes');
@@ -38,6 +39,8 @@ app.use(cors());
 
 //Set static folder
 // app.use(express.static(path.join(__dirname, "/public")));
+
+app.use(errorHandler)
 
 // Routes
 app.use(
