@@ -1,4 +1,6 @@
 const Test = require('../Models/test')
+const Section = require('../Models/section')
+const Question = require('../Models/question')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
@@ -83,5 +85,42 @@ exports.updateTest = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         data: test
+    })
+})
+
+exports.getTestSections = asyncHandler(async (req, res, next) => {
+    const sections = await Section.find({test: req.params.id})
+
+    if (!sections || sections.length  < 1) {
+        return res.status(404).json({
+            success: false,
+            message: "Test not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: sections
+    })
+})
+
+exports.getAllTestQuestions = asyncHandler(async (req, res, next) => {
+    const sections = await Section.find({test: req.params.id})
+    let questions = {}
+    
+    for (const i = 0; sections.length; i++) {
+        section = sections[i]
+        question = await Question.find({section: req.params.section_id})
+        questions.push(question)
+    }
+
+    if (!questions || questions.length  < 1) {
+        return res.status(404).json({
+            success: false,
+            message: "Test not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: questions
     })
 })
