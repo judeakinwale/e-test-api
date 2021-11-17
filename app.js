@@ -7,19 +7,19 @@ const cors = require("cors");
 const fileupload = require("express-fileupload");
 const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
+const errorHandler = require('./Middleware/error')
 // For swagger
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger-output.json')
-const errorHandler = require('./Middleware/error')
 
-// Routes files
-const companyProfileRoutes = require('./Routes/company_profile_routes');
-const testDetailRoutes = require('./Routes/test_details_routes');
-const questionInformationRoutes = require('./Routes/question_information_routes');
-const sectionInformationRoutes = require('./Routes/section_information_routes');
-const scoreDetailRoutes = require('./Routes/score_detail_routes');
-const adminInformationRoutes = require('./Routes/admin_information_routes');
-const candidateInformationRoutes = require('./Routes/candidate_information_routes');
+// Routes
+const companyProfileRoutes = require('./Routes/companyProfile');
+const testDetailRoutes = require('./Routes/test');
+const questionInformationRoutes = require('./Routes/question');
+const sectionInformationRoutes = require('./Routes/section');
+const scoreDetailRoutes = require('./Routes/score');
+const adminInformationRoutes = require('./Routes/admin');
+const candidateInformationRoutes = require('./Routes/candidate');
 const authentication = require('./Routes/authentication')
 
 const app = express();
@@ -33,14 +33,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan('dev'));
-
-//enable CORS
-app.use(cors());
-
-//Set static folder
-// app.use(express.static(path.join(__dirname, "/public")));
-
+app.use(cors()); //enable CORS
 app.use(errorHandler)
+// app.use(express.static(path.join(__dirname, "/public"))); //Set static folder
+
 
 // Routes
 app.use(
