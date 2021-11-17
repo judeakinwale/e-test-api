@@ -10,7 +10,7 @@ const SectionScore = new Schema({
     test: {
         type: mongoose.Schema.ObjectId,
         ref: "test",
-        required: true
+        required: false
     },
     section: {
         type: mongoose.Schema.ObjectId,
