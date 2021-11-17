@@ -13,13 +13,14 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger-output.json')
 
 // Routes
-const companyProfileRoutes = require('./Routes/companyProfile');
-const testDetailRoutes = require('./Routes/test');
-const questionInformationRoutes = require('./Routes/question');
-const sectionInformationRoutes = require('./Routes/section');
-const scoreDetailRoutes = require('./Routes/score');
-const adminInformationRoutes = require('./Routes/admin');
-const candidateInformationRoutes = require('./Routes/candidate');
+const companyProfile = require('./Routes/companyProfile');
+const test = require('./Routes/test');
+const question = require('./Routes/question');
+const section = require('./Routes/section');
+const testScore = require('./Routes/testScore');
+const sectionScore = require('./Routes/sectionScore');
+const admin = require('./Routes/admin');
+const candidate = require('./Routes/candidate');
 const authentication = require('./Routes/authentication')
 
 const app = express();
@@ -41,25 +42,28 @@ app.use(errorHandler)
 // Routes
 app.use(
     // '/api/v1/company', 
-    companyProfileRoutes);
+    companyProfile);
 app.use(
     // '/api/v1/test', 
-    testDetailRoutes);
+    test);
 app.use(
     // '/api/v1/question', 
-    questionInformationRoutes);
+    question);
 app.use(
     // '/api/v1/section', 
-    sectionInformationRoutes);
+    section);
 app.use(
-    // '/api/v1/score', 
-    scoreDetailRoutes);
+    // '/api/v1/test-score', 
+    testScore);
+app.use(
+    // '/api/v1/section-score', 
+    sectionScore);
 app.use(
     // '/api/v1/admin', 
-    adminInformationRoutes);
+    admin);
 app.use(
     // '/api/v1/candidate', 
-    candidateInformationRoutes);
+    candidate);
 app.use(
     // '/api/v1/auth', 
     authentication)
