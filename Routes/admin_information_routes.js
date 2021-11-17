@@ -1,6 +1,6 @@
 const express = require('express')
 const advancedResults = require('../Middleware/advancedResults')
-const Admin = require('../Models/admin_information')
+const Admin = require('../Models/admin')
 const {
     protect,
     authorize,

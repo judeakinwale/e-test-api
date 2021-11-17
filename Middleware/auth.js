@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("./async");
 const ErrorResponse = require("../Utils/errorResponse");
-const Admin = require("../Models/admin_information");
-const candidate = require("../Models/candidate_information")
+const Admin = require("../Models/admin");
+const Candidate = require("../Models/candidate")
 
 // // Protect routes
 // exports.protect = asyncHandler(async (req, res, next) => {
@@ -54,7 +54,7 @@ const candidate = require("../Models/candidate_information")
 // // Grant access to authenticated user
 // exports.authorize = () => {
 //   return (req, res, next) => {
-//     if (!req.admin || !req.candidate) {
+//     if (!req.admin || !req.Candidate) {
 //       return next(
 //         new ErrorResponse(
 //           `User is not authorized to access this route`,
@@ -68,7 +68,7 @@ const candidate = require("../Models/candidate_information")
 
 // Grant access to authenticated user
 exports.authorize = (req, res, next) => {
-  if (req.admin || req.candidate) {
+  if (req.admin || req.Candidate) {
     next();
   } else {
     return next(
@@ -142,7 +142,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
   //     // Verify token
   //     const decoded = jwt.verify(token, process.env.JWT_SECRET);
   
-  //     req.candidate = await candidate.findById(decoded.id);
+  //     req.candidate = await Candidate.findById(decoded.id);
   
   //     next();
   //   } catch (err) {
@@ -154,7 +154,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   req.admin = await Admin.findById(decoded.id);
-  req.candidate = await candidate.findById(decoded.id);
+  req.candidate = await Candidate.findById(decoded.id);
 
   if (req.admin || req.candidate) {
     next();

@@ -1,7 +1,7 @@
 const express = require('express')
 const advancedResults = require('../Middleware/advancedResults')
 // Admin model and auth controller
-const Admin = require('../Models/admin_information')
+const Admin = require('../Models/admin')
 const {
     adminLogin,
     adminLogout,
@@ -10,7 +10,7 @@ const {
     adminResetPassword,
 } = require('../Controllers/admin_authentication')
 // Candidate model and auth controller
-const Candidate = require('../Models/candidate_information')
+const Candidate = require('../Models/candidate')
 const {
     login,
     logout,

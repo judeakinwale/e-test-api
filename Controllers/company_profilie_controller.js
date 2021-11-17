@@ -1,4 +1,4 @@
-const CompanyProfile = require('../Models/company_profile')
+const CompanyProfile = require('../Models/companyProfile')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 

@@ -1,5 +1,5 @@
 const mongoose  = require("mongoose");
-const Section = require("./section_information")
+const Section = require("./section")
 const Schema = mongoose.Schema;
 
 const TestDetails = new Schema({

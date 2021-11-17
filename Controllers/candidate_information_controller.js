@@ -1,4 +1,4 @@
-const Candidate = require('../Models/candidate_information')
+const Candidate = require('../Models/candidate')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 

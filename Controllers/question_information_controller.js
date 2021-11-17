@@ -1,4 +1,4 @@
-const Question = require('../Models/question_information')
+const Question = require('../Models/question')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 

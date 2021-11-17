@@ -1,4 +1,4 @@
-const Score = require('../Models/score_details')
+const Score = require('../Models/testScore')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 

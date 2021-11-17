@@ -1,6 +1,6 @@
 const ErrorResponse = require("../Utils/errorResponse");
 const asyncHandler = require("../Middleware/async");
-const Admin = require("../Models/admin_information");
+const Admin = require("../Models/admin");
 // const otpGenerator = require("otp-generator");
 const sendEmail = require("../Utils/sendEmail");
 const crypto = require("crypto");

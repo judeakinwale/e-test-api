@@ -1,4 +1,4 @@
-const Test = require('../Models/test_details')
+const Test = require('../Models/test')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 

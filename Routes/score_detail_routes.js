@@ -1,6 +1,6 @@
 const express = require('express')
 const advancedResults = require('../Middleware/advancedResults')
-const Score = require('../Models/score_details')
+const Score = require('../Models/testScore')
 const {
     protect,
     authorize,
