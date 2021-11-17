@@ -8,7 +8,7 @@ const {
     adminAccount,
     adminForgotPassword,
     adminResetPassword,
-} = require('../Controllers/admin_authentication')
+} = require('../Controllers/adminAuthentication')
 // Candidate model and auth controller
 const Candidate = require('../Models/candidate')
 const {
@@ -17,7 +17,7 @@ const {
     account,
     forgotPassword,
     resetPassword,
-} = require('../Controllers/candidate_authentication')
+} = require('../Controllers/candidateAuthentication')
 
 const {
     protect,

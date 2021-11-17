@@ -12,7 +12,7 @@ const {
     getSectionQuestions,
     getQuestion,
     updateQuestions
-} = require('../Controllers/question_information_controller')
+} = require('../Controllers/question')
 
 const router = express.Router()
 

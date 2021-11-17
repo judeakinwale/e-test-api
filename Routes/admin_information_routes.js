@@ -13,7 +13,7 @@ const {
     updateAdmin,
     getSelf,
     updateSelf
-} = require('../Controllers/admin_information_controller')
+} = require('../Controllers/admin')
 
 const router = express.Router()
 

@@ -8,7 +8,7 @@ const {
     getCompanyProfile,
     createCompanyProfile,
     updateCompanyProfile
-} = require('../Controllers/company_profilie_controller')
+} = require('../Controllers/companyProfile')
 
 const router = Express.Router()
 

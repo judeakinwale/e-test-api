@@ -11,7 +11,7 @@ const {
     createTest,
     getTest,
     updateTest
-} = require('../Controllers/test_details_controller')
+} = require('../Controllers/test')
 
 const router = express.Router()
 

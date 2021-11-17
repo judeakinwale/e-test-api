@@ -13,7 +13,7 @@ const {
     updateCandidate,
     getSelf,
     updateSelf
-} = require('../Controllers/candidate_information_controller')
+} = require('../Controllers/candidate')
 
 const router = express.Router()
 

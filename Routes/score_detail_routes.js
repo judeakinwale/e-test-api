@@ -16,7 +16,7 @@ const {
     getCandidateTestScores,
     getAllSelfScores,
     getSelfTestScores
-} = require('../Controllers/score_details_controller')
+} = require('../Controllers/score')
 
 const router = express.Router()
 
