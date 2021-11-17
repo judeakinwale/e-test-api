@@ -1,4 +1,5 @@
 require('dotenv').config({path: './.env'});
+const path = require("path");
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -36,7 +37,20 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors()); //enable CORS
 app.use(errorHandler)
-// app.use(express.static(path.join(__dirname, "/public"))); //Set static folder
+app.use(express.static(path.join(__dirname, "/public"))); //Set static folder
+app.use(fileupload()); //file uploads
+
+// // Dev middleware
+// if (process.env.NODE_ENV === "development") {
+//     app.use(morgan("dev"));
+// }
+
+// //Rate limiting
+// const limiter = rateLimit({
+//     windowMs: 10 * 60 * 1000, // 10 mins
+//     max: 100,
+//   });
+//   app.use(limiter);
 
 
 // Routes
