@@ -4,6 +4,8 @@
 
 dependency_store.js
 endpoints.md
+.env
+Controllers/auth.js
 
 ### Node ###
 # Logs
