@@ -96,9 +96,33 @@
             }
         },
         "/api/v1/company/{id}": {
+            "get": {
+                "tags": ["company profile"],
+                "summary": "Get company profile by id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    } 
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CompanyProfile"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
             "put": {
                 "tags": ["company profile"],
-                "summary": "Update Company Profile",
+                "summary": "Update Company Profile by id",
                 "description": "",
                 "parameters": [
                     {
@@ -117,6 +141,47 @@
                     },
                     "400": {
                         "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/v1/company/all": {
+            "get": {
+                "tags": ["company profile"],
+                "summary": "Get all company profiles",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/CompanyProfile"
+                    }
+                    },
+                    "404": {
+                    "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/company/upload-logo": {
+            "post": {
+                "tags": ["company profile"],
+                "summary": "Upload the company's logo",
+                "description": "",
+                "consumes": ["multipart/form-data"],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "body",
+                        "type": "file",
+                        "description": "",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "OK"
                     }
                 }
             }
@@ -220,10 +285,7 @@
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "schema": {
-                            "$ref": "#/definitions/Test"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -392,10 +454,7 @@
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "schema": {
-                            "$ref": "#/definitions/Question"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -411,7 +470,7 @@
                 }
             }
         },
-        "/api/v1/question/{section_id}": {
+        "/api/v1/question/section/{section_id}": {
             "get": {
                 "tags": ["question"],
                 "summary":"Get all questions in a section using the section id",
@@ -538,10 +597,7 @@
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "schema": {
-                            "$ref": "#/definitions/Section"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -557,7 +613,7 @@
                 }
             }
         },
-        "/api/v1/section/{test_id}": {
+        "/api/v1/section/test/{test_id}": {
             "get": {
                 "tags": ["section"],
                 "summary": "Get all sections in a test using the test id",
@@ -684,10 +740,7 @@
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "schema": {
-                            "$ref": "#/definitions/TestScore"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -703,7 +756,7 @@
                 }
             }
         },
-        "/api/v1/test-score/{candidate_id}": {
+        "/api/v1/test-score/candidate/{candidate_id}": {
             "get": {
                 "tags": ["test score"],
                 "summary": "Get all test scores for a candidate, using candidate id",
@@ -713,10 +766,7 @@
                         "name": "candidate_id",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "schema": {
-                            "$ref": "#/definitions/TestScore"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -729,7 +779,7 @@
                 }
             }
         },
-        "/api/v1/test-score/{test_id}": {
+        "/api/v1/test-score/test/{test_id}": {
             "get": {
                 "tags": ["test score"],
                 "summary": "Get all test score for a test using test id",
@@ -755,7 +805,7 @@
                 }
             }
         },
-        "/api/v1/test-score/{test_id}/{candidate_id}": {
+        "/api/v1/test-score/test/{test_id}/candidate/{candidate_id}": {
             "get": {
                 "tags": ["test score"],
                 "summary": "Get test score for a candidate, in a test",
@@ -806,7 +856,7 @@
                 }
             }
         },
-        "/api/v1/test-score/self/{test_id}": {
+        "/api/v1/test-score/self/test/{test_id}": {
             "get": {
                 "tags": ["test score"],
                 "summary": "Get all authenticated candidate's test score for a specific test",
@@ -934,10 +984,7 @@
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "schema": {
-                            "$ref": "#/definitions/SectionScore"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -953,7 +1000,7 @@
                 }
             }
         },
-        "/api/v1/section-score/{candidate_id}": {
+        "/api/v1/section-score/candidate/{candidate_id}": {
             "get": {
                 "tags": ["section score"],
                 "summary": "Get all section scores for a candidate, using candidate id",
@@ -979,7 +1026,7 @@
                 }
             }
         },
-        "/api/v1/section-score/{test_id}": {
+        "/api/v1/section-score/test/{test_id}": {
             "get": {
                 "tags": ["section score"],
                 "summary": "Get all section scores for a test using test id",
@@ -1005,7 +1052,7 @@
                 }
             }
         },
-        "/api/v1/section-score/{section_id}": {
+        "/api/v1/section-score/section/{section_id}": {
             "get": {
                 "tags": ["section score"],
                 "summary": "Get all section score for a section using section id",
@@ -1031,7 +1078,7 @@
                 }
             }
         },
-        "/api/v1/section-score/{section_id}/{candidate_id}": {
+        "/api/v1/section-score/section/{section_id}/candidate/{candidate_id}": {
             "get": {
                 "tags": ["section score"],
                 "summary": "Get section score for a candidate, in a section",
@@ -1082,7 +1129,7 @@
                 }
             }
         },
-        "/api/v1/section-score/self/{section_id}": {
+        "/api/v1/section-score/self/section/{section_id}": {
             "get": {
                 "tags": ["section score"],
                 "summary":"Get all authenticated candidate's section score for a specific section",
@@ -1206,10 +1253,7 @@
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "schema": {
-                            "$ref": "#/definitions/Admin"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -1437,7 +1481,17 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
             }
         },
         "/api/v1/auth/admin/logout": {
@@ -1517,7 +1571,11 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
             }
         },
         "/api/v1/auth/": {
@@ -1542,7 +1600,17 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
             }
         },
         "/api/v1/auth/logout": {
@@ -1622,110 +1690,142 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
             }
         }
     },
     "definitions": {
         "CompanyProfile": {
+            "required": [
+                "title",
+                "description",
+                "logo"
+            ],
             "properties": {
                 "title": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "description": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "logo": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
-                "colorScheme": [
-                    {"type": "string"}
-                ],
+                "colorScheme": {
+                    "type": "array",
+                    "example": ["Some", "example", "string"]
+                },
                 "createdAt": {
-                    "type": "Date",
+                    "type": "string",
                     "default": "Date.now"
                 }
             }
         },
         "Admin": {
+            "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "password"
+            ],
             "properties": {
                 "firstName": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "lastName": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "phone": {
                     "type": "string"
                 },
                 "email": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "password": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "createdAt": {
-                    "type": "Date",
+                    "type": "string",
                     "default": "Date.now"
                 }
             }
         },
         "Candidate": {
+            "required": [
+                "firstName",
+                "lastName",
+                "phone",
+                "email",
+                "password"
+            ],
             "properties": {
                 "firstName": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "lastName": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "phone": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "email": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "password": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "createdAt": {
-                    "type": "Date",
+                    "type": "string",
                     "default": "Date.now"
                 }
             }
         },
         "Test": {
+            "required": [
+                "title"
+            ],
             "properties": {
                 "title": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "timer": {
                     "type": "integer",
                     "default": 0
                 },
                 "createdAt": {
-                    "type": "Date",
+                    "type": "string",
                     "default": "Date.now"
                 }
             }
         },
         "Section": {
+            "required": [
+                "title",
+                "timer",
+                "instruction",
+                "test"
+            ],
             "properties": {
                 "title": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "timer": {
                     "type": "integer",
@@ -1733,92 +1833,110 @@
                 },
                 "instruction": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },
                 "test": {
-                    "$ref": "#/definitions/Test",
-                    "required": true
-                },
+                    "$ref": "#/definitions/Test"                },
                 "createdAt": {
-                    "type": "Date",
+                    "type": "string",
                     "default": "Date.now"
                 }
             }
         },
         "Question": {
+            "required": [
+                "question",
+                "correct_answers",
+                "section"
+            ],
             "properties": {
                 "question": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
                 },  
-                "answers": [{ "type": "string" }],
-                "correct_answers": [{
-                    "type": "string",
-                    "required": true
-                }],
-                "section": {
-                    "$ref": "#/definitions/Section",
-                    "required": true
+                "answers": { "type": "array" },
+                "correct_answers": {
+                    "type": "array",
+                    "example": ["Some", "example", "string"]
                 },
+                "section": {
+                    "$ref": "#/definitions/Section"                },
                 "createdAt": {
-                    "type": "Date",
+                    "type": "string",
                     "default": "Date.now"
                 }
             }
         },
         "TestScore": {
+            "required": [
+                "candidate",
+                "test",
+                "score"
+            ],
             "properties": {
                 "candidate": {
-                    "$ref": "#/definitions/Candidate",
-                    "required": true
-                },
+                    "$ref": "#/definitions/Candidate"                },
                 "test": {
-                    "$ref": "#/definitions/Test",
-                    "required": true
-                },
+                    "$ref": "#/definitions/Test"                },
                 "score": {
                     "type": "integer",
-                    "required": true
+                    "example": 10
                 }
             }
         },
         "SectionScore": {
+            "required": [
+                "candidate",
+                "test",
+                "section",
+                "score"
+            ],
             "properties": {
                 "candidate": {
-                    "$ref": "#/definitions/Candidate",
-                    "required": true
-                },
+                    "$ref": "#/definitions/Candidate"                },
                 "test": {
-                    "$ref": "#/definitions/Test",
-                    "required": true
-                },
+                    "$ref": "#/definitions/Test"                },
                 "section": {
-                    "$ref": "#/definitions/Section",
-                    "required": true
-                },
+                    "$ref": "#/definitions/Section"                },
                 "score": {
                     "type": "integer",
-                    "required": true
+                    "example": 10
                 }
             }
         },
         "CandidateResponse": {
+            "required": [
+                "candidate",
+                "test",
+                "question",
+                "selected_answer"
+            ],
             "properties": {
                 "candidate": {
-                    "$ref": "#/definitions/Candidate",
-                    "required": true
-                },
+                    "$ref": "#/definitions/Candidate"                },
                 "test": {
-                    "$ref": "#/definitions/Test",
-                    "required": true
-                },
+                    "$ref": "#/definitions/Test"                },
                 "question": {
-                    "$ref": "#/definitions/Question",
-                    "required": true
-                },
+                    "$ref": "#/definitions/Question"                },
                 "selected_answer": {
                     "type": "string",
-                    "required": true
+                    "example": "Some example string"
+                }
+            }
+        },
+        "Token": {
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "example": "Some example string"
+                }
+            }
+        },
+        "File": {
+            "required": ["file"],
+            "properties": {
+                "file": {
+                    "type": "object"
                 }
             }
         }

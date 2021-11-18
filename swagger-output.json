@@ -43,6 +43,26 @@
       }
     },
     "/api/v1/company/{id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
       "put": {
         "tags": [],
         "description": "",
@@ -60,6 +80,33 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/v1/company/all": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/company/upload-logo": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -290,7 +337,7 @@
         }
       }
     },
-    "/api/v1/question/{section_id}": {
+    "/api/v1/question/section/{section_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -403,7 +450,7 @@
         }
       }
     },
-    "/api/v1/section/{test_id}": {
+    "/api/v1/section/test/{test_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -516,7 +563,7 @@
         }
       }
     },
-    "/api/v1/test-score/{candidate_id}": {
+    "/api/v1/test-score/candidate/{candidate_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -538,7 +585,7 @@
         }
       }
     },
-    "/api/v1/test-score/{test_id}": {
+    "/api/v1/test-score/test/{test_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -560,7 +607,7 @@
         }
       }
     },
-    "/api/v1/test-score/{test_id}/{candidate_id}": {
+    "/api/v1/test-score/test/{test_id}/candidate/{candidate_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -603,7 +650,7 @@
         }
       }
     },
-    "/api/v1/test-score/self/{test_id}": {
+    "/api/v1/test-score/self/test/{test_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -716,7 +763,7 @@
         }
       }
     },
-    "/api/v1/section-score/{candidate_id}": {
+    "/api/v1/section-score/candidate/{candidate_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -738,7 +785,7 @@
         }
       }
     },
-    "/api/v1/section-score/{test_id}": {
+    "/api/v1/section-score/test/{test_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -760,7 +807,7 @@
         }
       }
     },
-    "/api/v1/section-score/{section_id}": {
+    "/api/v1/section-score/section/{section_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -782,7 +829,7 @@
         }
       }
     },
-    "/api/v1/section-score/{section_id}/{candidate_id}": {
+    "/api/v1/section-score/section/{section_id}/candidate/{candidate_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -825,7 +872,7 @@
         }
       }
     },
-    "/api/v1/section-score/self/{section_id}": {
+    "/api/v1/section-score/self/section/{section_id}": {
       "get": {
         "tags": [],
         "description": "",
