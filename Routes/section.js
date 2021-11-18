@@ -20,6 +20,6 @@ router.route('/api/v1/section/').get(protect, authorize, advancedResults(Section
 router.route('/api/v1/section/').post(protect, authorizeAdmin, createSection)
 router.route('/api/v1/section/:id').get(protect, authorize, getSection)
 router.route('/api/v1/section/:id').put(protect, authorizeAdmin, updateSections)
-router.route('/api/v1/section/:test_id').get(protect, authorize, getTestSections)
+router.route('/api/v1/section/test/:test_id').get(protect, authorize, getTestSections)
 
 module.exports = router
