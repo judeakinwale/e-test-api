@@ -13,7 +13,8 @@ const CompanyInformation = new Schema({
     },
     logo: {
         type: String,
-        required: [true, "Please upload Company logo"]
+        // required: [true, "Please upload Company logo"]
+        default: "logo_company.png"
     },
     colorScheme: [
         {type: String},

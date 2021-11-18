@@ -2,7 +2,8 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("./async");
 const ErrorResponse = require("../Utils/errorResponse");
 const Admin = require("../Models/admin");
-const Candidate = require("../Models/candidate")
+const Candidate = require("../Models/candidate");
+const Company = require ("../Models/companyProfile")
 
 // // Protect routes
 // exports.protect = asyncHandler(async (req, res, next) => {
@@ -155,6 +156,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   req.admin = await Admin.findById(decoded.id);
   req.candidate = await Candidate.findById(decoded.id);
+  req.company = await Company.findOne()
 
   if (req.admin || req.candidate) {
     next();
