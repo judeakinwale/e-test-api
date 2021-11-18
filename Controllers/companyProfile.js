@@ -6,7 +6,7 @@ const asyncHandler = require('../Middleware/async')
 // @route   GET /api/v1/company
 // @access   Private/All
 exports.getCompanyProfile = asyncHandler(async (req, res, next) => {
-    const company = await CompanyProfile.find({})
+    const company = await CompanyProfile.findOne({})
 
     if (!company) {
         return res.status(404).json({
@@ -36,6 +36,22 @@ exports.createCompanyProfile = asyncHandler(async (req, res, next) => {
         // return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
     }
     res.status(201).json({
+        success: true,
+        data: company
+    })
+})
+
+exports.getCompanyProfileById = asyncHandler(async (req, res, next) => {
+    const company = await CompanyProfile.findById(req.params.id)
+
+    if (!company) {
+        return res.status(404).json({
+            success: false,
+            message: "Invalid company information"
+        })
+        // return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
+    }
+    res.status(200).json({
         success: true,
         data: company
     })

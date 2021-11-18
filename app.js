@@ -9,9 +9,14 @@ const fileupload = require("express-fileupload");
 const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
 const errorHandler = require('./Middleware/error')
+const bodyParser = require("body-parser");
 // For swagger
+const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require('swagger-ui-express')
-const swaggerFile = require('./swagger-output.json')
+// const swaggerFile = require('./swagger-output.json')
+const swaggerOptions = require('./swagger-options')
+// const swaggerFile = require('./swagger.yaml')
+const swaggerFile = require('./swagger.json')
 
 // Routes
 const companyProfile = require('./Routes/companyProfile');
@@ -81,7 +86,16 @@ app.use(
 app.use(
     // '/api/v1/auth', 
     authentication)
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+
+// const specs = swaggerJsdoc(options);
+const specs = swaggerJsdoc(swaggerOptions);
+// app.use(
+//     "/api-docs",
+//     swaggerUi.serve,
+//     swaggerUi.setup(specs)
+// );
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile, { explorer: true }))
+// app.use('/doc', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }))
 
 
 mongoose.connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})

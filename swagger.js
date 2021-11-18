@@ -11,13 +11,14 @@ const doc = {
 
 const outputFile = './swagger-output.json';
 const endpointsFiles = [
-    './Routes/company_profile_routes',
-    './Routes/test_details_routes',
-    './Routes/question_information_routes',
-    './Routes/section_information_routes',
-    './Routes/score_detail_routes',
-    './Routes/admin_information_routes',
-    './Routes/candidate_information_routes',
+    './Routes/companyProfile',
+    './Routes/test',
+    './Routes/question',
+    './Routes/section',
+    './Routes/testScore',
+    './Routes/sectionScore',
+    './Routes/admin',
+    './Routes/candidate',
     './Routes/authentication',
 ];
 // const endpointsFiles = [
