@@ -14,6 +14,7 @@ const Score = new Schema({
     },
     score: {
         type: Number,
+        default: 0,
         required: true
     }
 })

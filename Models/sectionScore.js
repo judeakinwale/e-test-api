@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const SectionScore = new Schema({
@@ -19,6 +19,7 @@ const SectionScore = new Schema({
     },
     score: {
         type: Number,
+        default: 0,
         required: true
     }
 })
