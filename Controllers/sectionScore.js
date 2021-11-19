@@ -1,5 +1,7 @@
 const SectionScore = require('../Models/sectionScore')
+const TestScore = require('../Models/testScore')
 const ErrorResponse = require('../Utils/errorResponse')
+const getTestScore = require('../Utils/getTestScore')
 const asyncHandler = require('../Middleware/async')
 
 exports.getAllScores = asyncHandler(async (req, res, next) => {
@@ -65,6 +67,9 @@ exports.updateScore = asyncHandler(async (req, res, next) => {
             message: "Invalid score details"
         })
     }
+    // Calculate the test scores from the section scores
+    await getTestScore(score)
+
     res.status(200).json({
         success: true,
         data: score

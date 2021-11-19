@@ -1,6 +1,8 @@
 const Section = require('../Models/section')
+const Test = require('../Models/test')
 const Question = require('../Models/question')
 const ErrorResponse = require('../Utils/errorResponse')
+const getTestTimer = require('../Utils/getTestTimer')
 const asyncHandler = require('../Middleware/async')
 
 exports.getAllSections = asyncHandler(async (req, res, next) => {
@@ -29,6 +31,9 @@ exports.createSection = asyncHandler(async (req, res, next) => {
             message: "Invalid section details"
         })
     }
+    // Calculate the test timer from section timers
+    await getTestTimer(section)
+    
     res.status(201).json({
         success: true,
         data: section
@@ -66,6 +71,9 @@ exports.updateSections = asyncHandler(async (req, res, next) => {
             message: "Invalid section details"
         })
     }
+    // Calculate the test timer from section timers
+    await getTestTimer(section)
+
     res.status(200).json({
         success: true,
         data: section
