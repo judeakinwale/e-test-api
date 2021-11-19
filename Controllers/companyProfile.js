@@ -127,7 +127,10 @@ exports.uploadLogo = asyncHandler(async (req, res, next) => {
         console.error(err);
         return next(new ErrorResponse(`An error occured while uploading`, 500));
       }
-      companyLogo = await CompanyProfile.findByIdAndUpdate(req.company._id, { logo: file.name });
+      console.log("start")
+      console.log(req.company.id)
+      companyLogo = await CompanyProfile.findByIdAndUpdate(req.company.id, { logo: file.name });
+      console.log("end")
       if (!companyLogo) {
         return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
       }
