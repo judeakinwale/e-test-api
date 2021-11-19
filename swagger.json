@@ -1745,7 +1745,8 @@
                     "example": "Some example string"
                 },
                 "phone": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Some example string"
                 },
                 "email": {
                     "type": "string",
@@ -1854,7 +1855,10 @@
                     "type": "string",
                     "example": "Some example string"
                 },  
-                "answers": { "type": "array" },
+                "answers": {
+                    "type": "array",
+                    "example": ["Some", "example", "string"]
+                },
                 "correct_answers": {
                     "type": "array",
                     "example": ["Some", "example", "string"]
@@ -1936,7 +1940,8 @@
             "required": ["file"],
             "properties": {
                 "file": {
-                    "type": "object"
+                    "type": "string",
+                    "example": "Some example string"
                 }
             }
         }
