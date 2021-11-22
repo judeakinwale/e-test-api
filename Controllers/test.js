@@ -3,6 +3,7 @@ const Section = require('../Models/section')
 const Question = require('../Models/question')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
+const section = require('../Models/section')
 
 exports.getAllTests = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
@@ -105,11 +106,11 @@ exports.getTestSections = asyncHandler(async (req, res, next) => {
 
 exports.getAllTestQuestions = asyncHandler(async (req, res, next) => {
     const sections = await Section.find({test: req.params.id})
-    let questions = {}
+    let questions = []
     
-    for (const i = 0; sections.length; i++) {
-        section = sections[i]
-        question = await Question.find({section: req.params.section_id})
+    for (let i = 0; i < sections.length; i++) {
+        let section = sections[i]
+        let question = await Question.find({section: section.id})
         questions.push(question)
     }
 
