@@ -344,7 +344,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Question"
+                            "$ref": "#/definitions/TestQuestions"
                         }
                     },
                     "404": {
@@ -1942,6 +1942,68 @@
                 "file": {
                     "type": "string",
                     "example": "Some example string"
+                }
+            }
+        },
+        "TestQuestions": {
+            "required": ["file"],
+            "properties": {
+                "questions": {
+                    "type": "array",
+                    "example": [
+                        [
+                            {
+                                "question": "Select the true option",
+                                "answers": [
+                                    "false",
+                                    "false",
+                                    "true"
+                                ],
+                                "correct_answers": [
+                                    "true"
+                                ],
+                                "section": "619769643f3ecd2d1cec4b0e"
+                            },
+                            {
+                                "question": "Select the false option",
+                                "answers": [
+                                    "true",
+                                    "true",
+                                    "false"
+                                ],
+                                "correct_answers": [
+                                    "false"
+                                ],
+                                "section": "619769643f3ecd2d1cec4b0e"
+                            }
+                        ],
+                        [
+                            {
+                                "question": "Select the red option",
+                                "answers": [
+                                    "blue",
+                                    "blue",
+                                    "red"
+                                ],
+                                "correct_answers": [
+                                    "red"
+                                ],
+                                "section": "619769d73f3ecd2d1cec4b1b"
+                            },
+                            {
+                                "question": "Select the blue option",
+                                "answers": [
+                                    "red",
+                                    "red",
+                                    "blue"
+                                ],
+                                "correct_answers": [
+                                    "blue"
+                                ],
+                                "section": "619769d73f3ecd2d1cec4b1b"
+                            }
+                        ]
+                    ]
                 }
             }
         }
