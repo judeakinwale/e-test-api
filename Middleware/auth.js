@@ -55,7 +55,7 @@ const Company = require ("../Models/companyProfile")
 // // Grant access to authenticated user
 // exports.authorize = () => {
 //   return (req, res, next) => {
-//     if (!req.admin || !req.Candidate) {
+//     if (!req.admin || !req.candidate) {
 //       return next(
 //         new ErrorResponse(
 //           `User is not authorized to access this route`,
@@ -69,7 +69,7 @@ const Company = require ("../Models/companyProfile")
 
 // Grant access to authenticated user
 exports.authorize = (req, res, next) => {
-  if (req.admin || req.Candidate) {
+  if (req.admin || req.candidate) {
     next();
   } else {
     return next(
