@@ -1948,7 +1948,7 @@
         "TestQuestions": {
             "required": ["file"],
             "properties": {
-                "questions": {
+                "data": {
                     "type": "array",
                     "example": [
                         [
