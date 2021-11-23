@@ -125,7 +125,11 @@ exports.getAllTestQuestions = asyncHandler(async (req, res, next) => {
     for (let i = 0; i < sections.length; i++) {
         let section = sections[i]
         let question = await Question.find({section: section.id})
-        questions.push(question)
+        questionSet = {
+            section: section.id,
+            questions: question
+        }
+        questions.push(questionSet)
     }
 
     if (!questions || questions.length  < 1) {
