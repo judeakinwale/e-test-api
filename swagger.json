@@ -143,6 +143,27 @@
                         "description": "Bad Request"
                     }
                 }
+            },
+            "delete": {
+                "tags": ["company profile"],
+                "summary": "Delete Company Profile by id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "OK"
+                    },
+                    "404": {
+                    "description": "Not Found"
+                    }
+                }
             }
         },
         "/api/v1/company/all": {
@@ -297,6 +318,27 @@
                     },
                     "400": {
                         "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["test"],
+                "summary": "Delete test by id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "OK"
+                    },
+                    "404": {
+                    "description": "Not Found"
                     }
                 }
             }
@@ -468,6 +510,27 @@
                         "description": "Bad Request"
                     }
                 }
+            },
+            "delete": {
+                "tags": ["question"],
+                "summary":"Delete question by id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "OK"
+                    },
+                    "404": {
+                    "description": "Not Found"
+                    }
+                }
             }
         },
         "/api/v1/question/section/{section_id}": {
@@ -611,6 +674,27 @@
                         "description": "Bad Request"
                     }
                 }
+            },
+            "delete": {
+                "tags": ["section"],
+                "summary": "Delete section by id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "OK"
+                    },
+                    "404": {
+                    "description": "Not Found"
+                    }
+                }
             }
         },
         "/api/v1/section/test/{test_id}": {
@@ -752,6 +836,27 @@
                     },
                     "400": {
                         "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["test score"],
+                "summary": "Delete test score by id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "OK"
+                    },
+                    "404": {
+                    "description": "Not Found"
                     }
                 }
             }
@@ -996,6 +1101,27 @@
                     },
                     "400": {
                         "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["section score"],
+                "summary": "Delete section score by id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "OK"
+                    },
+                    "404": {
+                    "description": "Not Found"
                     }
                 }
             }
@@ -1267,6 +1393,27 @@
                         "description": "Bad Request"
                     }
                 }
+            },
+            "delete": {
+                "tags": ["admin"],
+                "summary": "Delete admin user by id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "OK"
+                    },
+                    "404": {
+                    "description": "Not Found"
+                    }
+                }
             }
         },
         "/api/v1/admin/self": {
@@ -1425,6 +1572,27 @@
                     },
                     "400": {
                         "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["candidate"],
+                "summary": "Update candidate by id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                    "description": "OK"
+                    },
+                    "404": {
+                    "description": "Not Found"
                     }
                 }
             }
@@ -1951,58 +2119,97 @@
                 "data": {
                     "type": "array",
                     "example": [
-                        [
-                            {
-                                "question": "Select the true option",
-                                "answers": [
-                                    "false",
-                                    "false",
-                                    "true"
-                                ],
-                                "correct_answers": [
-                                    "true"
-                                ],
-                                "section": "619769643f3ecd2d1cec4b0e"
-                            },
-                            {
-                                "question": "Select the false option",
-                                "answers": [
-                                    "true",
-                                    "true",
-                                    "false"
-                                ],
-                                "correct_answers": [
-                                    "false"
-                                ],
-                                "section": "619769643f3ecd2d1cec4b0e"
-                            }
-                        ],
-                        [
-                            {
-                                "question": "Select the red option",
-                                "answers": [
-                                    "blue",
-                                    "blue",
-                                    "red"
-                                ],
-                                "correct_answers": [
-                                    "red"
-                                ],
-                                "section": "619769d73f3ecd2d1cec4b1b"
-                            },
-                            {
-                                "question": "Select the blue option",
-                                "answers": [
-                                    "red",
-                                    "red",
-                                    "blue"
-                                ],
-                                "correct_answers": [
-                                    "blue"
-                                ],
-                                "section": "619769d73f3ecd2d1cec4b1b"
-                            }
-                        ]
+                        {
+                            "section": "619769643f3ecd2d1cec4b0e",
+                            "questions": [
+                                {
+                                    "question": "Select the true option",
+                                    "answers": [
+                                        "false",
+                                        "false",
+                                        "true"
+                                    ],
+                                    "correct_answers": [
+                                        "true"
+                                    ],
+                                    "section": "619769643f3ecd2d1cec4b0e",
+                                    "createdAt": "2021-11-19T10:08:01.408Z"
+                                },
+                                {
+                                    "question": "Select the false option",
+                                    "answers": [
+                                        "true",
+                                        "true",
+                                        "false"
+                                    ],
+                                    "correct_answers": [
+                                        "false"
+                                    ],
+                                    "section": "619769643f3ecd2d1cec4b0e",
+                                    "createdAt": "2021-11-19T10:08:50.047Z"
+                                }
+                            ]
+                        },
+                        {
+                            "section": "619769d73f3ecd2d1cec4b1b",
+                            "questions": [
+                                {
+                                    "question": "Select the red option",
+                                    "answers": [
+                                        "blue",
+                                        "blue",
+                                        "red"
+                                    ],
+                                    "correct_answers": [
+                                        "red"
+                                    ],
+                                    "section": "619769d73f3ecd2d1cec4b1b",
+                                    "createdAt": "2021-11-19T10:10:21.023Z"
+                                },
+                                {
+                                    "question": "Select the blue option",
+                                    "answers": [
+                                        "red",
+                                        "red",
+                                        "blue"
+                                    ],
+                                    "correct_answers": [
+                                        "blue"
+                                    ],
+                                    "section": "619769d73f3ecd2d1cec4b1b",
+                                    "createdAt": "2021-11-19T10:11:04.512Z"
+                                }
+                            ]
+                        },
+                        {
+                            "section": "619769f13f3ecd2d1cec4b20",
+                            "questions": [
+                                {
+                                    "question": "Select the green option",
+                                    "answers": [
+                                        "yellow",
+                                        "yellow",
+                                        "green"
+                                    ],
+                                    "correct_answers": [
+                                        "green"
+                                    ],
+                                    "section": "619769f13f3ecd2d1cec4b20",
+                                    "createdAt": "2021-11-19T10:12:24.432Z"
+                                },
+                                {
+                                    "question": "Select the yellow option",
+                                    "answers": [
+                                        "green",
+                                        "green",
+                                        "yellow"
+                                    ],
+                                    "correct_answers": [
+                                        "yellow"
+                                    ],
+                                    "section": "619769f13f3ecd2d1cec4b20"                                }
+                            ]
+                        }
                     ]
                 }
             }
