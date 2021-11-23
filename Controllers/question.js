@@ -85,3 +85,18 @@ exports.updateQuestions = asyncHandler(async (req, res, next) => {
         data: question
     })
 })
+
+exports.deleteQuestion = asyncHandler(async (req, res, next) => {
+    const question = await Question.findByIdAndDelete(req.params.id)
+
+    if (!question) {
+        return res.status(404).json({
+            success: false,
+            message: "Question not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: {}
+    })
+})

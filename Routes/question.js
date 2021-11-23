@@ -11,7 +11,8 @@ const {
     createQuestion,
     getSectionQuestions,
     getQuestion,
-    updateQuestions
+    updateQuestions,
+    deleteQuestion
 } = require('../Controllers/question')
 
 const router = express.Router()
@@ -20,6 +21,7 @@ router.route('/api/v1/question/').get(protect, authorize, advancedResults(Questi
 router.route('/api/v1/question/').post(protect, authorizeAdmin, createQuestion)
 router.route('/api/v1/question/:id').get(protect, authorize, getQuestion)
 router.route('/api/v1/question/:id').put(protect, authorizeAdmin, updateQuestions)
+router.route('/api/v1/question/:id').delete(protect, authorize, deleteQuestion)
 router.route('/api/v1/question/section/:section_id').get(protect, authorize, getSectionQuestions)
 
 module.exports = router

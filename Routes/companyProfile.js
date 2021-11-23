@@ -9,6 +9,7 @@ const {
     createCompanyProfile,
     getCompanyProfileById,
     updateCompanyProfile,
+    deleteCompanyProfile,
     getAllCompanyProfile,
     uploadLogo,
 } = require('../Controllers/companyProfile')
@@ -21,5 +22,6 @@ router.route('/api/v1/company/all').get(protect, authorizeAdmin, getAllCompanyPr
 router.route('/api/v1/company/upload-logo').post(protect, uploadLogo)
 router.route('/api/v1/company/:id').get(protect, authorizeAdmin, getCompanyProfileById)
 router.route('/api/v1/company/:id').put(protect, authorizeAdmin, updateCompanyProfile)
+router.route('/api/v1/company/:id').delete(protect, authorizeAdmin, deleteCompanyProfile)
 
 module.exports = router

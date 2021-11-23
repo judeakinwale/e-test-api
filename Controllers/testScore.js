@@ -71,6 +71,21 @@ exports.updateScore = asyncHandler(async (req, res, next) => {
     })
 })
 
+exports.deleteScore = asyncHandler(async (req, res, next) => {
+    const scores = await TestScore.findByIdAndDelete(req.params.id)
+
+    if (!scores || scores.length < 1) {
+        return res.status(404).json({
+            success: false,
+            message: "Score not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: {}
+    })
+})
+
 exports.getAllCandidateScores = asyncHandler(async (req, res, next) => {
     const scores = await TestScore.find({candidate: req.params.candidate_id})
 

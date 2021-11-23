@@ -55,7 +55,7 @@ exports.getSection = asyncHandler(async (req, res, next) => {
     })
 })
 
-exports.updateSections = asyncHandler(async (req, res, next) => {
+exports.updateSection = asyncHandler(async (req, res, next) => {
     const section = await Section.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -77,6 +77,21 @@ exports.updateSections = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         data: section
+    })
+})
+
+exports.deleteSection = asyncHandler(async (req, res, next) => {
+    const section = await Section.findByIdAndDelete(req.params.id)
+
+    if (!section) {
+        return res.status(404).json({
+            success: false,
+            message: "Section not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: {}
     })
 })
 

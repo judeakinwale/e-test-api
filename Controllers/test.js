@@ -3,7 +3,6 @@ const Section = require('../Models/section')
 const Question = require('../Models/question')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
-const section = require('../Models/section')
 
 exports.getAllTests = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
@@ -86,6 +85,21 @@ exports.updateTest = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         data: test
+    })
+})
+
+exports.deleteTest = asyncHandler(async (req, res, next) => {
+    const test = await Test.findByIdAndDelete(req.params.id)
+
+    if (!test) {
+        return res.status(404).json({
+            success: false,
+            message: "Test not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: {}
     })
 })
 

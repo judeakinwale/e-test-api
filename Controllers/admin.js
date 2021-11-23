@@ -71,6 +71,21 @@ exports.updateAdmin = asyncHandler(async (req, res, next) => {
     })
 })
 
+exports.deleteAdmin = asyncHandler(async (req, res, next) => {
+    const admin = await Admin.findByIdAndDelete(req.params.id)
+
+    if (!admin) {
+        return res.status(404).json({
+            success: false,
+            message: "Admin not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: {}
+    })
+})
+
 exports.getSelf = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findById(req.admin._id)
 

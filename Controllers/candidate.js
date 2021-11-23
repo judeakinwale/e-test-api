@@ -72,6 +72,21 @@ exports.updateCandidate = asyncHandler(async (req, res, next) => {
     })
 })
 
+exports.deleteCandidate = asyncHandler(async (req, res, next) => {
+    const candidate = await Candidate.findByIdAndDelete(req.params.id)
+
+    if (!candidate) {
+        return res.status(404).json({
+            success: false,
+            message: "Candidate not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: {}
+    })
+})
+
 exports.getSelf = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findById(req.candidate._id)
 

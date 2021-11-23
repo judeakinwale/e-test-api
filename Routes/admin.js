@@ -11,6 +11,7 @@ const {
     createAdmin,
     getAdmin,
     updateAdmin,
+    deleteAdmin,
     getSelf,
     updateSelf
 } = require('../Controllers/admin')
@@ -23,5 +24,6 @@ router.route('/api/v1/admin/self').get(protect, authorizeAdmin, getSelf)
 router.route('/api/v1/admin/self').put(protect, authorizeAdmin, updateSelf)
 router.route('/api/v1/admin/:id').get(protect, authorizeAdmin, getAdmin)
 router.route('/api/v1/admin/:id').put(protect, authorizeAdmin, updateAdmin)
+router.route('/api/v1/admin/:id').delete(protect, authorizeAdmin, deleteAdmin)
 
 module.exports = router

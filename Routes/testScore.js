@@ -11,6 +11,7 @@ const {
     createScore,
     getScore,
     updateScore,
+    deleteScore,
     getAllCandidateScores,
     getAllTestScores,
     getCandidateTestScores,
@@ -24,6 +25,7 @@ router.route('/api/v1/test-score/').get(protect, authorizeAdmin, advancedResults
 router.route('/api/v1/test-score/').post(protect, authorize, createScore)
 router.route('/api/v1/test-score/:id').get(protect, authorize, getScore)
 router.route('/api/v1/test-score/:id').put(protect, authorize, updateScore)
+router.route('/api/v1/test-score/:id').delete(protect, authorize, deleteScore)
 router.route('/api/v1/test-score/candidate/:candidate_id').get(protect, authorizeAdmin, getAllCandidateScores)
 router.route('/api/v1/test-score/test/:test_id').get(protect, authorizeAdmin, getAllTestScores)
 router.route('/api/v1/test-score/test/:test_id/candidate/:candidate_id').get(protect, authorizeAdmin, getCandidateTestScores)

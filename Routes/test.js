@@ -11,6 +11,7 @@ const {
     createTest,
     getTest,
     updateTest,
+    deleteTest,
     getTestSections,
     getAllTestQuestions
 } = require('../Controllers/test')
@@ -21,6 +22,7 @@ router.route('/api/v1/test').get(protect, authorize, advancedResults(Test), getA
 router.route('/api/v1/test').post(protect, authorizeAdmin, createTest)
 router.route('/api/v1/test/:id').get(protect, authorize, getTest)
 router.route('/api/v1/test/:id').put(protect, authorizeAdmin, updateTest)
+router.route('/api/v1/test/:id').delete(protect, authorize, deleteTest)
 router.route('/api/v1/test/:id/sections').get(protect, authorize, getTestSections)
 router.route('/api/v1/test/:id/questions').get(protect, authorize, getAllTestQuestions)
 

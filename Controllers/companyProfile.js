@@ -63,9 +63,8 @@ exports.getCompanyProfileById = asyncHandler(async (req, res, next) => {
     if (!company) {
         return res.status(404).json({
             success: false,
-            message: "Invalid company information"
+            message: "Company information not found"
         })
-        // return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
     }
     res.status(200).json({
         success: true,
@@ -88,11 +87,25 @@ exports.updateCompanyProfile = asyncHandler(async (req, res, next) => {
             success: false,
             message: "Invalid company information"
         })
-        // return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
     }
     res.status(200).json({
         success: true,
         data: company
+    })
+})
+
+exports.deleteCompanyProfile = asyncHandler(async (req, res, next) => {
+    const company = await CompanyProfile.findByIdAndUpdate(req.params.id)
+
+    if (!company) {
+        return res.status(404).json({
+            success: false,
+            message: "Company information not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: {}
     })
 })
 
