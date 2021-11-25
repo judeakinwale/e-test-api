@@ -1,4 +1,4 @@
-const Express = require('express')
+const express = require('express')
 const {
     protect,
     authorize,
@@ -14,7 +14,7 @@ const {
     uploadLogo,
 } = require('../Controllers/companyProfile')
 
-const router = Express.Router()
+const router = express.Router()
 
 router.route('/api/v1/company/').get(getCompanyProfile)
 router.route('/api/v1/company/').post(protect, authorizeAdmin, createCompanyProfile)
