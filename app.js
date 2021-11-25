@@ -10,12 +10,12 @@ const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
 const errorHandler = require('./Middleware/error')
 const bodyParser = require("body-parser");
+
 // For swagger
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require('swagger-ui-express')
-// const swaggerFile = require('./swagger-output.json')
 const swaggerOptions = require('./swagger-options')
-// const swaggerFile = require('./swagger.yaml')
+// const swaggerFile = require('./swagger-output.json') // for swagger autogen
 const swaggerFile = require('./swagger.json')
 
 // Routes
@@ -59,43 +59,20 @@ app.use(fileupload()); //file uploads
 
 
 // Routes
-app.use(
-    // '/api/v1/company', 
-    companyProfile);
-app.use(
-    // '/api/v1/test', 
-    test);
-app.use(
-    // '/api/v1/question', 
-    question);
-app.use(
-    // '/api/v1/section', 
-    section);
-app.use(
-    // '/api/v1/test-score', 
-    testScore);
-app.use(
-    // '/api/v1/section-score', 
-    sectionScore);
-app.use(
-    // '/api/v1/admin', 
-    admin);
-app.use(
-    // '/api/v1/candidate', 
-    candidate);
-app.use(
-    // '/api/v1/auth', 
-    authentication)
+app.use(companyProfile);
+app.use(test);
+app.use(question);
+app.use(section);
+app.use(testScore);
+app.use(sectionScore);
+app.use(admin);
+app.use(candidate);
+app.use(authentication)
 
-// const specs = swaggerJsdoc(options);
-const specs = swaggerJsdoc(swaggerOptions);
-// app.use(
-//     "/api-docs",
-//     swaggerUi.serve,
-//     swaggerUi.setup(specs)
-// );
+const specs = swaggerJsdoc(swaggerOptions); // for swagger-autogen
+
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile, { explorer: true }))
-// app.use('/doc', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }))
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }))
 
 
 mongoose.connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})
