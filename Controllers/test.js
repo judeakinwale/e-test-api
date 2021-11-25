@@ -4,6 +4,9 @@ const Question = require('../Models/question')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
+// @desc    Get all tests
+// @route   GET    /api/v1/test
+// @access  Private
 exports.getAllTests = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
@@ -21,21 +24,9 @@ exports.getAllTests = asyncHandler(async (req, res, next) => {
     })
 })
 
-exports.getCandidateTests = asyncHandler(async (req, res, next) => {
-    const tests = await Test.find({candidate: req.params.candidate_id})
-
-    if (!tests || tests.length < 1) {
-        return res.status(404).json({
-            success: false,
-            message: "There are no tests"
-        })
-    }
-    res.status(200).json({
-        success: true,
-        data: tests
-    })
-})
-
+// @desc    Create test
+// @route   POST    /api/v1/test
+// @access  Private
 exports.createTest = asyncHandler(async (req, res, next) => {
     const test = await Test.create(req.body)
 
@@ -51,6 +42,9 @@ exports.createTest = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get test
+// @route   GET    /api/v1/test/:id
+// @access  Private
 exports.getTest = asyncHandler(async (req, res, next) => {
     const test = await Test.findById(req.params.id)
 
@@ -66,6 +60,9 @@ exports.getTest = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Update test
+// @route   PUT    /api/v1/test/:id
+// @access  Private
 exports.updateTest = asyncHandler(async (req, res, next) => {
     const test = await Test.findByIdAndUpdate(
         req.params.id,
@@ -88,6 +85,9 @@ exports.updateTest = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Delete test
+// @route   DELETE    /api/v1/test/:id
+// @access  Private
 exports.deleteTest = asyncHandler(async (req, res, next) => {
     const test = await Test.findByIdAndDelete(req.params.id)
 
@@ -103,6 +103,9 @@ exports.deleteTest = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all sections in a test
+// @route   GET    /api/v1/test/:test_id/sections
+// @access  Private
 exports.getTestSections = asyncHandler(async (req, res, next) => {
     const sections = await Section.find({test: req.params.id})
 
@@ -118,6 +121,9 @@ exports.getTestSections = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all questions and sections in a test
+// @route   GET    /api/v1/test/:test_id/questions
+// @access  Private
 exports.getAllTestQuestions = asyncHandler(async (req, res, next) => {
     const sections = await Section.find({test: req.params.id})
     let questions = []

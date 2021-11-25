@@ -5,6 +5,9 @@ const ErrorResponse = require('../Utils/errorResponse')
 const getTestTimer = require('../Utils/getTestTimer')
 const asyncHandler = require('../Middleware/async')
 
+// @desc    Get all sections
+// @route   GET    /api/v1/section
+// @access  Private
 exports.getAllSections = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
@@ -22,6 +25,9 @@ exports.getAllSections = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Create section
+// @route   POST    /api/v1/section
+// @access  Private
 exports.createSection = asyncHandler(async (req, res, next) => {
     const section = await Section.create(req.body)
 
@@ -40,6 +46,9 @@ exports.createSection = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get section
+// @route   GET    /api/v1/section/:id
+// @access  Private
 exports.getSection = asyncHandler(async (req, res, next) => {
     const section = await Section.findById(req.params.id)
 
@@ -55,6 +64,9 @@ exports.getSection = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Update section
+// @route   PUT    /api/v1/section/:id
+// @access  Private
 exports.updateSection = asyncHandler(async (req, res, next) => {
     const section = await Section.findByIdAndUpdate(
         req.params.id,
@@ -80,6 +92,9 @@ exports.updateSection = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Delete section
+// @route   DELETE    /api/v1/section/:id
+// @access  Private
 exports.deleteSection = asyncHandler(async (req, res, next) => {
     const section = await Section.findByIdAndDelete(req.params.id)
 
@@ -95,6 +110,9 @@ exports.deleteSection = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all sections in a test
+// @route   GET    /api/v1/section/test/:test_id
+// @access  Private
 exports.getTestSections = asyncHandler(async (req, res, next) => {
     const sections = await Section.find({test: req.params.test_id})
 

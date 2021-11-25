@@ -2,6 +2,9 @@ const Question = require('../Models/question')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
+// @desc    Get all questions
+// @route   GET    /api/v1/question
+// @access  Private
 exports.getAllQuestions = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
@@ -19,6 +22,9 @@ exports.getAllQuestions = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Create question
+// @route   POST    /api/v1/question
+// @access  Private
 exports.createQuestion = asyncHandler(async (req, res, next) => {
     const question = await Question.create(req.body)
 
@@ -34,6 +40,9 @@ exports.createQuestion = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all questions in a section
+// @route   GET    /api/v1/question/section/:section_id
+// @access  Private
 exports.getSectionQuestions = asyncHandler(async (req, res, next) => {
     const questions = await Question.find({section: req.params.section_id})
 
@@ -49,6 +58,9 @@ exports.getSectionQuestions = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get question
+// @route   GET    /api/v1/question/:id
+// @access  Private
 exports.getQuestion = asyncHandler(async (req, res, next) => {
     const question = await Question.findById(req.params.id)
 
@@ -64,6 +76,9 @@ exports.getQuestion = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Update question
+// @route   PUT    /api/v1/question/:id
+// @access  Private
 exports.updateQuestions = asyncHandler(async (req, res, next) => {
     const question = await Question.findByIdAndUpdate(
         req.params.id,
@@ -86,6 +101,9 @@ exports.updateQuestions = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Delete question
+// @route   DELETE    /api/v1/question/:id
+// @access  Private
 exports.deleteQuestion = asyncHandler(async (req, res, next) => {
     const question = await Question.findByIdAndDelete(req.params.id)
 

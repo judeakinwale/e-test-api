@@ -4,6 +4,9 @@ const ErrorResponse = require('../Utils/errorResponse')
 const getTestScore = require('../Utils/getTestScore')
 const asyncHandler = require('../Middleware/async')
 
+// @desc    Get all section scores
+// @route   GET    /api/v1/section-score
+// @access  Private
 exports.getAllScores = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
@@ -21,6 +24,9 @@ exports.getAllScores = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Create section score
+// @route   POST    /api/v1/section-score
+// @access  Private
 exports.createScore = asyncHandler(async (req, res, next) => {
     const score = await SectionScore.create(req.body)
 
@@ -36,6 +42,9 @@ exports.createScore = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get section score
+// @route   GET    /api/v1/section-score/:id
+// @access  Private
 exports.getScore = asyncHandler(async (req, res, next) => {
     const scores = await SectionScore.findById(req.params.id)
 
@@ -51,6 +60,9 @@ exports.getScore = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Update section score
+// @route   PUT    /api/v1/section-score/:id
+// @access  Private
 exports.updateScore = asyncHandler(async (req, res, next) => {
     const score = await SectionScore.findByIdAndUpdate(
         req.params.id,
@@ -76,6 +88,9 @@ exports.updateScore = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Delete section score
+// @route   DELETE    /api/v1/section-score/:id
+// @access  Private
 exports.deleteScore = asyncHandler(async (req, res, next) => {
     const scores = await SectionScore.findByIdAndDelete(req.params.id)
 
@@ -91,6 +106,9 @@ exports.deleteScore = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all section scores for a candidate
+// @route   GET    /api/v1/section-score/candidate/:candidate_id
+// @access  Private
 exports.getAllCandidateScores = asyncHandler(async (req, res, next) => {
     const scores = await SectionScore.find({candidate: req.params.candidate_id})
 
@@ -106,6 +124,9 @@ exports.getAllCandidateScores = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all section scores for a test
+// @route   GET    /api/v1/section-score/test/:test_id
+// @access  Private
 exports.getAllTestScores = asyncHandler(async (req, res, next) => {
     const scores = await SectionScore.find({test: req.params.test_id})
 
@@ -121,6 +142,9 @@ exports.getAllTestScores = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all section scores for a specific section
+// @route   GET    /api/v1/section-score/section/:section_id
+// @access  Private
 exports.getAllSectionScores = asyncHandler(async (req, res, next) => {
     const scores = await SectionScore.find({section: req.params.section_id})
 
@@ -136,6 +160,9 @@ exports.getAllSectionScores = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all section scores for a specific section and candidate
+// @route   GET    /api/v1/section-score/section/:section_id/candidate/:candidate_id
+// @access  Private
 exports.getCandidateSectionScores = asyncHandler(async (req, res, next) => {
     const scores = await SectionScore.find({
         candidate: req.params.candidate_id,
@@ -154,6 +181,9 @@ exports.getCandidateSectionScores = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all section scores for currently authenticated candidate
+// @route   GET    /api/v1/section-score/self
+// @access  Private
 exports.getAllSelfScores = asyncHandler(async (req, res, next) => {
     const scores = await SectionScore.find({candidate: req.candidate._id})
 
@@ -168,6 +198,10 @@ exports.getAllSelfScores = asyncHandler(async (req, res, next) => {
         data: scores
     })
 })
+
+// @desc    Get all section scores for a specific section and currently authenticated candidate
+// @route   GET    /api/v1/section-score/self/section/:section_id
+// @access  Private
 exports.getSelfSectionScores = asyncHandler(async (req, res, next) => {
     const scores = await SectionScore.find({
         candidate: req.candidate._id,

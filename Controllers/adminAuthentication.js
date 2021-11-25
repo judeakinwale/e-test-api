@@ -5,8 +5,8 @@ const Admin = require("../Models/admin");
 const sendEmail = require("../Utils/sendEmail");
 const crypto = require("crypto");
 
-// @desc    Login User
-// @route   POST/api/v1/auth/Admin/login
+// @desc    Login admin user
+// @route   POST    /api/v1/auth/admin
 // @access   Public
 exports.adminLogin = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
@@ -32,9 +32,9 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
     sendTokenResponse(admin, 200, res);
 });
   
-// @desc    Log user out / clear cookie
-// @route  GET /api/v1/auth/logout
-// @access   Private
+// @desc    Log admin user out / clear cookie
+// @route   GET  /api/v1/auth/admin/logout
+// @access  Private
 exports.adminLogout = asyncHandler(async (req, res, next) => {
     res.cookie("token", "none", {
         expires: new Date(Date.now() + 10 * 1000),
@@ -46,9 +46,9 @@ exports.adminLogout = asyncHandler(async (req, res, next) => {
     });
 });
 
-// @desc    Get current logged in user
-// @route   POST/api/v1/auth/me
-// @access   Private
+// @desc    Get current logged in admin user
+// @route   POST    /api/v1/auth/admin/account
+// @access  Private
 exports.adminAccount = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findById(req.admin.id);
     res.status(200).json({
@@ -58,8 +58,8 @@ exports.adminAccount = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Reset Password
-// @route   PUT/api/v1/auth/resetpassword/:resettoken
-// @access   Public
+// @route   PUT     /api/v1/auth/admin/resetpassword/:resettoken
+// @access  Public
 exports.adminResetPassword = asyncHandler(async (req, res, next) => {
     //get hashed token
     const resetPasswordToken = crypto
@@ -83,8 +83,8 @@ exports.adminResetPassword = asyncHandler(async (req, res, next) => {
 });
   
 // @desc    Forgot Password
-// @route   POST/api/v1/auth/forgotpassword
-// @access   Public
+// @route   POST    /api/v1/auth/admin/forgotpassword
+// @access  Public
 exports.adminForgotPassword = asyncHandler(async (req, res, next) => {
     const user = await Admin.findOne({ email: req.body.email });
 

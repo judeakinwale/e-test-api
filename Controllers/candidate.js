@@ -2,6 +2,9 @@ const Candidate = require('../Models/candidate')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
+// @desc    Get all candidate
+// @route   GET     /api/v1/candidate
+// @access  Public
 exports.getAllCandidates = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
@@ -19,6 +22,9 @@ exports.getAllCandidates = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Create candidate
+// @route   POST    /api/v1/candidate
+// @access  Private
 exports.createCandidate = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.create(req.body)
 
@@ -35,6 +41,9 @@ exports.createCandidate = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get candidate
+// @route   GET     /api/v1/candidate/:id
+// @access  Private
 exports.getCandidate = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findById(req.params.id)
 
@@ -50,6 +59,9 @@ exports.getCandidate = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Update candidate
+// @route   PUT    /api/v1/candidate/:id
+// @access  Private
 exports.updateCandidate = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findByIdAndUpdate(
         req.params.id,
@@ -72,6 +84,9 @@ exports.updateCandidate = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Delete candidate
+// @route   DELETE    /api/v1/candidate/:id
+// @access  Private
 exports.deleteCandidate = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findByIdAndDelete(req.params.id)
 
@@ -87,6 +102,9 @@ exports.deleteCandidate = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get currently authenticated candidate
+// @route   GET    /api/v1/candidate/self
+// @access  Private
 exports.getSelf = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findById(req.candidate._id)
 
@@ -102,6 +120,9 @@ exports.getSelf = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get currently authenticated candidate
+// @route   PUT    /api/v1/candidate/self
+// @access  Private
 exports.updateSelf = asyncHandler(async (req, res, next) => {
     const candidate = await Candidate.findByIdAndUpdate(
         req.candidate._id,

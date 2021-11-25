@@ -2,6 +2,9 @@ const Admin = require('../Models/admin')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
+// @desc    Get all admins
+// @route   GET     /api/v1/admin
+// @access  Public
 exports.getAllAdmins = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
@@ -19,6 +22,9 @@ exports.getAllAdmins = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Create admin
+// @route   POST    /api/v1/admin
+// @access  Private
 exports.createAdmin = asyncHandler(async (req, res, next) => {
     const admin = await Admin.create(req.body)
 
@@ -34,6 +40,9 @@ exports.createAdmin = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get admin
+// @route   GET     /api/v1/admin/:id
+// @access  Private
 exports.getAdmin = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findById(req.params.id)
 
@@ -49,6 +58,9 @@ exports.getAdmin = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Update admin
+// @route   PUT    /api/v1/admin/:id
+// @access  Private
 exports.updateAdmin = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findByIdAndUpdate(
         req.params.id,
@@ -71,6 +83,9 @@ exports.updateAdmin = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Delete admin
+// @route   DELETE    /api/v1/admin/:id
+// @access  Private
 exports.deleteAdmin = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findByIdAndDelete(req.params.id)
 
@@ -86,6 +101,9 @@ exports.deleteAdmin = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get currently authenticated admin
+// @route   GET    /api/v1/admin/self
+// @access  Private
 exports.getSelf = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findById(req.admin._id)
 
@@ -101,6 +119,9 @@ exports.getSelf = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get currently authenticated admin
+// @route   PUT    /api/v1/admin/self
+// @access  Private
 exports.updateSelf = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findByIdAndUpdate(
         req.admin._id,

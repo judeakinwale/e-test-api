@@ -4,8 +4,8 @@ const asyncHandler = require('../Middleware/async')
 const path = require('path')
 
 // @desc    Get Company Profile
-// @route   GET /api/v1/company
-// @access   Private/All
+// @route   GET     /api/v1/company
+// @access  Publi/All
 exports.getCompanyProfile = asyncHandler(async (req, res, next) => {
     const company = await CompanyProfile.findOne({})
 
@@ -21,6 +21,9 @@ exports.getCompanyProfile = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Create company profile
+// @route   POST    /api/v1/company
+// @access  Private
 exports.createCompanyProfile = asyncHandler(async (req, res, next) => {
     const company = await CompanyProfile.create(req.body)
 
@@ -37,6 +40,9 @@ exports.createCompanyProfile = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get all company profiles
+// @route   GET     /api/v1/company/all
+// @access  Private
 exports.getAllCompanyProfile = asyncHandler(async (req, res, next) => {
     const company = await CompanyProfile.find()
 
@@ -57,6 +63,9 @@ exports.getAllCompanyProfile = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get company profile by id
+// @route   GET    /api/v1/company/:id
+// @access  Private
 exports.getCompanyProfileById = asyncHandler(async (req, res, next) => {
     const company = await CompanyProfile.findById(req.params.id)
 
@@ -72,6 +81,9 @@ exports.getCompanyProfileById = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Update company profile
+// @route   PUT    /api/v1/company/:id
+// @access  Private
 exports.updateCompanyProfile = asyncHandler(async (req, res, next) => {
     const company = await CompanyProfile.findByIdAndUpdate(
         req.params.id,
@@ -94,6 +106,9 @@ exports.updateCompanyProfile = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Delete company profile
+// @route   DELETE    /api/v1/company/:id
+// @access  Private
 exports.deleteCompanyProfile = asyncHandler(async (req, res, next) => {
     const company = await CompanyProfile.findByIdAndUpdate(req.params.id)
 
@@ -109,6 +124,9 @@ exports.deleteCompanyProfile = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Upload company logo
+// @route   POST    /api/v1/company/upload-logo
+// @access  Private
 exports.uploadLogo = asyncHandler(async (req, res, next) => {
     if (!req.files) {
       return next(new ErrorResponse(`Please Upload a picture`, 400));
