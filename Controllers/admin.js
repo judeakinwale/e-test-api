@@ -29,10 +29,11 @@ exports.createAdmin = asyncHandler(async (req, res, next) => {
     const admin = await Admin.create(req.body)
 
     if (!admin) {
-        return res.status(400).json({
-            success: false,
-            message: "Invalid admin details"
-        })
+        // return res.status(400).json({
+        //     success: false,
+        //     message: "Invalid admin details"
+        // })
+        return next(new ErrorResponse("Invalid admin credentials", 400));
     }
     res.status(201).json({
         success: true,
