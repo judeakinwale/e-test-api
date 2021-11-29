@@ -11,7 +11,7 @@ const asyncHandler = require('../Middleware/async')
 exports.getAllSections = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
-    const sections = await Section.find()
+    const sections = await Section.find().populate({path: 'test', select: 'title timer'})
 
     if (!sections || sections.length < 1) {
         return res.status(404).json({
@@ -50,7 +50,7 @@ exports.createSection = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/section/:id
 // @access  Private
 exports.getSection = asyncHandler(async (req, res, next) => {
-    const section = await Section.findById(req.params.id)
+    const section = await Section.findById(req.params.id).populate({path: 'test', select: 'title timer'})
 
     if (!section) {
         return res.status(404).json({
@@ -114,7 +114,7 @@ exports.deleteSection = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/section/test/:test_id
 // @access  Private
 exports.getTestSections = asyncHandler(async (req, res, next) => {
-    const sections = await Section.find({test: req.params.test_id})
+    const sections = await Section.find({test: req.params.test_id}).populate({path: 'test', select: 'title timer'})
 
     if (!sections || sections.length < 1) {
         return res.status(404).json({

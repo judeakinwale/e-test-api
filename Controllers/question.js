@@ -8,7 +8,7 @@ const asyncHandler = require('../Middleware/async')
 exports.getAllQuestions = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
-    const questions = await Question.find()
+    const questions = await Question.find().populate({path: 'section', select: 'title timer instruction test'})
 
     if (!questions || questions.length < 1) {
         return res.status(404).json({
@@ -44,7 +44,7 @@ exports.createQuestion = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/question/section/:section_id
 // @access  Private
 exports.getSectionQuestions = asyncHandler(async (req, res, next) => {
-    const questions = await Question.find({section: req.params.section_id})
+    const questions = await Question.find({section: req.params.section_id}).populate({path: 'section', select: 'title timer instruction test'})
 
     if (!questions || questions.length < 1) {
         return res.status(404).json({
@@ -62,7 +62,7 @@ exports.getSectionQuestions = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/question/:id
 // @access  Private
 exports.getQuestion = asyncHandler(async (req, res, next) => {
-    const question = await Question.findById(req.params.id)
+    const question = await Question.findById(req.params.id).populate({path: 'section', select: 'title timer instruction test'})
 
     if (!question) {
         return res.status(404).json({

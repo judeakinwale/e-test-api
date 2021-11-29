@@ -132,7 +132,7 @@ exports.getAllTestQuestions = asyncHandler(async (req, res, next) => {
         let section = sections[i]
         let question = await Question.find({section: section.id})
         questionSet = {
-            section: section.id,
+            section: section,
             questions: question
         }
         questions.push(questionSet)
