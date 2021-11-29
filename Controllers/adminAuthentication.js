@@ -19,7 +19,7 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
     const admin = await Admin.findOne({ email: email }).select("+password");
   
     if (!admin) {
-        return next(new ErrorResponse("Invalid credentials", 401));
+        return next(new ErrorResponse("Invalid credentials", 400));
     }
   
     //check if password match
