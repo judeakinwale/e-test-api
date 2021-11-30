@@ -8,7 +8,11 @@ const asyncHandler = require('../Middleware/async')
 exports.getAllCandidateResponses = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
-    const candidateResponses = await CandidateResponse.find()
+    const candidateResponses = await CandidateResponse.find().populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'},
+        {path: 'question', select: 'question'}
+    ])
 
     if (!candidateResponses || candidateResponses.length < 1) {
         return res.status(404).json({
@@ -45,7 +49,11 @@ exports.createCandidateResponse = asyncHandler(async (req, res, next) => {
 // @route   GET     /api/v1/candidate-response/:id
 // @access  Private
 exports.getCandidateResponse = asyncHandler(async (req, res, next) => {
-    const candidateResponse = await CandidateResponse.findById(req.params.id)
+    const candidateResponse = await CandidateResponse.findById(req.params.id).populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'},
+        {path: 'question', select: 'question'}
+    ])
 
     if (!candidateResponse) {
         return res.status(404).json({
@@ -110,7 +118,11 @@ exports.getCandidateResponseByTestAndQuestion = asyncHandler(async (req, res, ne
         candidate: req.candidate._id,
         test: req.params.test_id,
         question: req.params.question_id
-    })
+    }).populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'},
+        {path: 'question', select: 'question'}
+    ])
 
     if (!candidateResponse) {
         return res.status(404).json({

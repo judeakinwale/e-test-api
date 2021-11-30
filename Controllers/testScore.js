@@ -7,7 +7,10 @@ const asyncHandler = require('../Middleware/async')
 exports.getAllScores = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
-    const scores = await TestScore.find()
+    const scores = await TestScore.find().populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'}
+    ])
 
     if (!scores || scores.length < 1) {
         return res.status(404).json({
@@ -41,7 +44,10 @@ exports.createScore = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/test-score/:id
 // @access  Private
 exports.getScore = asyncHandler(async (req, res, next) => {
-    const scores = await TestScore.findById(req.params.id)
+    const scores = await TestScore.findById(req.params.id).populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'}
+    ])
 
     if (!scores || scores.length < 1) {
         return res.status(404).json({
@@ -99,7 +105,10 @@ exports.deleteScore = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/test-score/candidate/:candidate_id
 // @access  Private
 exports.getAllCandidateScores = asyncHandler(async (req, res, next) => {
-    const scores = await TestScore.find({candidate: req.params.candidate_id})
+    const scores = await TestScore.find({candidate: req.params.candidate_id}).populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'}
+    ])
 
     if (!scores || scores.length < 1) {
         return res.status(404).json({
@@ -117,7 +126,10 @@ exports.getAllCandidateScores = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/test-score/test/:test_id
 // @access  Private
 exports.getAllTestScores = asyncHandler(async (req, res, next) => {
-    const scores = await TestScore.find({test: req.params.test_id})
+    const scores = await TestScore.find({test: req.params.test_id}).populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'}
+    ])
 
     if (!scores || scores.length < 1) {
         return res.status(404).json({
@@ -138,7 +150,10 @@ exports.getCandidateTestScores = asyncHandler(async (req, res, next) => {
     const scores = await TestScore.find({
         candidate: req.params.candidate_id,
         test: req.params.test_id
-    })
+    }).populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'}
+    ])
 
     if (!scores || scores.length < 1) {
         return res.status(404).json({
@@ -156,7 +171,10 @@ exports.getCandidateTestScores = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/test-score/self
 // @access  Private
 exports.getAllSelfScores = asyncHandler(async (req, res, next) => {
-    const scores = await TestScore.find({candidate: req.candidate._id})
+    const scores = await TestScore.find({candidate: req.candidate._id}).populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'}
+    ])
 
     if (!scores || scores.length < 1) {
         return res.status(404).json({
@@ -177,7 +195,10 @@ exports.getSelfTestScores = asyncHandler(async (req, res, next) => {
     const scores = await TestScore.find({
         candidate: req.candidate._id,
         test: req.params.test_id
-    })
+    }).populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'}
+    ])
 
     if (!scores || scores.length < 1) {
         return res.status(404).json({
