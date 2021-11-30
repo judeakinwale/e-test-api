@@ -21,4 +21,24 @@ const getTestScore = async (score) => {
     await testScore.save()
 }
 
-module.exports = getTestScore
+const getTestScoreUsingTest = async (test) => {
+
+    const sectionScores = await SectionScore.find({
+        candidate: req.candidate.id,
+        test: test.id
+    })
+    const testScore = await TestScore.findOne({
+        candidate: req.candidate.id,
+        test: test.id
+    })
+    let tempScore = 0
+    for (let i = 0; i < sectionScores.length; i++) {
+        tempScore += sectionScores[i].score
+    }
+    finalScore = tempScore / sectionScores.length
+    testScore.score = finalScore * 10
+    await testScore.save()
+}
+
+
+module.exports = {getTestScore, getTestScoreUsingTest}

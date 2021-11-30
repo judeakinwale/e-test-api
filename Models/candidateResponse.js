@@ -12,15 +12,20 @@ const CandidateResponse = new Schema({
         ref: "test",
         required: true
     },
+    section: {
+        type: mongoose.Schema.ObjectId,
+        ref: "section",
+        required: true
+    },
     question: {
         type: mongoose.Schema.ObjectId,
         ref: "question",
         required: true
     },
-    selected_answer: {
+    selected_answers: [{
         type: String,
         required: true
-    },
+    }],
 });
 
 module.exports = mongoose.model('candidate_response', CandidateResponse)

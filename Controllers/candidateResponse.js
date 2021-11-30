@@ -1,5 +1,6 @@
 const CandidateResponse = require('../Models/candidateResponse')
 const ErrorResponse = require('../Utils/errorResponse')
+const getSectionScore = require('../Utils/getSectionScore')
 const asyncHandler = require('../Middleware/async')
 
 // @desc    Get all candidate response
@@ -11,7 +12,8 @@ exports.getAllCandidateResponses = asyncHandler(async (req, res, next) => {
     const candidateResponses = await CandidateResponse.find().populate([
         {path: 'candidate', select: 'firstName lastName email'},
         {path: 'test', select: 'title timer'},
-        {path: 'question', select: 'question'}
+        {path: 'section', select: 'title timer instruction test'},
+        {path: 'question', select: 'question section'}
     ])
 
     if (!candidateResponses || candidateResponses.length < 1) {
@@ -39,6 +41,7 @@ exports.createCandidateResponse = asyncHandler(async (req, res, next) => {
         })
         // return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
     }
+    await getSectionScore(candidateResponse)
     res.status(201).json({
         success: true,
         data: candidateResponse
@@ -52,7 +55,8 @@ exports.getCandidateResponse = asyncHandler(async (req, res, next) => {
     const candidateResponse = await CandidateResponse.findById(req.params.id).populate([
         {path: 'candidate', select: 'firstName lastName email'},
         {path: 'test', select: 'title timer'},
-        {path: 'question', select: 'question'}
+        {path: 'section', select: 'title timer instruction test'},
+        {path: 'question', select: 'question section'}
     ])
 
     if (!candidateResponse) {
@@ -86,6 +90,7 @@ exports.updateCandidateResponse = asyncHandler(async (req, res, next) => {
             message: "Invalid candidate response details"
         })
     }
+    await getSectionScore(candidateResponse)
     res.status(200).json({
         success: true,
         data: candidateResponse
@@ -121,7 +126,8 @@ exports.getCandidateResponseByTestAndQuestion = asyncHandler(async (req, res, ne
     }).populate([
         {path: 'candidate', select: 'firstName lastName email'},
         {path: 'test', select: 'title timer'},
-        {path: 'question', select: 'question'}
+        {path: 'section', select: 'title timer instruction test'},
+        {path: 'question', select: 'question section'}
     ])
 
     if (!candidateResponse) {
