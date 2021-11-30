@@ -28,6 +28,11 @@ const CandidateInformation = new Schema({
         required: true,
         select: false
     },
+    examType: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'test',
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now,
