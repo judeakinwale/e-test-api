@@ -22,16 +22,16 @@ const {
 
 const router = express.Router()
 
-router.route('/api/v1/section-score/').get(protect, authorizeAdmin, advancedResults(Score), getAllScores)
-router.route('/api/v1/section-score/').post(protect, authorize, createScore)
-router.route('/api/v1/section-score/:id').get(protect, authorize, getScore)
-router.route('/api/v1/section-score/:id').put(protect, authorize, updateScore)
-router.route('/api/v1/section-score/:id').delete(protect, authorize, deleteScore)
-router.route('/api/v1/section-score/candidate/:candidate_id').get(protect, authorizeAdmin, getAllCandidateScores)
-router.route('/api/v1/section-score/test/:test_id').get(protect, authorizeAdmin, getAllTestScores)
-router.route('/api/v1/section-score/section/:section_id').get(protect, authorizeAdmin, getAllSectionScores)
-router.route('/api/v1/section-score/section/:section_id/candidate/:candidate_id').get(protect, authorizeAdmin, getCandidateSectionScores)
-router.route('/api/v1/section-score/self').get(protect, authorize, getAllSelfScores)
-router.route('/api/v1/section-score/self/section/:section_id').get(protect, authorize, getSelfSectionScores)
+router.route('/api/v1/section-score/').get(advancedResults(Score), getAllScores)
+router.route('/api/v1/section-score/').post(createScore)
+router.route('/api/v1/section-score/:id').get(getScore)
+router.route('/api/v1/section-score/:id').put(updateScore)
+router.route('/api/v1/section-score/:id').delete(deleteScore)
+router.route('/api/v1/section-score/candidate/:candidate_id').get(getAllCandidateScores)
+router.route('/api/v1/section-score/test/:test_id').get(getAllTestScores)
+router.route('/api/v1/section-score/section/:section_id').get(getAllSectionScores)
+router.route('/api/v1/section-score/section/:section_id/candidate/:candidate_id').get(getCandidateSectionScores)
+router.route('/api/v1/section-score/self').get(getAllSelfScores)
+router.route('/api/v1/section-score/self/section/:section_id').get(getSelfSectionScores)
 
 module.exports = router

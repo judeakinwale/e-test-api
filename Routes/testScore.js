@@ -21,15 +21,15 @@ const {
 
 const router = express.Router()
 
-router.route('/api/v1/test-score/').get(protect, authorizeAdmin, advancedResults(Score), getAllScores)
-router.route('/api/v1/test-score/').post(protect, authorize, createScore)
-router.route('/api/v1/test-score/:id').get(protect, authorize, getScore)
-router.route('/api/v1/test-score/:id').put(protect, authorize, updateScore)
-router.route('/api/v1/test-score/:id').delete(protect, authorize, deleteScore)
-router.route('/api/v1/test-score/candidate/:candidate_id').get(protect, authorizeAdmin, getAllCandidateScores)
-router.route('/api/v1/test-score/test/:test_id').get(protect, authorizeAdmin, getAllTestScores)
-router.route('/api/v1/test-score/test/:test_id/candidate/:candidate_id').get(protect, authorizeAdmin, getCandidateTestScores)
-router.route('/api/v1/test-score/self').get(protect, authorize, getAllSelfScores)
-router.route('/api/v1/test-score/self/test/:test_id').get(protect, authorize, getSelfTestScores)
+router.route('/api/v1/test-score/').get(advancedResults(Score), getAllScores)
+router.route('/api/v1/test-score/').post(createScore)
+router.route('/api/v1/test-score/:id').get(getScore)
+router.route('/api/v1/test-score/:id').put(updateScore)
+router.route('/api/v1/test-score/:id').delete(deleteScore)
+router.route('/api/v1/test-score/candidate/:candidate_id').get(getAllCandidateScores)
+router.route('/api/v1/test-score/test/:test_id').get(getAllTestScores)
+router.route('/api/v1/test-score/test/:test_id/candidate/:candidate_id').get(getCandidateTestScores)
+router.route('/api/v1/test-score/self').get(getAllSelfScores)
+router.route('/api/v1/test-score/self/test/:test_id').get(getSelfTestScores)
 
 module.exports = router
