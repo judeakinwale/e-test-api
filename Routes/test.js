@@ -18,7 +18,7 @@ const {
 
 const router = express.Router()
 
-router.route('/api/v1/test').get(protect, authorize, advancedResults(Test), getAllTests)
+router.route('/api/v1/test').get(advancedResults(Test), getAllTests)
 router.route('/api/v1/test').post(protect, authorizeAdmin, createTest)
 router.route('/api/v1/test/:id').get(protect, authorize, getTest)
 router.route('/api/v1/test/:id').put(protect, authorizeAdmin, updateTest)
