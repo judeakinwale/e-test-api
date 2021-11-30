@@ -22,3 +22,5 @@ const CandidateResponse = new Schema({
         required: true
     },
 });
+
+module.exports = mongoose.model('candidate_response', CandidateResponse)

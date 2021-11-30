@@ -130,7 +130,7 @@ exports.getAllTestQuestions = asyncHandler(async (req, res, next) => {
     
     for (let i = 0; i < sections.length; i++) {
         let section = sections[i]
-        let question = await Question.find({section: section.id})
+        let question = await Question.find({section: section.id}).populate({path: 'section', select: 'title timer instruction'})
         questionSet = {
             section: section,
             questions: question

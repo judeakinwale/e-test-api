@@ -27,6 +27,7 @@ const testScore = require('./Routes/testScore');
 const sectionScore = require('./Routes/sectionScore');
 const admin = require('./Routes/admin');
 const candidate = require('./Routes/candidate');
+const candidateResponse = require('./Routes/candidateResponse');
 const authentication = require('./Routes/authentication')
 
 const app = express();
@@ -67,6 +68,7 @@ app.use(testScore);
 app.use(sectionScore);
 app.use(admin);
 app.use(candidate);
+app.use(candidateResponse);
 app.use(authentication)
 
 const specs = swaggerJsdoc(swaggerOptions); // for swagger-autogen
