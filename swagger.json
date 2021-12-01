@@ -87,7 +87,10 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created"
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/CompanyProfile"
+                        }
                     },
                     "400": {
                         "description": "Bad Request"
@@ -174,13 +177,13 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                    "description": "OK",
-                    "schema": {
-                        "$ref": "#/definitions/CompanyProfile"
-                    }
+                        "description": "OK",
+                        "schema": [{
+                            "$ref": "#/definitions/CompanyProfile"
+                        }]
                     },
                     "404": {
-                    "description": "Not Found"
+                        "description": "Not Found"
                     }
                 }
             }
@@ -202,7 +205,10 @@
                 ],
                 "responses": {
                     "200": {
-                    "description": "OK"
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
                     }
                 }
             }
@@ -360,7 +366,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Section"
+                            "$ref": "#/responses/Section"
                         }
                     },
                     "404": {
@@ -386,7 +392,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TestQuestions"
+                            "$ref": "#/responses/TestQuestions"
                         }
                     },
                     "404": {
@@ -426,7 +432,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Question"
+                            "$ref": "#/responses/Question"
                         }
                     },
                     "404": {
@@ -453,7 +459,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/Question"
+                            "$ref": "#/responses/Question"
                         }
                     },
                     "400": {
@@ -479,7 +485,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Question"
+                            "$ref": "#/responses/Question"
                         }
                     },
                     "404": {
@@ -497,13 +503,22 @@
                         "in": "path",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Question"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Question"
+                            "$ref": "#/responses/Question"
                         }
                     },
                     "400": {
@@ -550,7 +565,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Question"
+                            "$ref": "#/responses/Question"
                         }
                     },
                     "404": {
@@ -590,7 +605,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Section"
+                            "$ref": "#/responses/Section"
                         }
                     },
                     "404": {
@@ -617,7 +632,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/Section"
+                            "$ref": "#/responses/Section"
                         }
                     },
                     "400": {
@@ -643,7 +658,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Section"
+                            "$ref": "#/responses/Section"
                         }
                     },
                     "404": {
@@ -661,13 +676,22 @@
                         "in": "path",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Section"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Section"
+                            "$ref": "#/responses/Section"
                         }
                     },
                     "400": {
@@ -714,7 +738,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Section"
+                            "$ref": "#/responses/Section"
                         }
                     },
                     "404": {
@@ -754,7 +778,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TestScore"
+                            "$ref": "#/responses/TestScore"
                         }
                     },
                     "404": {
@@ -781,7 +805,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/TestScore"
+                            "$ref": "#/responses/TestScore"
                         }
                     },
                     "400": {
@@ -807,7 +831,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TestScore"
+                            "$ref": "#/responses/TestScore"
                         }
                     },
                     "404": {
@@ -825,13 +849,22 @@
                         "in": "path",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TestScore"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TestScore"
+                            "$ref": "#/responses/TestScore"
                         }
                     },
                     "400": {
@@ -876,7 +909,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/responses/TestScore"
+                        }
                     },
                     "404": {
                         "description": "Not Found"
@@ -901,7 +937,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TestScore"
+                            "$ref": "#/responses/TestScore"
                         }
                     },
                     "404": {
@@ -933,7 +969,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TestScore"
+                            "$ref": "#/responses/TestScore"
                         }
                     },
                     "404": {
@@ -952,7 +988,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TestScore"
+                            "$ref": "#/responses/TestScore"
                         }
                     },
                     "404": {
@@ -978,7 +1014,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TestScore"
+                            "$ref": "#/responses/TestScore"
                         }
                     },
                     "404": {
@@ -1018,7 +1054,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SectionScore"
+                            "$ref": "#/response/SectionScore"
                         }
                     },
                     "404": {
@@ -1045,7 +1081,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/SectionScore"
+                            "$ref": "#/response/SectionScore"
                         }
                     },
                     "400": {
@@ -1071,7 +1107,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SectionScore"
+                            "$ref": "#/response/SectionScore"
                         }
                         
                     },
@@ -1090,13 +1126,22 @@
                         "in": "path",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SectionScore"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SectionScore"
+                            "$ref": "#/response/SectionScore"
                         }
                     },
                     "400": {
@@ -1143,7 +1188,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SectionScore"
+                            "$ref": "#/responses/SectionScore"
                         }
                     },
                     "404": {
@@ -1169,7 +1214,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SectionScore"
+                            "$ref": "#/responses/SectionScore"
                         }
                     },
                     "404": {
@@ -1195,7 +1240,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SectionScore"
+                            "$ref": "#/responses/SectionScore"
                         }
                     },
                     "404": {
@@ -1227,7 +1272,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SectionScore"
+                            "$ref": "#/responses/SectionScore"
                         }
                     },
                     "404": {
@@ -1246,7 +1291,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SectionScore"
+                            "$ref": "#/responses/SectionScore"
                         }
                     },
                     "404": {
@@ -1270,7 +1315,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/responses/SectionScore"
+                        }
                     },
                     "404": {
                         "description": "Not Found"
@@ -1380,6 +1428,15 @@
                         "in": "path",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Admin"
+                        }
                     }
                 ],
                 "responses": {
@@ -1564,6 +1621,15 @@
                         "in": "path",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Candidate"
+                        }
                     }
                 ],
                 "responses": {
@@ -1605,7 +1671,10 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Candidate"
+                        }
                     },
                     "404": {
                         "description": "Not Found"
@@ -1616,10 +1685,23 @@
                 "tags": ["candidate"],
                 "summary": "Update currently authenticated candidate",
                 "description": "",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Candidate"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Candidate"
+                        }
                     },
                     "400": {
                         "description": "Bad Request"
@@ -1658,7 +1740,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/CandidateResponseRes"
+                            "$ref": "#/responses/CandidateResponse"
                         }
                     },
                     "404": {
@@ -1685,7 +1767,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/CandidateResponseRes"
+                            "$ref": "#/responses/CandidateResponse"
                         }
                     },
                     "400": {
@@ -1693,8 +1775,8 @@
                     }
                 }
             }
-          },
-          "/api/v1/candidate-response/{id}": {
+        },
+        "/api/v1/candidate-response/{id}": {
             "get": {
                 "tags": ["candidate response"],
                 "summary": "Get a candidate's response using id",
@@ -1711,7 +1793,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/CandidateResponseRes"
+                            "$ref": "#/responses/CandidateResponse"
                         }
                     },
                     "404": {
@@ -1744,7 +1826,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/CandidateResponseRes"
+                            "$ref": "#/responses/CandidateResponse"
                         }
                     },
                     "400": {
@@ -1768,7 +1850,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/CandidateResponseRes"
+                            "$ref": "#/responses/CandidateResponse"
                         }
                     },
                     "404": {
@@ -1800,7 +1882,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/CandidateResponseRes"
+                            "$ref": "#/responses/CandidateResponse"
                         }
                     },
                     "404": {
@@ -1835,7 +1917,7 @@
                     "200": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/Token"
+                            "$ref": "#/responses/Token"
                         }
                     },
                     "400": {
@@ -1954,7 +2036,7 @@
                     "200": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/Token"
+                            "$ref": "#/responses/Token"
                         }
                     },
                     "400": {
@@ -2187,6 +2269,154 @@
                     "example": "Some example string"
                 },
                 "test": {
+                    "type": "string",
+                    "example": "Test id"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "default": "Date.now"
+                }
+            }
+        },
+        "Question": {
+            "required": [
+                "question",
+                "correct_answers",
+                "section"
+            ],
+            "properties": {
+                "question": {
+                    "type": "string",
+                    "example": "Some example string"
+                },  
+                "answers": {
+                    "type": "array",
+                    "example": ["Some", "example", "string"]
+                },
+                "correct_answers": {
+                    "type": "array",
+                    "example": ["Some", "example", "string"]
+                },
+                "section": {
+                    "type": "string",
+                    "example": "Section id"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "default": "Date.now"
+                }
+            }
+        },
+        "TestScore": {
+            "required": [
+                "candidate",
+                "test",
+                "score"
+            ],
+            "properties": {
+                "candidate": {
+                    "type": "string",
+                    "example": "Candidate id"
+                },
+                "test": {
+                    "type": "string",
+                    "example": "Test id"
+                },
+                "score": {
+                    "type": "integer",
+                    "example": 10
+                }
+            }
+        },
+        "SectionScore": {
+            "required": [
+                "candidate",
+                "test",
+                "section",
+                "score"
+            ],
+            "properties": {
+                "candidate": {
+                    "type": "string",
+                    "example": "Candidate id"
+                },
+                "test": {
+                    "type": "string",
+                    "example": "Test id"
+                },
+                "section": {
+                    "type": "string",
+                    "example": "Section id"
+                },
+                "score": {
+                    "type": "integer",
+                    "example": 10
+                }
+            }
+        },
+        "CandidateResponse": {
+            "required": [
+                "candidate",
+                "test",
+                "section",
+                "question",
+                "selected_answer"
+            ],
+            "properties": {
+                "candidate": {
+                    "type": "string",
+                    "example": "Candidate id"
+                },
+                "test": {
+                    "type": "string",
+                    "example": "Test id"
+                },
+                "section": {
+                    "type": "string",
+                    "example": "Section id"
+                },
+                "question": {
+                    "type": "string",
+                    "example": "Question id"
+                },
+                "selected_answer": {
+                    "type": "string",
+                    "example": "Some example string"
+                }
+            }
+        },
+        "File": {
+            "required": ["file"],
+            "properties": {
+                "file": {
+                    "type": "string",
+                    "example": "Some example string"
+                }
+            }
+        }
+    },
+    "responses": {
+        "Section": {
+            "required": [
+                "title",
+                "timer",
+                "instruction",
+                "test"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "example": "Some example string"
+                },
+                "timer": {
+                    "type": "integer",
+                    "default": 0
+                },
+                "instruction": {
+                    "type": "string",
+                    "example": "Some example string"
+                },
+                "test": {
                     "$ref": "#/definitions/Test"                },
                 "createdAt": {
                     "type": "string",
@@ -2221,75 +2451,7 @@
                 }
             }
         },
-        "TestScore": {
-            "required": [
-                "candidate",
-                "test",
-                "score"
-            ],
-            "properties": {
-                "candidate": {
-                    "$ref": "#/definitions/Candidate"                },
-                "test": {
-                    "$ref": "#/definitions/Test"                },
-                "score": {
-                    "type": "integer",
-                    "example": 10
-                }
-            }
-        },
-        "SectionScore": {
-            "required": [
-                "candidate",
-                "test",
-                "section",
-                "score"
-            ],
-            "properties": {
-                "candidate": {
-                    "$ref": "#/definitions/Candidate"                },
-                "test": {
-                    "$ref": "#/definitions/Test"                },
-                "section": {
-                    "$ref": "#/definitions/Section"                },
-                "score": {
-                    "type": "integer",
-                    "example": 10
-                }
-            }
-        },
         "CandidateResponse": {
-            "required": [
-                "candidate",
-                "test",
-                "section",
-                "question",
-                "selected_answer"
-            ],
-            "properties": {
-                "candidate": {
-                    "type": "string",
-                    "example": "candidate_id"
-                },
-                "test": {
-                    "type": "string",
-                    "example": "test_id"
-                },
-                "section": {
-                    "type": "string",
-                    "example": "section_id"
-                },
-                "question": {
-                    "type": "string",
-                    "example": "question_id"
-                },
-                "selected_answer": {
-                    "type": "string",
-                    "example": "Some example string"
-                }
-            }
-        },
-        "CandidateResponseRes": {
             "required": [
                 "candidate",
                 "test",
@@ -2316,18 +2478,49 @@
                 }
             }
         },
-        "Token": {
+        "TestScore": {
+            "required": [
+                "candidate",
+                "test",
+                "score"
+            ],
             "properties": {
-                "token": {
-                    "type": "string",
-                    "example": "Some example string"
+                "candidate": {
+                    "$ref": "#/definitions/Candidate"                },
+                "test": {
+                    "$ref": "#/definitions/Test"                },
+                "score": {
+                    "type": "integer",
+                    "example": 10
                 }
             }
         },
-        "File": {
-            "required": ["file"],
+        "SectionScore": {
+            "required": [
+                "candidate",
+                "test",
+                "section",
+                "score"
+            ],
             "properties": {
-                "file": {
+                "candidate": {
+                    "$ref": "#/definitions/Candidate"                
+                },
+                "test": {
+                    "$ref": "#/definitions/Test"                
+                },
+                "section": {
+                    "$ref": "#/definitions/Section"                
+                },
+                "score": {
+                    "type": "integer",
+                    "example": 10
+                }
+            }
+        },
+        "Token": {
+            "properties": {
+                "token": {
                     "type": "string",
                     "example": "Some example string"
                 }
@@ -2340,95 +2533,12 @@
                     "type": "array",
                     "example": [
                         {
-                            "section": "619769643f3ecd2d1cec4b0e",
-                            "questions": [
-                                {
-                                    "question": "Select the true option",
-                                    "answers": [
-                                        "false",
-                                        "false",
-                                        "true"
-                                    ],
-                                    "correct_answers": [
-                                        "true"
-                                    ],
-                                    "section": "619769643f3ecd2d1cec4b0e",
-                                    "createdAt": "2021-11-19T10:08:01.408Z"
-                                },
-                                {
-                                    "question": "Select the false option",
-                                    "answers": [
-                                        "true",
-                                        "true",
-                                        "false"
-                                    ],
-                                    "correct_answers": [
-                                        "false"
-                                    ],
-                                    "section": "619769643f3ecd2d1cec4b0e",
-                                    "createdAt": "2021-11-19T10:08:50.047Z"
-                                }
-                            ]
-                        },
-                        {
-                            "section": "619769d73f3ecd2d1cec4b1b",
-                            "questions": [
-                                {
-                                    "question": "Select the red option",
-                                    "answers": [
-                                        "blue",
-                                        "blue",
-                                        "red"
-                                    ],
-                                    "correct_answers": [
-                                        "red"
-                                    ],
-                                    "section": "619769d73f3ecd2d1cec4b1b",
-                                    "createdAt": "2021-11-19T10:10:21.023Z"
-                                },
-                                {
-                                    "question": "Select the blue option",
-                                    "answers": [
-                                        "red",
-                                        "red",
-                                        "blue"
-                                    ],
-                                    "correct_answers": [
-                                        "blue"
-                                    ],
-                                    "section": "619769d73f3ecd2d1cec4b1b",
-                                    "createdAt": "2021-11-19T10:11:04.512Z"
-                                }
-                            ]
-                        },
-                        {
-                            "section": "619769f13f3ecd2d1cec4b20",
-                            "questions": [
-                                {
-                                    "question": "Select the green option",
-                                    "answers": [
-                                        "yellow",
-                                        "yellow",
-                                        "green"
-                                    ],
-                                    "correct_answers": [
-                                        "green"
-                                    ],
-                                    "section": "619769f13f3ecd2d1cec4b20",
-                                    "createdAt": "2021-11-19T10:12:24.432Z"
-                                },
-                                {
-                                    "question": "Select the yellow option",
-                                    "answers": [
-                                        "green",
-                                        "green",
-                                        "yellow"
-                                    ],
-                                    "correct_answers": [
-                                        "yellow"
-                                    ],
-                                    "section": "619769f13f3ecd2d1cec4b20"                                }
-                            ]
+                            "section": {
+                                "$ref": "#/definitions/Section"                
+                            },
+                            "question": {
+                                "$ref": "#/definitions/Question"
+                            }
                         }
                     ]
                 }
