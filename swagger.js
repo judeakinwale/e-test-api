@@ -19,6 +19,7 @@ const endpointsFiles = [
     './Routes/sectionScore',
     './Routes/admin',
     './Routes/candidate',
+    './Routes/candidateResponse',
     './Routes/authentication',
 ];
 // const endpointsFiles = [

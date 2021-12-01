@@ -1627,6 +1627,188 @@
                 }
             }
         },
+        "/api/v1/candidate-response": {
+            "get": {
+                "tags": ["candidate response"],
+                "summary": "Get a candidate's response",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "select",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CandidateResponseRes"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["candidate response"],
+                "summary": "Create a candidate's response",
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CandidateResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/CandidateResponseRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+          },
+          "/api/v1/candidate-response/{id}": {
+            "get": {
+                "tags": ["candidate response"],
+                "summary": "Get a candidate's response using id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CandidateResponseRes"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["candidate response"],
+                "summary": "Update a candidate's response using id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CandidateResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CandidateResponseRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["candidate response"],
+                "summary": "Delete a candidate's response using id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CandidateResponseRes"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/candidate-response/test/{test_id}/question/{question_id}": {
+            "get": {
+                "tags": ["candidate response"],
+                "summary": "Get a candidate's response using the test id and question id",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "test_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    },
+                    {
+                    "name": "question_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CandidateResponseRes"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1/auth/admin/": {
             "post": {
                 "tags": ["authentication"],
@@ -2080,16 +2262,54 @@
             "required": [
                 "candidate",
                 "test",
+                "section",
                 "question",
                 "selected_answer"
             ],
             "properties": {
                 "candidate": {
-                    "$ref": "#/definitions/Candidate"                },
+                    "type": "string",
+                    "example": "candidate_id"
+                },
                 "test": {
-                    "$ref": "#/definitions/Test"                },
+                    "type": "string",
+                    "example": "test_id"
+                },
+                "section": {
+                    "type": "string",
+                    "example": "section_id"
+                },
                 "question": {
-                    "$ref": "#/definitions/Question"                },
+                    "type": "string",
+                    "example": "question_id"
+                },
+                "selected_answer": {
+                    "type": "string",
+                    "example": "Some example string"
+                }
+            }
+        },
+        "CandidateResponseRes": {
+            "required": [
+                "candidate",
+                "test",
+                "section",
+                "question",
+                "selected_answer"
+            ],
+            "properties": {
+                "candidate": {
+                    "$ref": "#/definitions/Candidate"
+                },
+                "test": {
+                    "$ref": "#/definitions/Test"
+                },
+                "section": {
+                    "$ref": "#/definitions/Section"
+                },
+                "question": {
+                    "$ref": "#/definitions/Question"
+                },
                 "selected_answer": {
                     "type": "string",
                     "example": "Some example string"
