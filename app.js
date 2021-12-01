@@ -52,11 +52,11 @@ app.use(fileupload()); //file uploads
 // }
 
 // //Rate limiting
-// const limiter = rateLimit({
-//     windowMs: 10 * 60 * 1000, // 10 mins
-//     max: 100,
-//   });
-//   app.use(limiter);
+ const limiter = rateLimit({
+     windowMs: 10 * 60 * 1000, // 10 mins
+     max: 100,
+   });
+app.use(limiter);
 
 
 // Routes
