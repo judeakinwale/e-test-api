@@ -178,9 +178,9 @@
                 "responses": {
                     "200": {
                         "description": "OK",
-                        "schema": [{
+                        "schema": {
                             "$ref": "#/definitions/CompanyProfile"
-                        }]
+                        }
                     },
                     "404": {
                         "description": "Not Found"
