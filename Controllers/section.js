@@ -127,3 +127,23 @@ exports.getTestSections = asyncHandler(async (req, res, next) => {
         data: sections
     })
 })
+
+// @desc    Get sections assigned to the authenticated candidate
+// @route   GET    /api/v1/section/assigned
+// @access  Private
+exports.getAssignedTestSections = asyncHandler(async (req, res, next) => {
+    const examType = await req.candidate.examType
+    // const assignedTest = await Test.findById(examType)
+    const sections = await Section.find({test: examType})
+
+    if (!sections || sections.length  < 1) {
+        return res.status(404).json({
+            success: false,
+            message: "Assigned Sections not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: sections
+    })
+})

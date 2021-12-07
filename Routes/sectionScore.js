@@ -31,7 +31,7 @@ router.route('/api/v1/section-score/candidate/:candidate_id').get(getAllCandidat
 router.route('/api/v1/section-score/test/:test_id').get(getAllTestScores)
 router.route('/api/v1/section-score/section/:section_id').get(getAllSectionScores)
 router.route('/api/v1/section-score/section/:section_id/candidate/:candidate_id').get(getCandidateSectionScores)
-router.route('/api/v1/section-score/self').get(getAllSelfScores)
-router.route('/api/v1/section-score/self/section/:section_id').get(getSelfSectionScores)
+router.route('/api/v1/section-score/self').get(protect, getAllSelfScores)
+router.route('/api/v1/section-score/self/section/:section_id').get(protect, getSelfSectionScores)
 
 module.exports = router

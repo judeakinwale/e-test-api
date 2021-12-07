@@ -113,7 +113,7 @@ exports.getAllCandidateScores = asyncHandler(async (req, res, next) => {
     if (!scores || scores.length < 1) {
         return res.status(404).json({
             success: false,
-            message: "Candidates scores not found"
+            message: "Candidates test scores not found"
         })
     }
     res.status(200).json({
@@ -158,7 +158,7 @@ exports.getCandidateTestScores = asyncHandler(async (req, res, next) => {
     if (!scores || scores.length < 1) {
         return res.status(404).json({
             success: false,
-            message: "Candidates scores not found"
+            message: "Candidates test scores not found"
         })
     }
     res.status(200).json({
@@ -179,7 +179,7 @@ exports.getAllSelfScores = asyncHandler(async (req, res, next) => {
     if (!scores || scores.length < 1) {
         return res.status(404).json({
             success: false,
-            message: "Candidates scores not found"
+            message: "Candidates test scores not found"
         })
     }
     res.status(200).json({
@@ -203,7 +203,7 @@ exports.getSelfTestScores = asyncHandler(async (req, res, next) => {
     if (!scores || scores.length < 1) {
         return res.status(404).json({
             success: false,
-            message: "Candidates scores not found"
+            message: "Candidates test scores not found"
         })
     }
     res.status(200).json({

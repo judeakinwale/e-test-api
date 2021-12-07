@@ -32,15 +32,15 @@ router.route("/api/v1/auth/admin/").post(adminLogin);
 // router.route("/api/v1/auth/verifyEmail").post(verifyEmail);
 router.route("/api/v1/auth/admin/logout").post(adminLogout);
 router.route("/api/v1/auth/admin/account").get(protect, authorizeAdmin, adminAccount);
-router.route("/api/v1/auth/admin/forgotPassword").post(protect, authorizeAdmin, adminForgotPassword);
-router.route("/api/v1/auth/admin/resetPassword").post(protect, authorizeAdmin, adminResetPassword);
+router.route("/api/v1/auth/admin/forgotPassword").post(adminForgotPassword);
+router.route("/api/v1/auth/admin/resetPassword").post(adminResetPassword);
 
 router.route("/api/v1/auth/").post(login);
 // router.route("/api/v1/auth/addEmail").post(addEmail);
 // router.route("/api/v1/auth/verifyEmail").post(verifyEmail);
 router.route("/api/v1/auth/logout").post(logout);
 router.route("/api/v1/auth/account").get(protect, authorize, account);
-router.route("/api/v1/auth/forgotPassword").post(protect, authorize, forgotPassword);
-router.route("/api/v1/auth/resetPassword").post(protect, authorize, resetPassword);
+router.route("/api/v1/auth/forgotPassword").post(forgotPassword);
+router.route("/api/v1/auth/resetPassword").post(resetPassword);
 
 module.exports = router

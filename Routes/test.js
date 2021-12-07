@@ -13,7 +13,7 @@ const {
     updateTest,
     deleteTest,
     getTestSections,
-    getAssignedTestSections,
+    getAssignedTest,
     getAllTestQuestions
 } = require('../Controllers/test')
 
@@ -21,7 +21,7 @@ const router = express.Router()
 
 router.route('/api/v1/test').get(advancedResults(Test), getAllTests)
 router.route('/api/v1/test').post(protect, authorizeAdmin, createTest)
-router.route('/api/v1/test/candidate').get(protect, getAssignedTestSections)
+router.route('/api/v1/test/assigned').get(protect, getAssignedTest)
 router.route('/api/v1/test/:id').get(getTest)
 router.route('/api/v1/test/:id').put(protect, authorizeAdmin, updateTest)
 router.route('/api/v1/test/:id').delete(protect, authorizeAdmin, deleteTest)

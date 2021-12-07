@@ -115,6 +115,33 @@ exports.deleteCandidateResponse = asyncHandler(async (req, res, next) => {
     })
 })
 
+// @desc    Get candidate response for a candidate using candidate id, test id and question id
+// @route   GET    /api/v1/candidate-response/candidate/:candidate_id/test/:test_id/question/:question_id
+// @access  Private
+exports.getCandidateResponseByCandidateTestAndQuestion = asyncHandler(async (req, res, next) => {
+    const candidateResponse = await CandidateResponse.find({
+        candidate: req.params.candidate_id,
+        test: req.params.test_id,
+        question: req.params.question_id
+    }).populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'},
+        {path: 'section', select: 'title timer instruction test'},
+        {path: 'question', select: 'question section'}
+    ])
+
+    if (!candidateResponse) {
+        return res.status(404).json({
+            success: false,
+            message: "Candidate response not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: candidateResponse
+    })
+})
+
 // @desc    Get currently authenticated candidate response
 // @route   GET    /api/v1/candidate-response/test/:test_id/question/:question_id
 // @access  Private

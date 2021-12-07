@@ -18,9 +18,9 @@ const router = express.Router()
 
 router.route('/api/v1/company/').get(getCompanyProfile)
 router.route('/api/v1/company/').post(protect, authorizeAdmin, createCompanyProfile)
-router.route('/api/v1/company/all').get(protect, authorizeAdmin, getAllCompanyProfile)
+router.route('/api/v1/company/all').get(getAllCompanyProfile)
 router.route('/api/v1/company/upload-logo').post(protect, uploadLogo)
-router.route('/api/v1/company/:id').get(protect, authorizeAdmin, getCompanyProfileById)
+router.route('/api/v1/company/:id').get(getCompanyProfileById)
 router.route('/api/v1/company/:id').put(protect, authorizeAdmin, updateCompanyProfile)
 router.route('/api/v1/company/:id').delete(protect, authorizeAdmin, deleteCompanyProfile)
 

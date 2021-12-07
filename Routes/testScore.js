@@ -29,7 +29,7 @@ router.route('/api/v1/test-score/:id').delete(deleteScore)
 router.route('/api/v1/test-score/candidate/:candidate_id').get(getAllCandidateScores)
 router.route('/api/v1/test-score/test/:test_id').get(getAllTestScores)
 router.route('/api/v1/test-score/test/:test_id/candidate/:candidate_id').get(getCandidateTestScores)
-router.route('/api/v1/test-score/self').get(getAllSelfScores)
-router.route('/api/v1/test-score/self/test/:test_id').get(getSelfTestScores)
+router.route('/api/v1/test-score/self').get(protect, getAllSelfScores)
+router.route('/api/v1/test-score/self/test/:test_id').get(protect, getSelfTestScores)
 
 module.exports = router

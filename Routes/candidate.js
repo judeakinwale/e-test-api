@@ -22,7 +22,7 @@ router.route('/api/v1/candidate').get(advancedResults(Candidate), getAllCandidat
 router.route('/api/v1/candidate').post(createCandidate)
 router.route('/api/v1/candidate/self').get(protect, authorize, getSelf)
 router.route('/api/v1/candidate/self').put(protect, authorize, updateSelf)
-router.route('/api/v1/candidate/:id').get(protect, authorize, getCandidate)
+router.route('/api/v1/candidate/:id').get(getCandidate)
 router.route('/api/v1/candidate/:id').put(protect, authorize, updateCandidate)
 router.route('/api/v1/candidate/:id').delete(protect, authorize, deleteCandidate)
 

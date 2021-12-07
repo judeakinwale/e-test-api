@@ -11,6 +11,7 @@ const {
     createQuestion,
     getSectionQuestions,
     getQuestion,
+    getAssignedTestQuestions,
     updateQuestions,
     deleteQuestion
 } = require('../Controllers/question')
@@ -19,6 +20,7 @@ const router = express.Router()
 
 router.route('/api/v1/question/').get(advancedResults(Question), getAllQuestions)
 router.route('/api/v1/question/').post(protect, authorizeAdmin, createQuestion)
+router.route('/api/v1/question/assigned').get(protect, getAssignedTestQuestions)
 router.route('/api/v1/question/:id').get(getQuestion)
 router.route('/api/v1/question/:id').put(protect, authorizeAdmin, updateQuestions)
 router.route('/api/v1/question/:id').delete(protect, authorizeAdmin, deleteQuestion)

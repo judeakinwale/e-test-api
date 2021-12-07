@@ -87,7 +87,7 @@ exports.updateScore = asyncHandler(async (req, res, next) => {
             message: "Invalid score details"
         })
     }
-    // Calculate the test scores from the section scores
+    // Calculate the section scores from the section scores
     await getTestScore(score)
 
     res.status(200).json({
@@ -127,7 +127,7 @@ exports.getAllCandidateScores = asyncHandler(async (req, res, next) => {
     if (!scores || scores.length < 1) {
         return res.status(404).json({
             success: false,
-            message: "Candidates scores not found"
+            message: "Candidates section scores not found"
         })
     }
     res.status(200).json({
@@ -149,7 +149,7 @@ exports.getAllTestScores = asyncHandler(async (req, res, next) => {
     if (!scores || scores.length < 1) {
         return res.status(404).json({
             success: false,
-            message: "Test scores not found"
+            message: "Section scores not found"
         })
     }
     res.status(200).json({
@@ -196,7 +196,7 @@ exports.getCandidateSectionScores = asyncHandler(async (req, res, next) => {
     if (!scores || scores.length < 1) {
         return res.status(404).json({
             success: false,
-            message: "Candidates scores not found"
+            message: "Candidates section scores not found"
         })
     }
     res.status(200).json({
@@ -218,7 +218,7 @@ exports.getAllSelfScores = asyncHandler(async (req, res, next) => {
     if (!scores || scores.length < 1) {
         return res.status(404).json({
             success: false,
-            message: "Candidates scores not found"
+            message: "Candidates section scores not found"
         })
     }
     res.status(200).json({
@@ -243,7 +243,7 @@ exports.getSelfSectionScores = asyncHandler(async (req, res, next) => {
     if (!scores || scores.length < 1) {
         return res.status(404).json({
             success: false,
-            message: "Candidates scores not found"
+            message: "Candidates section scores not found"
         })
     }
     res.status(200).json({

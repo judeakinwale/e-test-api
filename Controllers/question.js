@@ -1,4 +1,6 @@
 const Question = require('../Models/question')
+const Section = require('../Models/section')
+const Test = require('../Models/test')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
@@ -116,5 +118,36 @@ exports.deleteQuestion = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         data: {}
+    })
+})
+
+// @desc    Get questions assigned to the authenticated candidate
+// @route   GET    /api/v1/questions/assigned
+// @access  Private
+exports.getAssignedTestQuestions = asyncHandler(async (req, res, next) => {
+    const examType = await req.candidate.examType
+    const assignedTest = await Test.findById(examType)
+    const sections = await Section.find({test: examType})
+    let questionSet = []
+
+    for (let x = 0; x < sections.length; x++) {
+        section = sections[x]
+        questions = await Question.find({section: section})
+        for (let i = 0; i < questions.length; i++) {
+            question = questions[i]
+            questionSet.push(question)
+        }
+    }
+    console.log(questionSet)
+
+    if (!questionSet || questionSet.length  < 1) {
+        return res.status(404).json({
+            success: false,
+            message: "Assigned Questions not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: questionSet
     })
 })
