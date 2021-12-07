@@ -132,7 +132,7 @@ exports.getAssignedTestQuestions = asyncHandler(async (req, res, next) => {
 
     for (let x = 0; x < sections.length; x++) {
         section = sections[x]
-        questions = await Question.find({section: section})
+        questions = await Question.find({section: section}).populate({path: 'section', select: 'title timer instruction test'})
         for (let i = 0; i < questions.length; i++) {
             question = questions[i]
             questionSet.push(question)
