@@ -278,6 +278,25 @@
                 }
             }
         },
+        "/api/v1/test/assigned": {
+            "get": {
+                "tags": ["test"],
+                "summary":"Get assigned test for the authenticated candidate ",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Test"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+          },
         "/api/v1/test/{id}": {
             "get": {
                 "tags": ["test"],
@@ -641,6 +660,25 @@
                 }
             }
         },
+        "/api/v1/section/assigned": {
+            "get": {
+                "tags": ["section"],
+                "summary": "Get sections in a candidate's assigned test",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/responses/Section"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+          },
         "/api/v1/section/{id}": {
             "get": {
                 "tags": ["section"],
@@ -1876,6 +1914,44 @@
                     "in": "path",
                     "required": true,
                     "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/responses/CandidateResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/candidate-response/candidate/{candidate_id}/test/{test_id}/question/{question_id}": {
+            "get": {
+                "tags": ["candidate response"],
+                "summary": "Get a candidate's response using the candidate id, test id and question id",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "candidate_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "test_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "question_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "responses": {

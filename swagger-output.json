@@ -180,6 +180,21 @@
         }
       }
     },
+    "/api/v1/test/assigned": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/v1/test/{id}": {
       "get": {
         "tags": [],
@@ -464,6 +479,21 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/v1/section/assigned": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -1405,6 +1435,40 @@
         "tags": [],
         "description": "",
         "parameters": [
+          {
+            "name": "test_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "question_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/candidate-response/candidate/{candidate_id}/test/{test_id}/question/{question_id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "candidate_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "test_id",
             "in": "path",
