@@ -17,8 +17,24 @@ const getTestScore = async (score) => {
         tempScore += sectionScores[i].score
     }
     finalScore = tempScore / sectionScores.length
-    testScore.score = finalScore
-    await testScore.save()
+    
+    if (!testScore) {
+        const createTestScore = await TestScore.create({
+            candidate: score.candidate,
+            test: score.test,
+            score: finalScore
+        })
+        console.log("\n Test Score: " + createTestScore)    
+    } else {
+        testScore.score = finalScore
+        await testScore.save()
+        console.log("\n Test Score: " + testScore)    
+    }
+
+    console.log(`Score: ${tempScore} of ${sectionScores.length}`)    
+    // testScore.score = finalScore
+    // await testScore.save()
+    // console.log("\n Test Score: " + testScore)
 }
 
 const getTestScoreUsingTest = async (test) => {
