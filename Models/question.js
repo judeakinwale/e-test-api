@@ -10,7 +10,7 @@ const QuestionInformation = new Schema({
     correct_answers: [{
         type: String,
         required: true,
-        select: false
+        // select: false
     }],
     section: {
         type: mongoose.Schema.ObjectId,

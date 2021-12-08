@@ -1,4 +1,5 @@
 const CandidateResponse = require('../Models/candidateResponse')
+const Question = require('../Models/question')
 const ErrorResponse = require('../Utils/errorResponse')
 const getSectionScore = require('../Utils/getSectionScore')
 const asyncHandler = require('../Middleware/async')
@@ -41,7 +42,27 @@ exports.createCandidateResponse = asyncHandler(async (req, res, next) => {
         })
         // return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
     }
-    await getSectionScore(candidateResponse)
+
+    if (!req.candidate) {
+        return res.status(400).json({
+            success: false,
+            message: "Candidate not found for candidate response details"
+        })
+    }
+    
+    question = await Question.findById(candidateResponse.question)
+    console.log(question)
+    
+    candidateResponse.candidate = req.candidate.id
+    candidateResponse.test = req.candidate.examType
+    candidateResponse.section = question.section
+
+    await candidateResponse.save()
+    
+    console.log(candidateResponse)
+
+    await getSectionScore(req, candidateResponse)
+
     res.status(201).json({
         success: true,
         data: candidateResponse
@@ -56,7 +77,7 @@ exports.getCandidateResponse = asyncHandler(async (req, res, next) => {
         {path: 'candidate', select: 'firstName lastName email'},
         {path: 'test', select: 'title timer'},
         {path: 'section', select: 'title timer instruction test'},
-        {path: 'question', select: 'question section'}
+        {path: 'question', select: 'question correct_answers section'}
     ])
 
     if (!candidateResponse) {

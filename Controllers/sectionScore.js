@@ -1,7 +1,7 @@
 const SectionScore = require('../Models/sectionScore')
 const TestScore = require('../Models/testScore')
 const ErrorResponse = require('../Utils/errorResponse')
-const getTestScore = require('../Utils/getTestScore')
+const {getTestScore} = require('../Utils/getTestScore')
 const asyncHandler = require('../Middleware/async')
 
 // @desc    Get all section scores
