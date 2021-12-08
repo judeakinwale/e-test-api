@@ -19,7 +19,7 @@ const {
 const router = express.Router()
 
 router.route('/api/v1/candidate-response').get(advancedResults(CandidateResponse), getAllCandidateResponses)
-router.route('/api/v1/candidate-response').post(createCandidateResponse)
+router.route('/api/v1/candidate-response').post(protect, createCandidateResponse)
 router.route('/api/v1/candidate-response/:id').get(protect, authorize, getCandidateResponse)
 router.route('/api/v1/candidate-response/:id').put(protect, authorize, updateCandidateResponse)
 router.route('/api/v1/candidate-response/:id').delete(protect, authorize, deleteCandidateResponse)
