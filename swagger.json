@@ -2432,9 +2432,6 @@
         },
         "CandidateResponse": {
             "required": [
-                "candidate",
-                "test",
-                "section",
                 "question",
                 "selected_answer"
             ],
