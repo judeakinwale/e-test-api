@@ -60,8 +60,13 @@ const getSectionScore = async (req, response) => {
         test: response.test,
         section: response.section
     })
+    const questions = await Question.find({
+        section: response.section
+    })
     
     let tempScore = 0
+    let questionIds = []
+
     for (let i = 0; i < candidateResponses.length; i++) {
 
         let resp = candidateResponses[i]
@@ -71,17 +76,27 @@ const getSectionScore = async (req, response) => {
         let question = await Question.findById(resp.question)
         console.log("\n Answer: " + question.correct_answers[0])
 
+        
+        
+
+        console.log(question.correct_answers === resp.selected_answers)
         console.log(question.correct_answers[0] === resp.selected_answers[0])
 
-        if (question.correct_answers[0] === resp.selected_answers[0]) {
+        if (question.correct_answers[0] === resp.selected_answers[0] && !questionIds.includes(question.id)) {
+            questionIds.push(question.id)
             tempScore += 1
             console.log("\n correct answers and selected answers are equal")
         }
     }
-    console.log("\n Temp Score 01: " + tempScore)
+    console.log("\n Section Temp Score 01: " + tempScore)
+
+    let sectionFinalScore = (tempScore / questions.length) * 10
+
+    console.log(`Score: ${tempScore} / Total Score: ${questions.length}`)
+    console.log(`Final Section Score: ${sectionFinalScore}`)
 
     if (getSectionScoreScore) {
-        getSectionScoreScore.score = tempScore
+        getSectionScoreScore.score = sectionFinalScore
         await getSectionScoreScore.save()
         console.log("\n Retrieved Section Score: " + getSectionScoreScore)
         // console.log(getSectionScoreScore)
