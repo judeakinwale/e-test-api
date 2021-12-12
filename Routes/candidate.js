@@ -13,7 +13,9 @@ const {
     updateCandidate,
     deleteCandidate,
     getSelf,
-    updateSelf
+    updateSelf,
+    getPassedCandidates,
+    getFailedCandidates
 } = require('../Controllers/candidate')
 
 const router = express.Router()
@@ -22,6 +24,8 @@ router.route('/api/v1/candidate').get(advancedResults(Candidate), getAllCandidat
 router.route('/api/v1/candidate').post(createCandidate)
 router.route('/api/v1/candidate/self').get(protect, authorize, getSelf)
 router.route('/api/v1/candidate/self').put(protect, authorize, updateSelf)
+router.route('/api/v1/candidate/passed').get(getPassedCandidates)
+router.route('/api/v1/candidate/failed').get(getFailedCandidates)
 router.route('/api/v1/candidate/:id').get(getCandidate)
 router.route('/api/v1/candidate/:id').put(protect, authorize, updateCandidate)
 router.route('/api/v1/candidate/:id').delete(protect, authorize, deleteCandidate)

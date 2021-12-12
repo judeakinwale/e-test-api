@@ -1,4 +1,5 @@
 const Candidate = require('../Models/candidate')
+const TestScore = require('../Models/testScore')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
@@ -142,5 +143,65 @@ exports.updateSelf = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         data: candidate
+    })
+})
+
+// @desc    Get candidates that passed their test
+// @route   GET    /api/v1/candidate/passed
+// @access  Private
+exports.getPassedCandidates = asyncHandler(async (req, res, next) => {
+    // const candidate = await Candidate.findById(req.candidate._id)
+    const testScores = await TestScore.find().populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'}
+    ])
+    let candidates = []
+
+    for (let x = 0; x < testScores.length; x++) {
+        let test = testScores[x]
+        if (test.score >= 50) {
+            candidates.push(test.candidate)
+        }
+    }
+
+    if (!candidates || candidates.length < 1) {
+        return res.status(404).json({
+            success: false,
+            message: "Candidate not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: candidates
+    })
+})
+
+// @desc    Get candidates that failed their test
+// @route   GET    /api/v1/candidate/failed
+// @access  Private
+exports.getFailedCandidates = asyncHandler(async (req, res, next) => {
+    // const candidate = await Candidate.findById(req.candidate._id)
+    const testScores = await TestScore.find().populate([
+        {path: 'candidate', select: 'firstName lastName email'},
+        {path: 'test', select: 'title timer'}
+    ])
+    let candidates = []
+
+    for (let x = 0; x < testScores.length; x++) {
+        let test = testScores[x]
+        if (test.score < 5) {
+            candidates.push(test.candidate)
+        }
+    }
+
+    if (!candidates || candidates.length < 1) {
+        return res.status(404).json({
+            success: false,
+            message: "Candidate not found"
+        })
+    }
+    res.status(200).json({
+        success: true,
+        data: candidates
     })
 })
