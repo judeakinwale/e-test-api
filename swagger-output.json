@@ -350,6 +350,21 @@
         }
       }
     },
+    "/api/v1/question/assigned": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/v1/question/{id}": {
       "get": {
         "tags": [],
@@ -631,6 +646,21 @@
         }
       }
     },
+    "/api/v1/test-score/self": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/v1/test-score/{id}": {
       "get": {
         "tags": [],
@@ -765,21 +795,6 @@
         }
       }
     },
-    "/api/v1/test-score/self": {
-      "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
     "/api/v1/test-score/self/test/{test_id}": {
       "get": {
         "tags": [],
@@ -847,6 +862,21 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/v1/section-score/self": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -997,21 +1027,6 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/api/v1/section-score/self": {
-      "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -1257,6 +1272,36 @@
         }
       }
     },
+    "/api/v1/candidate/passed": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/candidate/failed": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/v1/candidate/{id}": {
       "get": {
         "tags": [],
@@ -1430,17 +1475,11 @@
         }
       }
     },
-    "/api/v1/candidate-response/test/{test_id}/question/{question_id}": {
+    "/api/v1/candidate-response/test/question/{question_id}": {
       "get": {
         "tags": [],
         "description": "",
         "parameters": [
-          {
-            "name": "test_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "question_id",
             "in": "path",

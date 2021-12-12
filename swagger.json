@@ -296,7 +296,7 @@
                     }
                 }
             }
-          },
+        },
         "/api/v1/test/{id}": {
             "get": {
                 "tags": ["test"],
@@ -483,6 +483,25 @@
                     },
                     "400": {
                         "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/v1/question/assigned": {
+            "get": {
+                "tags": ["question"],
+                "summary":"Get all questions in a users test",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/responses/Question"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             }
@@ -852,6 +871,25 @@
                 }
             }
         },
+        "/api/v1/test-score/self": {
+            "get": {
+                "tags": ["test score"],
+                "summary": "Get all authenticated candidate's test scores",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/responses/TestScore"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1/test-score/{id}": {
             "get": {
                 "tags": ["test score"],
@@ -1016,25 +1054,6 @@
                 }
             }
         },
-        "/api/v1/test-score/self": {
-            "get": {
-                "tags": ["test score"],
-                "summary": "Get all authenticated candidate's test scores",
-                "description": "",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/responses/TestScore"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
         "/api/v1/test-score/self/test/{test_id}": {
             "get": {
                 "tags": ["test score"],
@@ -1124,6 +1143,25 @@
                     },
                     "400": {
                         "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/v1/section-score/self": {
+            "get": {
+                "tags": ["section score"],
+                "summary": "Get all authenticated candidate's section scores",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/responses/SectionScore"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             }
@@ -1306,25 +1344,6 @@
                         "type": "string"
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/responses/SectionScore"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1/section-score/self": {
-            "get": {
-                "tags": ["section score"],
-                "summary": "Get all authenticated candidate's section scores",
-                "description": "",
-                "parameters": [],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1623,6 +1642,44 @@
                     }
                 }
             }
+        },
+        "/api/v1/candidate/passed": {
+          "get": {
+            "tags": ["candidate"],
+            "summary": "Get all candidates",
+            "description": "",
+            "parameters": [],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                    "$ref": "#/definitions/Candidate"
+                }
+              },
+              "404": {
+                "description": "Not Found"
+              }
+            }
+          }
+        },
+        "/api/v1/candidate/failed": {
+          "get": {
+            "tags": ["candidate"],
+            "summary": "Get all candidates",
+            "description": "",
+            "parameters": [],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                    "$ref": "#/definitions/Candidate"
+                }
+              },
+              "404": {
+                "description": "Not Found"
+              }
+            }
+          }
         },
         "/api/v1/candidate/{id}": {
             "get": {

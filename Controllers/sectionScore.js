@@ -40,6 +40,10 @@ exports.createScore = asyncHandler(async (req, res, next) => {
             message: "Invalid score details"
         })
     }
+
+    // Calculate the test scores from the section scores
+    await getTestScore(score)
+    
     res.status(201).json({
         success: true,
         data: score
@@ -87,7 +91,7 @@ exports.updateScore = asyncHandler(async (req, res, next) => {
             message: "Invalid score details"
         })
     }
-    // Calculate the section scores from the section scores
+    // Calculate the test scores from the section scores
     await getTestScore(score)
 
     res.status(200).json({
