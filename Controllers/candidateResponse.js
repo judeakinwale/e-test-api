@@ -154,7 +154,7 @@ exports.deleteCandidateResponse = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/candidate-response/candidate/:candidate_id/test/:test_id/question/:question_id
 // @access  Private
 exports.getCandidateResponseByCandidateTestAndQuestion = asyncHandler(async (req, res, next) => {
-    const candidateResponse = await CandidateResponse.find({
+    const candidateResponse = await CandidateResponse.findOne({
         candidate: req.params.candidate_id,
         test: req.params.test_id,
         question: req.params.question_id
@@ -178,10 +178,10 @@ exports.getCandidateResponseByCandidateTestAndQuestion = asyncHandler(async (req
 })
 
 // @desc    Get currently authenticated candidate response
-// @route   GET    /api/v1/candidate-response/test/question/:question_id
+// @route   GET    /api/v1/candidate-response/question/:question_id
 // @access  Private
-exports.getCandidateResponseByTestAndQuestion = asyncHandler(async (req, res, next) => {
-    const candidateResponse = await CandidateResponse.find({
+exports.getCandidateResponseByQuestion = asyncHandler(async (req, res, next) => {
+    const candidateResponse = await CandidateResponse.findOne({
         candidate: req.candidate._id,
         test: req.candidate.examType,
         question: req.params.question_id

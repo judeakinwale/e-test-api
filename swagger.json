@@ -1954,18 +1954,12 @@
                 }
             }
         },
-        "/api/v1/candidate-response/test/question/{question_id}": {
+        "/api/v1/candidate-response/question/{question_id}": {
             "get": {
                 "tags": ["candidate response"],
-                "summary": "Get a candidate's response using the question id",
+                "summary": "Get an authenticated candidate's response using the question id",
                 "description": "",
                 "parameters": [
-                    {
-                    "name": "test_id",
-                    "in": "path",
-                    "required": true,
-                    "type": "string"
-                    },
                     {
                     "name": "question_id",
                     "in": "path",
