@@ -111,7 +111,21 @@ exports.updateCandidateResponse = asyncHandler(async (req, res, next) => {
             message: "Invalid candidate response details"
         })
     }
-    await getSectionScore(candidateResponse)
+
+    question = await Question.findById(candidateResponse.question)
+    console.log(question)
+    
+    candidateResponse.candidate = req.candidate.id
+    candidateResponse.test = req.candidate.examType
+    candidateResponse.section = question.section
+
+    await candidateResponse.save()
+    
+    console.log(candidateResponse)
+
+    await getSectionScore(req, candidateResponse)
+    // await getSectionScore(candidateResponse)
+    
     res.status(200).json({
         success: true,
         data: candidateResponse
@@ -164,12 +178,12 @@ exports.getCandidateResponseByCandidateTestAndQuestion = asyncHandler(async (req
 })
 
 // @desc    Get currently authenticated candidate response
-// @route   GET    /api/v1/candidate-response/test/:test_id/question/:question_id
+// @route   GET    /api/v1/candidate-response/test/question/:question_id
 // @access  Private
 exports.getCandidateResponseByTestAndQuestion = asyncHandler(async (req, res, next) => {
     const candidateResponse = await CandidateResponse.find({
         candidate: req.candidate._id,
-        test: req.params.test_id,
+        test: req.candidate.examType,
         question: req.params.question_id
     }).populate([
         {path: 'candidate', select: 'firstName lastName email'},
