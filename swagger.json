@@ -1954,7 +1954,7 @@
                 }
             }
         },
-        "/api/v1/candidate-response/test/{test_id}/question/{question_id}": {
+        "/api/v1/candidate-response/test/question/{question_id}": {
             "get": {
                 "tags": ["candidate response"],
                 "summary": "Get a candidate's response using the test id and question id",
