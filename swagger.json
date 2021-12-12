@@ -1957,7 +1957,7 @@
         "/api/v1/candidate-response/test/question/{question_id}": {
             "get": {
                 "tags": ["candidate response"],
-                "summary": "Get a candidate's response using the test id and question id",
+                "summary": "Get a candidate's response using the question id",
                 "description": "",
                 "parameters": [
                     {
