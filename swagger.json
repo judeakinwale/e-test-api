@@ -490,7 +490,7 @@
         "/api/v1/question/assigned": {
             "get": {
                 "tags": ["question"],
-                "summary":"Get all questions in a users test",
+                "summary":"Get all questions in an authenticated candidate's test",
                 "description": "",
                 "parameters": [],
                 "responses": {
@@ -1646,7 +1646,7 @@
         "/api/v1/candidate/passed": {
           "get": {
             "tags": ["candidate"],
-            "summary": "Get all candidates",
+            "summary": "Get all candidates that passed their test",
             "description": "",
             "parameters": [],
             "responses": {
@@ -1665,7 +1665,7 @@
         "/api/v1/candidate/failed": {
           "get": {
             "tags": ["candidate"],
-            "summary": "Get all candidates",
+            "summary": "Get all candidates that failed their test",
             "description": "",
             "parameters": [],
             "responses": {
