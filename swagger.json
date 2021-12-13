@@ -2504,8 +2504,8 @@
                     "example": "Question id"
                 },
                 "selected_answers": {
-                    "type": "string",
-                    "example": "Some example string"
+                    "type": "array",
+                    "example": ["Some example string"]
                 }
             }
         },
@@ -2597,8 +2597,8 @@
                     "$ref": "#/definitions/Question"
                 },
                 "selected_answers": {
-                    "type": "string",
-                    "example": "Some example string"
+                    "type": "array",
+                    "example": ["Some example string"]
                 }
             }
         },
