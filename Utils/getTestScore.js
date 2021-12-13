@@ -18,7 +18,8 @@ const getTestScore = async (score) => {
         console.log(`section score __ ${i} : ${sectionScores[i].score}`)
         console.log(`temp score __ ${i} : ${tempScore}`)
     }
-    finalScore = (tempScore / sectionScores.length) * 10
+    let finalScore = (tempScore / sectionScores.length) * 10
+    finalScore = finalScore.toFixed(2)
     
     if (!testScore) {
         const createTestScore = await TestScore.create({

@@ -91,6 +91,7 @@ const getSectionScore = async (req, response) => {
     console.log("\n Section Temp Score 01: " + tempScore)
 
     let sectionFinalScore = (tempScore / questions.length) * 10
+    sectionFinalScore = sectionFinalScore.toFixed(2)
 
     console.log(`Score: ${tempScore} / Total Score: ${questions.length}`)
     console.log(`Final Section Score: ${sectionFinalScore}`)
@@ -111,7 +112,7 @@ const getSectionScore = async (req, response) => {
             candidate: req.candidate.id,
             test: response.test,
             section: response.section,
-            score: tempScore
+            score: sectionFinalScore
     
         })
         console.log("\n Created Section Score: " + createSectionScore)
