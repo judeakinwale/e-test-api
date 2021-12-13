@@ -33,7 +33,23 @@ exports.getAllCandidateResponses = asyncHandler(async (req, res, next) => {
 // @route   POST    /api/v1/candidate-response
 // @access  Private
 exports.createCandidateResponse = asyncHandler(async (req, res, next) => {
-    const candidateResponse = await CandidateResponse.create(req.body)
+    const existingCandidateResponse = await CandidateResponse.findOne({
+        candidate: req.candidate.id,
+        question: req.body.question
+    }) //checks if candidate response exists
+
+    // const candidateResponse = await CandidateResponse.create(req.body)
+
+    let candidateResponse;
+    
+    if (existingCandidateResponse) {
+        existingCandidateResponse.selected_answers = req.body.selected_answers
+        await existingCandidateResponse.save()
+
+        candidateResponse = await existingCandidateResponse
+    } else {
+        candidateResponse = await CandidateResponse.create(req.body) //create candidate response
+    }
 
     if (!candidateResponse) {
         return res.status(400).json({
