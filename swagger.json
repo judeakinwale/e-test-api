@@ -2484,7 +2484,7 @@
         "CandidateResponse": {
             "required": [
                 "question",
-                "selected_answer"
+                "selected_answers"
             ],
             "properties": {
                 "candidate": {
@@ -2503,7 +2503,7 @@
                     "type": "string",
                     "example": "Question id"
                 },
-                "selected_answer": {
+                "selected_answers": {
                     "type": "string",
                     "example": "Some example string"
                 }
@@ -2581,7 +2581,7 @@
                 "test",
                 "section",
                 "question",
-                "selected_answer"
+                "selected_answers"
             ],
             "properties": {
                 "candidate": {
@@ -2596,7 +2596,7 @@
                 "question": {
                     "$ref": "#/definitions/Question"
                 },
-                "selected_answer": {
+                "selected_answers": {
                     "type": "string",
                     "example": "Some example string"
                 }
