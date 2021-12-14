@@ -1,6 +1,7 @@
 const Question = require('../Models/question')
 const Section = require('../Models/section')
 const Test = require('../Models/test')
+const TestScore = require('../Models/testScore')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
@@ -28,6 +29,18 @@ exports.getAllQuestions = asyncHandler(async (req, res, next) => {
 // @route   POST    /api/v1/question
 // @access  Private
 exports.createQuestion = asyncHandler(async (req, res, next) => {
+    const existingQuestion = await Question.findOne({
+        question: req.body.question,
+        section: req.body.section
+    })
+
+    if (existingQuestion) {
+        return res.status(400).json({
+            success: false,
+            message: "This question already exists. Update it instead"
+        })
+    }
+
     const question = await Question.create(req.body)
 
     if (!question) {
@@ -129,6 +142,18 @@ exports.getAssignedTestQuestions = asyncHandler(async (req, res, next) => {
     const assignedTest = await Test.findById(examType)
     const sections = await Section.find({test: examType})
     let questionSet = []
+
+    const existingTestScore = await TestScore.findOne({
+        candidate: req.candidate.id,
+        test: req.candidate.examType
+    })
+
+    if (existingTestScore && process.env.NODE_ENV === "production") {
+        return res.status(400).json({
+            success: false,
+            message: "You have taken this test"
+        })
+    }
 
     for (let x = 0; x < sections.length; x++) {
         section = sections[x]

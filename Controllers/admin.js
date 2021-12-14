@@ -26,6 +26,19 @@ exports.getAllAdmins = asyncHandler(async (req, res, next) => {
 // @route   POST    /api/v1/admin
 // @access  Private
 exports.createAdmin = asyncHandler(async (req, res, next) => {
+    const existingAdmin = await Admin.findOne({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+    })
+
+    if (existingAdmin) {
+        return res.status(400).json({
+            success: false,
+            message: "This account already exists, log in instead"
+        })
+    }
+
     const admin = await Admin.create(req.body)
 
     if (!admin) {

@@ -29,6 +29,18 @@ exports.getAllSections = asyncHandler(async (req, res, next) => {
 // @route   POST    /api/v1/section
 // @access  Private
 exports.createSection = asyncHandler(async (req, res, next) => {
+    const existingSection = await Section.findOne({
+        title: req.body.title,
+        test: req.body.test
+    })
+
+    if (existingSection) {
+        return res.status(400).json({
+            success: false,
+            message: "This section already exists. Update it instead"
+        })
+    }
+
     const section = await Section.create(req.body)
 
     if (!section) {

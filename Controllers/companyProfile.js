@@ -25,6 +25,17 @@ exports.getCompanyProfile = asyncHandler(async (req, res, next) => {
 // @route   POST    /api/v1/company
 // @access  Private
 exports.createCompanyProfile = asyncHandler(async (req, res, next) => {
+    const existingCompany = await CompanyProfile.findOne({
+        title: req.body.title
+    })
+
+    if (existingCompany) {
+        return res.status(400).json({
+            success: false,
+            message: "This company profile already exists. Update it instead"
+        })
+    }
+
     const company = await CompanyProfile.create(req.body)
 
     if (!company) {

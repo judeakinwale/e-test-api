@@ -27,6 +27,18 @@ exports.getAllScores = asyncHandler(async (req, res, next) => {
 // @route   POST    /api/v1/test-score
 // @access  Private
 exports.createScore = asyncHandler(async (req, res, next) => {
+    const existingTestScore = await TestScore.findOne({
+        candidate: req.candidate.id,
+        test: req.candidate.examType
+    })
+
+    if (existingTestScore) {
+        return res.status(400).json({
+            success: false,
+            message: "You have taken this test"
+        })
+    }
+
     const score = await TestScore.create(req.body)
 
     if (!score) {

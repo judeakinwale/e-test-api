@@ -1,6 +1,7 @@
 const Test = require('../Models/test')
 const Section = require('../Models/section')
 const Question = require('../Models/question')
+const TestScore = require('../Models/testScore')
 const ErrorResponse = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
@@ -28,6 +29,17 @@ exports.getAllTests = asyncHandler(async (req, res, next) => {
 // @route   POST    /api/v1/test
 // @access  Private
 exports.createTest = asyncHandler(async (req, res, next) => {
+    const existingTest = await Test.findOne({
+        title: req.body.title
+    })
+
+    if (existingTest) {
+        return res.status(400).json({
+            success: false,
+            message: "This test already exists. Update it instead"
+        })
+    }
+    
     const test = await Test.create(req.body)
 
     if (!test) {
@@ -130,6 +142,18 @@ exports.getAssignedTest = asyncHandler(async (req, res, next) => {
     const assignedTest = await Test.findById(examType)
     // const assignedTest = await Test.find({_id: examType})
     // const sections = await Section.find({test: examType})
+
+    const existingTestScore = await TestScore.findOne({
+        candidate: req.candidate.id,
+        test: req.candidate.examType
+    })
+
+    if (existingTestScore && process.env.NODE_ENV === "production") {
+        return res.status(400).json({
+            success: false,
+            message: "You have taken this test"
+        })
+    }
 
     if (!assignedTest) {
         return res.status(404).json({

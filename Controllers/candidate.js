@@ -27,6 +27,19 @@ exports.getAllCandidates = asyncHandler(async (req, res, next) => {
 // @route   POST    /api/v1/candidate
 // @access  Private
 exports.createCandidate = asyncHandler(async (req, res, next) => {
+    const existingCandidate = await Candidate.findOne({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+    })
+
+    if (existingCandidate) {
+        return res.status(400).json({
+            success: false,
+            message: "This account already exists, log in instead"
+        })
+    }
+    
     const candidate = await Candidate.create(req.body)
 
     if (!candidate) {
