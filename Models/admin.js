@@ -25,6 +25,9 @@ const AdminInformation = new Schema({
         required: true,
         select: false
     },
+    image: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now,
