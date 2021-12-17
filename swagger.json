@@ -98,6 +98,31 @@
                 }
             }
         },
+        "/api/v1/company/upload-logo": {
+            "post": {
+                "tags": ["company profile"],
+                "summary": "Upload the company's logo",
+                "description": "",
+                "consumes": ["multipart/form-data"],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "body",
+                        "type": "file",
+                        "description": "",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/api/v1/company/{id}": {
             "get": {
                 "tags": ["company profile"],
@@ -184,31 +209,6 @@
                     },
                     "404": {
                         "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1/company/upload-logo": {
-            "post": {
-                "tags": ["company profile"],
-                "summary": "Upload the company's logo",
-                "description": "",
-                "consumes": ["multipart/form-data"],
-                "parameters": [
-                    {
-                        "in": "formData",
-                        "name": "body",
-                        "type": "file",
-                        "description": "",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
                     }
                 }
             }
@@ -1446,6 +1446,33 @@
                     },
                     "400": {
                         "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/v1/admin/upload-profile": {
+            "post": {
+                "tags": ["admin"],
+                "summary": "Upload a profile picture for the authenticated admin user",
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "body",
+                        "type": "file",
+                        "description": "",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
                     }
                 }
             }

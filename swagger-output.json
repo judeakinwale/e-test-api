@@ -31,7 +31,20 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -169,7 +182,20 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -188,6 +214,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -339,7 +368,23 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "question": {
+                  "example": "any"
+                },
+                "section": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -358,6 +403,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -487,7 +535,23 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "test": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -1097,10 +1161,32 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1129,6 +1215,21 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/upload-profile": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -1233,7 +1334,26 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -1402,7 +1522,23 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "question": {
+                  "example": "any"
+                },
+                "selected_answers": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -1475,7 +1611,7 @@
         }
       }
     },
-    "/api/v1/candidate-response/test/question/{question_id}": {
+    "/api/v1/candidate-response/question/{question_id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -1604,20 +1740,23 @@
         }
       }
     },
-    "/api/v1/auth/admin/resetPassword": {
+    "/api/v1/auth/admin/resetPassword/{resettoken}": {
       "post": {
         "tags": [],
         "description": "",
         "parameters": [
+          {
+            "name": "resettoken",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "obj",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "id": {
-                  "example": "any"
-                },
                 "password": {
                   "example": "any"
                 }
@@ -1701,20 +1840,23 @@
         }
       }
     },
-    "/api/v1/auth/resetPassword": {
+    "/api/v1/auth/resetPassword/{resettoken}": {
       "post": {
         "tags": [],
         "description": "",
         "parameters": [
+          {
+            "name": "resettoken",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "obj",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "id": {
-                  "example": "any"
-                },
                 "password": {
                   "example": "any"
                 }

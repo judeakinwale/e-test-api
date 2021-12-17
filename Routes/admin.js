@@ -13,7 +13,8 @@ const {
     updateAdmin,
     deleteAdmin,
     getSelf,
-    updateSelf
+    updateSelf,
+    uploadProfilePicture
 } = require('../Controllers/admin')
 
 const router = express.Router()
@@ -22,6 +23,7 @@ router.route('/api/v1/admin/').get(advancedResults(Admin), getAllAdmins)
 router.route('/api/v1/admin/').post(createAdmin)
 router.route('/api/v1/admin/self').get(protect, authorizeAdmin, getSelf)
 router.route('/api/v1/admin/self').put(protect, authorizeAdmin, updateSelf)
+router.route('/api/v1/admin/upload-profile').post(protect, authorizeAdmin, uploadProfilePicture)
 router.route('/api/v1/admin/:id').get(protect, authorizeAdmin, getAdmin)
 router.route('/api/v1/admin/:id').put(protect, authorizeAdmin, updateAdmin)
 router.route('/api/v1/admin/:id').delete(protect, authorizeAdmin, deleteAdmin)

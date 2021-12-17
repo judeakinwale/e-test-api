@@ -178,4 +178,4 @@ exports.uploadLogo = asyncHandler(async (req, res, next) => {
         data: file.name,
       });
     });
-  });
+});

@@ -157,3 +157,49 @@ exports.updateSelf = asyncHandler(async (req, res, next) => {
         data: admin
     })
 })
+
+// @desc    Upload profile picture for admin
+// @route   POST    /api/v1/admin/upload-profile
+// @access  Private
+exports.uploadProfilePicture = asyncHandler(async (req, res, next) => {
+    if (!req.files) {
+      return next(new ErrorResponse(`Please Upload a picture`, 400));
+    }
+  
+    const file = req.files.file;
+    // Make sure the image is a photo
+    if (!file.mimetype.startsWith("image")) {
+      return next(new ErrorResponse(`Please Upload an image file`, 400));
+    }
+  
+    // Check filesize
+    if (file.size > process.env.MAX_FILE_UPLOAD) {
+      return next(new ErrorResponse(`Please Upload an image less than 5MB`, 400));
+    }
+
+    // Confirm admin user is authenticated
+    if (!req.admin) {
+        return res.status(401).json({
+            success: false,
+            message: "You are not authenticated, Please login"
+        })
+    }
+  
+    //create custom filename
+    file.name = `logo_${req.admin.lastName}${path.parse(file.name).ext}`;
+  
+    file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
+      if (err) {
+        console.error(err);
+        return next(new ErrorResponse(`An error occured while uploading`, 500));
+      }
+      adminImage = await Admin.findByIdAndUpdate(req.admin.id, { image: file.name });
+      if (!adminImage) {
+        return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
+      }
+      res.status(200).json({
+        success: true,
+        data: file.name,
+      });
+    });
+});
