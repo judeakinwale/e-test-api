@@ -11,7 +11,7 @@ const asyncHandler = require('../Middleware/async')
 exports.getAllQuestions = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
-    const questions = await Question.find().populate({path: 'section', select: 'title timer instruction test'})
+    const questions = await Question.find().select("-correct_answers").populate({path: 'section', select: 'title timer instruction test'})
 
     if (!questions || questions.length < 1) {
         return res.status(404).json({
@@ -157,13 +157,13 @@ exports.getAssignedTestQuestions = asyncHandler(async (req, res, next) => {
 
     for (let x = 0; x < sections.length; x++) {
         section = sections[x]
-        questions = await Question.find({section: section}).populate({path: 'section', select: 'title timer instruction test'})
+        questions = await Question.find({section: section}).select("-correct_answers").populate({path: 'section', select: 'title timer instruction test'})
         for (let i = 0; i < questions.length; i++) {
             question = questions[i]
             questionSet.push(question)
         }
     }
-    console.log(questionSet)
+    // console.log(questionSet)
 
     if (!questionSet || questionSet.length  < 1) {
         return res.status(404).json({
