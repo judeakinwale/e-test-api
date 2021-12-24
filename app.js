@@ -43,7 +43,6 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors()); //enable CORS
 app.use(errorHandler)
-app.use(express.static(path.join(__dirname, "/public"))); //Set static folder
 app.use(fileupload()); //file uploads
 
 // // Dev middleware
@@ -76,6 +75,7 @@ const specs = swaggerJsdoc(swaggerOptions); // for swagger-autogen
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile, { explorer: true }))
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }))
 
+app.use(express.static(path.join(__dirname, "/public"))); //Set static folder
 
 mongoose.connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => {
