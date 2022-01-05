@@ -89,6 +89,26 @@ mongoose.connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: tr
     });
 
 
+// For emulating .htaccess
+app.use(function(req, res, next) {
+    console.log('%s %s', req.method, req.url);
+    next();
+});
+
+app.engine('.html', require('ejs').__express);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/public');
+app.set('view engine', 'html');
+
+app.get('/*', function(req, res) {
+    if (req.xhr) {
+        var pathname = url.parse(req.url).pathname;
+        res.sendfile('index.html', {root: __dirname + '/public' + pathname});
+    } else {
+        res.render('index');
+    }
+});
+
 // Error handling
 app.use((req, res) => {
     res.status(400).json({
