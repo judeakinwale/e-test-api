@@ -7,9 +7,7 @@ const getTestTimer = async (section) => {
     const sections = await Section.find({
         test: section.test
     })
-    const test = await Test.findOne({
-        test: section.test
-    })
+    const test = await Test.findById(section.test)
     let timer = 0
     for (let i = 0; i < sections.length; i++) {
         timer += sections[i].timer

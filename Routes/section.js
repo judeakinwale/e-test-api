@@ -22,7 +22,7 @@ router.route('/api/v1/section/').get(advancedResults(Section), getAllSections)
 router.route('/api/v1/section/').post(protect, authorizeAdmin, createSection)
 router.route('/api/v1/section/assigned').get(protect, getAssignedTestSections)
 router.route('/api/v1/section/:id').get(getSection)
-router.route('/api/v1/section/:id').put(protect, authorizeAdmin, updateSection)
+router.route('/api/v1/section/:id').put(updateSection)
 router.route('/api/v1/section/:id').delete(protect, authorizeAdmin, deleteSection)
 router.route('/api/v1/section/test/:test_id').get(getTestSections)
 
