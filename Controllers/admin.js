@@ -1,5 +1,5 @@
 const Admin = require('../Models/admin')
-const ErrorResponse = require('../Utils/errorResponse')
+const {ErrorResponseJSON} = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
 // @desc    Get all admins
@@ -46,7 +46,7 @@ exports.createAdmin = asyncHandler(async (req, res, next) => {
         //     success: false,
         //     message: "Invalid admin details"
         // })
-        return next(new ErrorResponse("Invalid admin credentials", 400));
+        return next(new ErrorResponseJSON(res, "Invalid admin credentials", 400));
     }
     res.status(201).json({
         success: true,
@@ -163,18 +163,18 @@ exports.updateSelf = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.uploadProfilePicture = asyncHandler(async (req, res, next) => {
     if (!req.files) {
-      return next(new ErrorResponse(`Please Upload a picture`, 400));
+      return next(new ErrorResponseJSON(res, `Please Upload a picture`, 400));
     }
   
     const file = req.files.file;
     // Make sure the image is a photo
     if (!file.mimetype.startsWith("image")) {
-      return next(new ErrorResponse(`Please Upload an image file`, 400));
+      return next(new ErrorResponseJSON(res, `Please Upload an image file`, 400));
     }
   
     // Check filesize
     if (file.size > process.env.MAX_FILE_UPLOAD) {
-      return next(new ErrorResponse(`Please Upload an image less than 5MB`, 400));
+      return next(new ErrorResponseJSON(res, `Please Upload an image less than 5MB`, 400));
     }
 
     // Confirm admin user is authenticated
@@ -191,11 +191,11 @@ exports.uploadProfilePicture = asyncHandler(async (req, res, next) => {
     file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
       if (err) {
         console.error(err);
-        return next(new ErrorResponse(`An error occured while uploading`, 500));
+        return next(new ErrorResponseJSON(res, `An error occured while uploading`, 500));
       }
       adminImage = await Admin.findByIdAndUpdate(req.admin.id, { image: file.name });
       if (!adminImage) {
-        return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
+        return next(new ErrorResponseJSON(res, "An Error Occured, Please Tray Again", 400));
       }
       res.status(200).json({
         success: true,

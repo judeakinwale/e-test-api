@@ -4,4 +4,14 @@ class ErrorResponse extends Error {
     this.statusCode = statusCode;
   }
 }
-module.exports = ErrorResponse;
+
+class ErrorResponseJSON {
+  constructor(res, message, statusCode) {
+    return res.status(statusCode).json({
+      success: false,
+      message: message
+    })
+  }
+}
+
+module.exports = {ErrorResponse, ErrorResponseJSON};

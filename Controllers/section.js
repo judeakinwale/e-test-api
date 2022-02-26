@@ -1,7 +1,7 @@
 const Section = require('../Models/section')
 const Test = require('../Models/test')
 const Question = require('../Models/question')
-const ErrorResponse = require('../Utils/errorResponse')
+const {ErrorResponseJSON} = require('../Utils/errorResponse')
 const getTestTimer = require('../Utils/getTestTimer')
 const asyncHandler = require('../Middleware/async')
 

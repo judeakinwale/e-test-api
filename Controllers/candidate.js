@@ -1,6 +1,6 @@
 const Candidate = require('../Models/candidate')
 const TestScore = require('../Models/testScore')
-const ErrorResponse = require('../Utils/errorResponse')
+const {ErrorResponseJSON} = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
 // @desc    Get all candidate
@@ -47,7 +47,7 @@ exports.createCandidate = asyncHandler(async (req, res, next) => {
             success: false,
             message: "Invalid candidate details"
         })
-        // return next(new ErrorResponse("An Error Occured, Please Tray Again", 400));
+        // return next(new ErrorResponseJSON(res, "An Error Occured, Please Tray Again", 400));
     }
     res.status(201).json({
         success: true,

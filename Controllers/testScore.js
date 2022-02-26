@@ -1,6 +1,7 @@
 const TestScore = require('../Models/testScore')
-const ErrorResponse = require('../Utils/errorResponse')
+const {ErrorResponseJSON} = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
+
 // @desc    Get all test scores
 // @route   GET    /api/v1/test-score
 // @access  Private

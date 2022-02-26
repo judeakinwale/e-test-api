@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("./async");
-const ErrorResponse = require("../Utils/errorResponse");
+const {ErrorResponseJSON} = require("../Utils/errorResponse");
 const Admin = require("../Models/admin");
 const Candidate = require("../Models/candidate");
 const Company = require ("../Models/companyProfile")
@@ -22,7 +22,7 @@ const Company = require ("../Models/companyProfile")
 
 //   // Make sure token exists
 //   if (!token) {
-//     return next(new ErrorResponse("Not authorized to access this route", 401));
+//     return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
 //   }
 
 //   try {
@@ -33,7 +33,7 @@ const Company = require ("../Models/companyProfile")
 
 //     next();
 //   } catch (err) {
-//     return next(new ErrorResponse("Not authorized to access this route", 401));
+//     return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
 //   }
 // });
 
@@ -42,7 +42,7 @@ const Company = require ("../Models/companyProfile")
 //   return (req, res, next) => {
 //     if (!roles.includes(req.staff.role)) {
 //       return next(
-//         new ErrorResponse(
+//         new ErrorResponseJSON(res, 
 //           `User role ${req.staff.role} is not authorized to access this route`,
 //           403
 //         )
@@ -57,7 +57,7 @@ const Company = require ("../Models/companyProfile")
 //   return (req, res, next) => {
 //     if (!req.admin || !req.candidate) {
 //       return next(
-//         new ErrorResponse(
+//         new ErrorResponseJSON(res, 
 //           `User is not authorized to access this route`,
 //           403
 //         )
@@ -73,7 +73,7 @@ exports.authorize = (req, res, next) => {
     next();
   } else {
     return next(
-      new ErrorResponse(
+      new ErrorResponseJSON(res, 
         `User is not authorized to access this route`,
         403
       )
@@ -87,7 +87,7 @@ exports.authorize = (req, res, next) => {
 //   return (req, res, next) => {
 //     if (!req.admin) {
 //       return next(
-//         new ErrorResponse(
+//         new ErrorResponseJSON(res, 
 //           `User is not authorized to access this route`,
 //           403
 //         )
@@ -101,7 +101,7 @@ exports.authorize = (req, res, next) => {
 exports.authorizeAdmin = (req, res, next) => {
   if (!req.admin) {
     return next(
-      new ErrorResponse(
+      new ErrorResponseJSON(res, 
         `User is not authorized to access this route`,
         403
       )
@@ -127,7 +127,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
   // Make sure token exists
   if (!token) {
-    return next(new ErrorResponse("Not authorized to access this route", 401));
+    return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
   }
 
   // try {
@@ -147,10 +147,10 @@ exports.protect = asyncHandler(async (req, res, next) => {
   
   //     next();
   //   } catch (err) {
-  //     return next(new ErrorResponse("Not authorized to access this route", 401));
+  //     return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
   //   }
 
-  //   return next(new ErrorResponse("Not authorized to access this route", 401));
+  //   return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
   // }
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -161,7 +161,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
   if (req.admin || req.candidate) {
     next();
   } else {
-    return next(new ErrorResponse("Not authorized to access this route", 401));
+    return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
   }
 
   

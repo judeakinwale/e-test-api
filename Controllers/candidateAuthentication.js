@@ -1,4 +1,4 @@
-const ErrorResponse = require("../Utils/errorResponse");
+const {ErrorResponseJSON} = require("../Utils/errorResponse");
 const asyncHandler = require("../Middleware/async");
 const Candidate = require("../Models/candidate");
 // const otpGenerator = require("otp-generator");
@@ -13,20 +13,20 @@ exports.login = asyncHandler(async (req, res, next) => {
   
     //validate email & password
     if (!email || !password) {
-        return next(new ErrorResponse("Please Provide an email and password", 400));
+        return next(new ErrorResponseJSON(res, "Please Provide an email and password", 400));
     }
     //check for user
     const candidate = await Candidate.findOne({ email: email }).select("+password");
   
     if (!candidate) {
-        return next(new ErrorResponse("Invalid credentials", 401));
+        return next(new ErrorResponseJSON(res, "Invalid credentials", 401));
     }
   
     //check if password match
     const isMatch = await candidate.matchPassword(password);
   
     if (!isMatch) {
-        return next(new ErrorResponse("Invalid credentials", 401));
+        return next(new ErrorResponseJSON(res, "Invalid credentials", 401));
     }
   
     sendTokenResponse(candidate, 200, res);
@@ -71,7 +71,7 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
         resetPasswordExpire: { $gt: Date.now() },
     });
     if (!user) {
-        return next(new ErrorResponse("Invalid Token", 400));
+        return next(new ErrorResponseJSON(res, "Invalid Token", 400));
     }
     // set new password
     user.password = req.body.password;
@@ -89,7 +89,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     const user = await Candidate.findOne({ email: req.body.email });
 
     if (!user) {
-        return next(new ErrorResponse("User not found", 404));
+        return next(new ErrorResponseJSON(res, "User not found", 404));
     }
     //Get reset token
     const resetToken = user.getResetPasswordToken();
@@ -193,7 +193,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
         user.getResetPasswordToken = undefined;
         user.resetPasswordTokenExpire = undefined;
         await user.save({ validateBeforeSave: false });
-        return next(new ErrorResponse("Email could not be sent", 500));
+        return next(new ErrorResponseJSON(res, "Email could not be sent", 500));
     }
 });
 

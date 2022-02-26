@@ -2,7 +2,7 @@ const Test = require('../Models/test')
 const Section = require('../Models/section')
 const Question = require('../Models/question')
 const TestScore = require('../Models/testScore')
-const ErrorResponse = require('../Utils/errorResponse')
+const {ErrorResponseJSON} = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
 
 // @desc    Get all tests
