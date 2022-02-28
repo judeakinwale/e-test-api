@@ -49,6 +49,18 @@
         "http",
         "https"
     ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
+        }
+    },
+    "security": [
+        {
+           "Bearer": []
+        }
+    ],
     "consumes": [],
     "produces": [],
     "paths": {
