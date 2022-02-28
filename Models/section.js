@@ -1,5 +1,6 @@
 const mongoose  = require("mongoose");
 const Schema = mongoose.Schema;
+const Question = require("./question")
 
 const SectionInformation = new Schema({
     title: {
@@ -23,6 +24,13 @@ const SectionInformation = new Schema({
         type: Date,
         default: Date.now,
     },
+});
+
+SectionInformation.pre('remove', async (next) => {
+    // 'this' is the client being removed. Provide callbacks here if you want
+    // to be notified of the calls' result.
+    Question.remove({section: this._id}).exec();
+    next();
 });
 
 module.exports = mongoose.model('section', SectionInformation);
