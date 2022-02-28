@@ -2059,6 +2059,7 @@
         },
         "/api/v1/auth/admin/": {
             "post": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Admin login",
                 "description": "",
@@ -2094,6 +2095,7 @@
         },
         "/api/v1/auth/admin/logout": {
             "post": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Admin logout",
                 "description": "",
@@ -2107,6 +2109,7 @@
         },
         "/api/v1/auth/admin/account": {
             "get": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Get currently authenticated admin user",
                 "description": "",
@@ -2123,6 +2126,7 @@
         },
         "/api/v1/auth/admin/forgotPassword": {
             "post": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Forgot password for admin",
                 "description": "",
@@ -2149,6 +2153,7 @@
         },
         "/api/v1/auth/admin/resetPassword/:resettoken": {
             "post": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Reset Password for admin",
                 "description": "",
@@ -2178,6 +2183,7 @@
         },
         "/api/v1/auth/": {
             "post": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Candidate login",
                 "description": "",
@@ -2213,6 +2219,7 @@
         },
         "/api/v1/auth/logout": {
             "post": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Candidate logout",
                 "description": "",
@@ -2226,6 +2233,7 @@
         },
         "/api/v1/auth/account": {
             "get": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Get currently authenticated candidate",
                 "description": "",
@@ -2242,6 +2250,7 @@
         },
         "/api/v1/auth/forgotPassword": {
             "post": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Forgot password for candidate",
                 "description": "",
@@ -2268,6 +2277,7 @@
         },
         "/api/v1/auth/resetPassword/:resettoken": {
             "post": {
+                "security": [],
                 "tags": ["authentication"],
                 "summary": "Reset Password for candidate",
                 "description": "",
