@@ -5,7 +5,7 @@
         "description": "Description",
         "version": "1.0.0"
     },
-    "host": "localhost:5000",
+    "host": "murmuring-everglades-30575.herokuapp.com",
     "basePath": "/",
     "tags": [
         {
@@ -2354,6 +2354,7 @@
                 "lastName",
                 "phone",
                 "email",
+                "examType",
                 "password"
             ],
             "properties": {
@@ -2372,6 +2373,10 @@
                 "email": {
                     "type": "string",
                     "example": "Some example string"
+                },
+                "examType": {
+                    "type": "string",
+                    "example": "Test id"
                 },
                 "password": {
                     "type": "string",

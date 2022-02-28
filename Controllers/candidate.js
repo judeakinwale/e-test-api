@@ -9,7 +9,7 @@ const asyncHandler = require('../Middleware/async')
 exports.getAllCandidates = asyncHandler(async (req, res, next) => {
     // res.status(200).json(res.advancedResults);
 
-    const candidates = await Candidate.find()
+    const candidates = await Candidate.find().populate({path: 'examType', select: 'title timer'})
 
     if (!candidates || candidates.length < 1) {
         return res.status(404).json({
@@ -59,7 +59,7 @@ exports.createCandidate = asyncHandler(async (req, res, next) => {
 // @route   GET     /api/v1/candidate/:id
 // @access  Private
 exports.getCandidate = asyncHandler(async (req, res, next) => {
-    const candidate = await Candidate.findById(req.params.id)
+    const candidate = await Candidate.findById(req.params.id).populate({path: 'examType', select: 'title timer'})
 
     if (!candidate) {
         return res.status(404).json({
@@ -120,7 +120,7 @@ exports.deleteCandidate = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/candidate/self
 // @access  Private
 exports.getSelf = asyncHandler(async (req, res, next) => {
-    const candidate = await Candidate.findById(req.candidate._id)
+    const candidate = await Candidate.findById(req.candidate._id).populate({path: 'examType', select: 'title timer'})
 
     if (!candidate) {
         return res.status(404).json({

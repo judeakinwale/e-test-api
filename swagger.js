@@ -5,8 +5,8 @@ const doc = {
     title: 'e-Test API',
     description: 'Description',
   },
-  host: 'localhost:5000',
-  schemes: ['http'],
+  host: 'murmuring-everglades-30575.herokuapp.com',
+  schemes: ['http', 'https'],
 };
 
 const outputFile = './swagger-output.json';

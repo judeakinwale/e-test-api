@@ -3,6 +3,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Schema = mongoose.Schema;
+const CandidateResponse = require("./candidateResponse");
+const SectionScore = require("./sectionScore");
+const TestScore = require("./testScore");
 
 const CandidateInformation = new Schema({
     firstName: {
@@ -42,7 +45,7 @@ const CandidateInformation = new Schema({
 });
 
 //Encrypt password using bcrypt
-CandidateInformation.pre("save", async function (next) {
+CandidateInformation.pre("save", async (next) => {
     if (!this.isModified("password")) {
         next();
     }
@@ -76,5 +79,14 @@ CandidateInformation.methods.getResetPasswordToken = function () {
     this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
     return resetToken;
 };
+
+CandidateInformation.pre('remove', async (next) => {
+    // 'this' is the client being removed. Provide callbacks here if you want
+    // to be notified of the calls' result.
+    CandidateResponse.remove({candidate: this._id}).exec();
+    SectionScore.remove({candidate: this._id}).exec();
+    TestScore.remove({candidate: this._id}).exec();
+    next();
+});
 
 module.exports = mongoose.model('candidate', CandidateInformation);
