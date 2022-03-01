@@ -17,7 +17,7 @@ const TestDetails = new Schema({
     },
 });
 
-TestDetails.pre('remove', async (next) => {
+TestDetails.pre('remove', async function(next) {
     // 'this' is the client being removed. Provide callbacks here if you want
     // to be notified of the calls' result.
     Section.remove({test: this._id}).exec();

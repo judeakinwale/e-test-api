@@ -26,7 +26,7 @@ const SectionInformation = new Schema({
     },
 });
 
-SectionInformation.pre('remove', async (next) => {
+SectionInformation.pre('remove', async function(next) {
     // 'this' is the client being removed. Provide callbacks here if you want
     // to be notified of the calls' result.
     Question.remove({section: this._id}).exec();

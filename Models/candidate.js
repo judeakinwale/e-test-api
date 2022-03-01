@@ -45,7 +45,7 @@ const CandidateInformation = new Schema({
 });
 
 //Encrypt password using bcrypt
-CandidateInformation.pre("save", async (next) => {
+CandidateInformation.pre("save", async function(next) {
     if (!this.isModified("password")) {
         next();
     }
@@ -80,7 +80,7 @@ CandidateInformation.methods.getResetPasswordToken = function () {
     return resetToken;
 };
 
-CandidateInformation.pre('remove', async (next) => {
+CandidateInformation.pre('remove', async function(next) {
     // 'this' is the client being removed. Provide callbacks here if you want
     // to be notified of the calls' result.
     CandidateResponse.remove({candidate: this._id}).exec();
