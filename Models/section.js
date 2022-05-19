@@ -11,6 +11,9 @@ const SectionInformation = new Schema({
         type: Number,
         default: 0
     },
+    videoUrl: {
+        type: String,
+    },
     instruction: {
         type: String,
         required: [true, "Please enter section instruction"],

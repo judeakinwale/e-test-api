@@ -11,6 +11,10 @@ const TestDetails = new Schema({
         type: Number,
         default: 0
     },
+    isTraining: {
+        type: Boolean,
+        default: false,
+    },
     createdAt: {
         type: Date,
         default: Date.now,
