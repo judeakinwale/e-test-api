@@ -11,6 +11,9 @@ const TestDetails = new Schema({
         type: Number,
         default: 0
     },
+    videoUrl: {
+        type: String,
+    },
     isTraining: {
         type: Boolean,
         default: false,
