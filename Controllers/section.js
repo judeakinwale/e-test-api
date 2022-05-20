@@ -4,6 +4,7 @@ const Question = require('../Models/question')
 const {ErrorResponseJSON} = require('../Utils/errorResponse')
 const getTestTimer = require('../Utils/getTestTimer')
 const asyncHandler = require('../Middleware/async')
+const { youtube_parser } = require('../Utils/videoUtils')
 
 // @desc    Get all sections
 // @route   GET    /api/v1/section
@@ -39,6 +40,12 @@ exports.createSection = asyncHandler(async (req, res, next) => {
             success: false,
             message: "This section already exists. Update it instead"
         })
+    }
+
+    const {videoUrl} = req.body
+
+    if (videoUrl) {
+        req.body.videoUrl = youtube_parser(videoUrl)
     }
 
     const section = await Section.create(req.body)
@@ -80,6 +87,13 @@ exports.getSection = asyncHandler(async (req, res, next) => {
 // @route   PUT    /api/v1/section/:id
 // @access  Private
 exports.updateSection = asyncHandler(async (req, res, next) => {
+
+    const {videoUrl} = req.body
+
+    if (videoUrl) {
+        req.body.videoUrl = youtube_parser(videoUrl)
+    }
+
     const section = await Section.findByIdAndUpdate(
         req.params.id,
         req.body,

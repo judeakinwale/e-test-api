@@ -4,6 +4,7 @@ const Question = require('../Models/question')
 const TestScore = require('../Models/testScore')
 const {ErrorResponseJSON} = require('../Utils/errorResponse')
 const asyncHandler = require('../Middleware/async')
+const { youtube_parser } = require('../Utils/videoUtils')
 
 // @desc    Get all tests
 // @route   GET    /api/v1/test
@@ -38,6 +39,12 @@ exports.createTest = asyncHandler(async (req, res, next) => {
             success: false,
             message: "This test already exists. Update it instead"
         })
+    }
+
+    const {videoUrl} = req.body
+
+    if (videoUrl) {
+        req.body.videoUrl = youtube_parser(videoUrl)
     }
     
     const test = await Test.create(req.body)
@@ -76,6 +83,13 @@ exports.getTest = asyncHandler(async (req, res, next) => {
 // @route   PUT    /api/v1/test/:id
 // @access  Private
 exports.updateTest = asyncHandler(async (req, res, next) => {
+
+    const {videoUrl} = req.body
+
+    if (videoUrl) {
+        req.body.videoUrl = youtube_parser(videoUrl)
+    }
+
     const test = await Test.findByIdAndUpdate(
         req.params.id,
         req.body,
