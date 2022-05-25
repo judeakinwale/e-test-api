@@ -1,34 +1,34 @@
-const mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Section = require("./section")
+const Section = require("./section");
 
 const TestDetails = new Schema({
-    title: {
-        type: String,
-        required: [true, "Please enter test title"],
-    },
-    timer: {
-        type: Number,
-        default: 0
-    },
-    videoUrl: {
-        type: String,
-    },
-    isTraining: {
-        type: Boolean,
-        default: false,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
+  title: {
+    type: String,
+    required: [true, "Please enter test title"],
+  },
+  timer: {
+    type: Number,
+    default: 0,
+  },
+  videoUrl: {
+    type: String,
+  },
+  isTraining: {
+    type: Boolean,
+    default: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-TestDetails.pre('remove', async function(next) {
-    // 'this' is the client being removed. Provide callbacks here if you want
-    // to be notified of the calls' result.
-    Section.remove({test: this._id}).exec();
-    next();
+TestDetails.pre("remove", async function (next) {
+  // 'this' is the client being removed. Provide callbacks here if you want
+  // to be notified of the calls' result.
+  Section.remove({test: this._id}).exec();
+  next();
 });
 
-module.exports = mongoose.model('test', TestDetails);
+module.exports = mongoose.model("test", TestDetails);

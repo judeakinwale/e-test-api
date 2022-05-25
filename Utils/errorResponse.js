@@ -9,8 +9,8 @@ class ErrorResponseJSON {
   constructor(res, message, statusCode) {
     return res.status(statusCode).json({
       success: false,
-      message: message
-    })
+      message: message,
+    });
   }
 }
 

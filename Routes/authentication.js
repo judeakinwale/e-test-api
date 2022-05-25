@@ -1,31 +1,20 @@
-const express = require('express')
-const advancedResults = require('../Middleware/advancedResults')
+const express = require("express");
+const advancedResults = require("../Middleware/advancedResults");
 // Admin model and auth controller
-const Admin = require('../Models/admin')
+const Admin = require("../Models/admin");
 const {
-    adminLogin,
-    adminLogout,
-    adminAccount,
-    adminForgotPassword,
-    adminResetPassword,
-} = require('../Controllers/adminAuthentication')
+  adminLogin,
+  adminLogout,
+  adminAccount,
+  adminForgotPassword,
+  adminResetPassword,
+} = require("../Controllers/adminAuthentication");
 // Candidate model and auth controller
-const Candidate = require('../Models/candidate')
-const {
-    login,
-    logout,
-    account,
-    forgotPassword,
-    resetPassword,
-} = require('../Controllers/candidateAuthentication')
+const Candidate = require("../Models/candidate");
+const {login, logout, account, forgotPassword, resetPassword} = require("../Controllers/candidateAuthentication");
+const {protect, authorize, authorizeAdmin} = require("../Middleware/auth");
 
-const {
-    protect,
-    authorize,
-    authorizeAdmin
-} = require("../Middleware/auth");
-
-const router = express.Router()
+const router = express.Router();
 
 router.route("/api/v1/auth/admin/").post(adminLogin);
 // router.route("/api/v1/auth/addEmail").post(addEmail);
@@ -43,4 +32,4 @@ router.route("/api/v1/auth/account").get(protect, authorize, account);
 router.route("/api/v1/auth/forgotPassword").post(forgotPassword);
 router.route("/api/v1/auth/resetPassword/:resettoken").post(resetPassword);
 
-module.exports = router
+module.exports = router;

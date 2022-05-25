@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (options) => {
+const sendEmail = async options => {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
@@ -9,7 +9,7 @@ const sendEmail = async (options) => {
       user: process.env.SMTP_EMAIL,
       pass: process.env.SMTP_PASSWORD,
     },
-    tls: { ciphers: "SSLv3" },
+    tls: {ciphers: "SSLv3"},
     service: "Outlook365",
     // tls: {
     //   // do not fail on invalid certs
