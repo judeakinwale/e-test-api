@@ -89,7 +89,7 @@ mongoose
 // For emulating .htaccess
 app.use(function (req, res, next) {
   console.log("%s %s", req.method, req.url);
-  next();git 
+  next();
 });
 
 app.engine(".html", require("ejs").__express);
