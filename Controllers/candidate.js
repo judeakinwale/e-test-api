@@ -194,7 +194,7 @@ exports.getFailedCandidates = asyncHandler(async (req, res, next) => {
 
   for (let x = 0; x < testScores.length; x++) {
     let test = testScores[x];
-    if (test.score < 5) {
+    if (test.score < 50) {
       candidates.push(test.candidate);
     }
   }

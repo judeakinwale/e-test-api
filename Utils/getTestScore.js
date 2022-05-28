@@ -13,8 +13,8 @@ const getTestScore = async score => {
   let tempScore = 0;
   for (let i = 0; i < sectionScores.length; i++) {
     tempScore += sectionScores[i].score;
-    console.log(`section score __ ${i} : ${sectionScores[i].score}`);
-    console.log(`temp score __ ${i} : ${tempScore}`);
+    // console.log(`section score __ ${i} : ${sectionScores[i].score}`);
+    // console.log(`temp score __ ${i} : ${tempScore}`);
   }
   let finalScore = (tempScore / sectionScores.length) * 10;
   finalScore = finalScore.toFixed(2);
@@ -25,19 +25,19 @@ const getTestScore = async score => {
       test: score.test,
       score: finalScore,
     });
-    console.log("\n Test Score: " + createTestScore);
+    // console.log("\n Test Score: " + createTestScore);
   } else {
     testScore.score = finalScore;
     await testScore.save();
-    console.log("\n Test Score: " + testScore);
+    // console.log("\n Test Score: " + testScore);
   }
 
-  // console.log(`Score: ${tempScore} of ${sectionScores.length}`)
-  console.log(`Score: ${tempScore} / Total Score: ${sectionScores.length}`);
-  console.log(`Final Score: ${finalScore}`);
+  // // console.log(`Score: ${tempScore} of ${sectionScores.length}`)
+  // console.log(`Score: ${tempScore} / Total Score: ${sectionScores.length}`);
+  // console.log(`Final Score: ${finalScore}`);
   // testScore.score = finalScore
   // await testScore.save()
-  // console.log("\n Test Score: " + testScore)
+  // // console.log("\n Test Score: " + testScore)
 };
 
 const getTestScoreUsingTest = async test => {
