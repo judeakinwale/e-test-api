@@ -89,25 +89,25 @@ mongoose
     console.log("Error connecting to MongoDB!");
   });
 
-// // For emulating .htaccess
-// app.use(function (req, res, next) {
-//   console.log("%s %s", req.method, req.url);
-//   next();
-// });
+// For emulating .htaccess
+app.use(function (req, res, next) {
+  console.log("%s %s", req.method, req.url);
+  next();
+});
 
-// app.engine(".html", require("ejs").__express);
-// app.set("view engine", "html");
-// app.set("views", __dirname + "/public");
-// app.set("view engine", "html");
+app.engine(".html", require("ejs").__express);
+app.set("view engine", "html");
+app.set("views", __dirname + "/public");
+app.set("view engine", "html");
 
-// app.get("/*", function (req, res) {
-//   if (req.xhr) {
-//     var pathname = url.parse(req.url).pathname;
-//     res.sendfile("index.html", {root: __dirname + "/public" + pathname});
-//   } else {
-//     res.render("index");
-//   }
-// });
+app.get("/*", function (req, res) {
+  if (req.xhr) {
+    var pathname = url.parse(req.url).pathname;
+    res.sendfile("index.html", {root: __dirname + "/public" + pathname});
+  } else {
+    res.render("index");
+  }
+});
 
 // // Error handling
 // app.use((req, res) => {
