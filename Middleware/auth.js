@@ -69,33 +69,15 @@ const Company = require("../Models/companyProfile");
 
 // Grant access to authenticated user
 exports.authorize = (req, res, next) => {
-  if (req.admin || req.candidate) {
-    next();
-  } else {
+  if (!req.admin && !req.candidate)
     return next(new ErrorResponseJSON(res, `User is not authorized to access this route`, 403));
-  }
+  next();
 };
-
-// // Grant access to admin
-// exports.authorizeAdmin = () => {
-//   return (req, res, next) => {
-//     if (!req.admin) {
-//       return next(
-//         new ErrorResponseJSON(res,
-//           `User is not authorized to access this route`,
-//           403
-//         )
-//       );
-//     }
-//     next();
-//   };
-// };
 
 // Grant access to admin
 exports.authorizeAdmin = (req, res, next) => {
-  if (!req.admin) {
+  if (!req.admin)
     return next(new ErrorResponseJSON(res, `User is not authorized to access this route`, 403));
-  }
   next();
 };
 
@@ -110,43 +92,18 @@ exports.protect = asyncHandler(async (req, res, next) => {
   } else if (req.cookies.token) {
     token = req.cookies.token;
   }
-
+  console.log(token)
   // Make sure token exists
   if (!token) {
     return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
   }
-
-  // try {
-  //   // Verify token
-  //   const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-  //   req.admin = await Admin.findById(decoded.id)
-
-  //   next();
-  // } catch (err) {
-
-  //   try {
-  //     // Verify token
-  //     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-  //     req.candidate = await Candidate.findById(decoded.id);
-
-  //     next();
-  //   } catch (err) {
-  //     return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
-  //   }
-
-  //   return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
-  // }
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   req.admin = await Admin.findById(decoded.id);
   req.candidate = await Candidate.findById(decoded.id);
   req.company = await Company.findOne();
 
-  if (req.admin || req.candidate) {
-    next();
-  } else {
-    return next(new ErrorResponseJSON(res, "Not authorized to access this route", 401));
-  }
+  if (!req.admin && !req.candidate)
+    return next(new ErrorResponseJSON(res, `User is not authorized to access this route`, 403));
+  next();
 });

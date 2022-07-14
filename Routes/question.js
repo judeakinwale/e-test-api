@@ -14,12 +14,14 @@ const {
 
 const router = express.Router();
 
-router.route("/api/v1/question/").get(advancedResults(Question), getAllQuestions);
-router.route("/api/v1/question/").post(protect, authorizeAdmin, createQuestion);
-router.route("/api/v1/question/assigned").get(protect, getAssignedTestQuestions);
-router.route("/api/v1/question/:id").get(getQuestion);
-router.route("/api/v1/question/:id").put(protect, authorizeAdmin, updateQuestions);
-router.route("/api/v1/question/:id").delete(protect, authorizeAdmin, deleteQuestion);
-router.route("/api/v1/question/section/:section_id").get(getSectionQuestions);
+let baseRoute = "/api/v1/question";
+
+router.route("/").get(advancedResults(Question), getAllQuestions);
+router.route("/").post(protect, authorizeAdmin, createQuestion);
+router.route("/assigned").get(protect, getAssignedTestQuestions);
+router.route("/:id").get(getQuestion);
+router.route("/:id").put(protect, authorizeAdmin, updateQuestions);
+router.route("/:id").delete(protect, authorizeAdmin, deleteQuestion);
+router.route("/section/:section_id").get(getSectionQuestions);
 
 module.exports = router;

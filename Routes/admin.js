@@ -15,13 +15,15 @@ const {
 
 const router = express.Router();
 
-router.route("/api/v1/admin/").get(advancedResults(Admin), getAllAdmins);
-router.route("/api/v1/admin/").post(createAdmin);
-router.route("/api/v1/admin/self").get(protect, authorizeAdmin, getSelf);
-router.route("/api/v1/admin/self").put(protect, authorizeAdmin, updateSelf);
-router.route("/api/v1/admin/upload-profile").post(protect, authorizeAdmin, uploadProfilePicture);
-router.route("/api/v1/admin/:id").get(protect, authorizeAdmin, getAdmin);
-router.route("/api/v1/admin/:id").put(protect, authorizeAdmin, updateAdmin);
-router.route("/api/v1/admin/:id").delete(protect, authorizeAdmin, deleteAdmin);
+let baseRoute = "/api/v1/admin";
+
+router.route("/").get(advancedResults(Admin), getAllAdmins);
+router.route("/").post(createAdmin);
+router.route("/self").get(protect, getSelf);
+router.route("/self").put(protect, authorizeAdmin, updateSelf);
+router.route("/upload-profile").post(protect, authorizeAdmin, uploadProfilePicture);
+router.route("/:id").get(protect, authorizeAdmin, getAdmin);
+router.route("/:id").put(updateAdmin);
+router.route("/:id").delete(protect, authorizeAdmin, deleteAdmin);
 
 module.exports = router;

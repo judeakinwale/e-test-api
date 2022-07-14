@@ -1,29 +1,28 @@
 const Section = require("../Models/section");
 const Test = require("../Models/test");
 const Question = require("../Models/question");
-const {ErrorResponseJSON} = require("../Utils/errorResponse");
+const {ErrorResponseJSON, SuccessResponseJSON} = require("../Utils/errorResponse");
 const getTestTimer = require("../Utils/getTestTimer");
 const asyncHandler = require("../Middleware/async");
 const {youtube_parser} = require("../Utils/videoUtils");
+const { populateTestDetails } = require("./test");
+const advancedResults = require("../Middleware/advancedResults");
+const { getPassedCandidates } = require("./candidate");
+
+exports.populateSectionDetails = {path: "test questions", select: "-correct_answers"}
+// exports.populateSectionDetails = undefined
 
 // @desc    Get all sections
 // @route   GET    /api/v1/section
+// @route   GET    /api/v1/test/:testId/section
 // @access  Private
 exports.getAllSections = asyncHandler(async (req, res, next) => {
-  // res.status(200).json(res.advancedResults);
-
-  const sections = await Section.find().populate({path: "test", select: "title timer"});
-
-  if (!sections || sections.length < 1) {
-    return res.status(404).json({
-      success: false,
-      message: "There are no sections",
-    });
+  const {testId} = req.params
+  if (testId) {
+    const sections = await Section.find({test: testId}).populate(this.populateSectionDetails);
+    return new SuccessResponseJSON(res, sections);
   }
-  res.status(200).json({
-    success: true,
-    data: sections,
-  });
+  res.status(200).json(res.advancedResults);
 });
 
 // @desc    Create section
@@ -34,35 +33,18 @@ exports.createSection = asyncHandler(async (req, res, next) => {
     title: req.body.title,
     test: req.body.test,
   });
-
-  if (existingSection) {
-    return res.status(400).json({
-      success: false,
-      message: "This section already exists. Update it instead",
-    });
-  }
+  if (existingSection) 
+    return new ErrorResponseJSON(res, "This section already exists. Update it instead!", 400);
 
   const {videoUrl} = req.body;
-
-  if (videoUrl) {
-    req.body.videoUrl = youtube_parser(videoUrl);
-  }
+  if (videoUrl) req.body.videoUrl = youtube_parser(videoUrl);
 
   const section = await Section.create(req.body);
+  if (!section) return new ErrorResponseJSON(res, "Invalid Section Details!", 400);
 
-  if (!section) {
-    return res.status(400).json({
-      success: false,
-      message: "Invalid section details",
-    });
-  }
-  // Calculate the test timer from section timers
-  await getTestTimer(section);
+  await getTestTimer(section); // Calculate the test timer from section timers
 
-  res.status(201).json({
-    success: true,
-    data: section,
-  });
+  return new SuccessResponseJSON(res, section, 201);
 });
 
 // @desc    Get section
@@ -71,16 +53,9 @@ exports.createSection = asyncHandler(async (req, res, next) => {
 exports.getSection = asyncHandler(async (req, res, next) => {
   const section = await Section.findById(req.params.id).populate({path: "test", select: "title timer"});
 
-  if (!section) {
-    return res.status(404).json({
-      success: false,
-      message: "Section not found",
-    });
-  }
-  res.status(200).json({
-    success: true,
-    data: section,
-  });
+  if (!section) return new ErrorResponseJSON(res, "Section not Found!", 400);
+  
+  return new SuccessResponseJSON(res, section);
 });
 
 // @desc    Update section
@@ -89,28 +64,17 @@ exports.getSection = asyncHandler(async (req, res, next) => {
 exports.updateSection = asyncHandler(async (req, res, next) => {
   const {videoUrl} = req.body;
 
-  if (videoUrl) {
-    req.body.videoUrl = youtube_parser(videoUrl);
-  }
+  if (videoUrl) req.body.videoUrl = youtube_parser(videoUrl);
 
   const section = await Section.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
+  if (!section) return new ErrorResponseJSON(res, "Invalid Section Details!", 400);
+  
+  await getTestTimer(section); // Calculate the test timer from section timers
 
-  if (!section) {
-    return res.status(400).json({
-      success: false,
-      message: "Invalid section details",
-    });
-  }
-  // Calculate the test timer from section timers
-  await getTestTimer(section);
-
-  res.status(200).json({
-    success: true,
-    data: section,
-  });
+  return new SuccessResponseJSON(res, section);
 });
 
 // @desc    Delete section
@@ -118,53 +82,28 @@ exports.updateSection = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.deleteSection = asyncHandler(async (req, res, next) => {
   const section = await Section.findByIdAndDelete(req.params.id);
-
-  if (!section) {
-    return res.status(404).json({
-      success: false,
-      message: "Section not found",
-    });
-  }
-  res.status(200).json({
-    success: true,
-    data: {},
-  });
+  if (!section) return new ErrorResponseJSON(res, "Section not found!", 404);
+  
+  return new SuccessResponseJSON(res);
 });
 
 // @desc    Get all sections in a test
 // @route   GET    /api/v1/section/test/:test_id
 // @access  Private
 exports.getTestSections = asyncHandler(async (req, res, next) => {
-  const sections = await Section.find({test: req.params.test_id}).populate({path: "test", select: "title timer"});
+  const sections = await Section.find({test: req.params.test_id}).populate(this.populateSectionDetails);
 
-  if (!sections || sections.length < 1) {
-    return res.status(404).json({
-      success: false,
-      message: "There are no sections",
-    });
-  }
-  res.status(200).json({
-    success: true,
-    data: sections,
-  });
+  return new SuccessResponseJSON(res, sections);
 });
 
 // @desc    Get sections assigned to the authenticated candidate
 // @route   GET    /api/v1/section/assigned
 // @access  Private
 exports.getAssignedTestSections = asyncHandler(async (req, res, next) => {
-  const examType = await req.candidate.examType;
-  // const assignedTest = await Test.findById(examType)
+  const {examType} = req.candidate;
+  if (!examType) return new ErrorResponseJSON(res, "Assigned Test not Configured!", 404);
+  
   const sections = await Section.find({test: examType});
 
-  if (!sections || sections.length < 1) {
-    return res.status(404).json({
-      success: false,
-      message: "Assigned Sections not found",
-    });
-  }
-  res.status(200).json({
-    success: true,
-    data: sections,
-  });
+  return new SuccessResponseJSON(res, sections);
 });

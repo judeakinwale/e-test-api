@@ -14,15 +14,17 @@ const {
 
 const router = express.Router();
 
-router.route("/api/v1/candidate-response").get(advancedResults(CandidateResponse), getAllCandidateResponses);
-router.route("/api/v1/candidate-response").post(protect, createCandidateResponse);
-router.route("/api/v1/candidate-response/:id").get(protect, authorize, getCandidateResponse);
-router.route("/api/v1/candidate-response/:id").put(protect, authorize, updateCandidateResponse);
-router.route("/api/v1/candidate-response/:id").delete(protect, authorize, deleteCandidateResponse);
-router.route("/api/v1/candidate-response/question/:question_id")
-  .get(protect, authorize, getCandidateResponseByQuestion);
-router.route("/api/v1/candidate-response/candidate/:candidate_id/test/:test_id/question/:question_id")
+let baseRoute = "/api/v1/candidate-response";
+
+router.route("").get(advancedResults(CandidateResponse), getAllCandidateResponses);
+router.route("").post(protect, createCandidateResponse);
+router.route("/:id").get(protect, authorize, getCandidateResponse);
+router.route("/:id").put(protect, authorize, updateCandidateResponse);
+router.route("/:id").delete(protect, authorize, deleteCandidateResponse);
+router.route("/question/:question_id").get(protect, authorize, getCandidateResponseByQuestion);
+router
+  .route("/candidate/:candidate_id/test/:test_id/question/:question_id")
   .get(protect, authorize, getCandidateResponseByCandidateTestAndQuestion);
-// router.route('/api/v1/candidate-response/self').put(protect, authorizeAdmin, updateSelf)
+// router.route('/self').put(protect, authorizeAdmin, updateSelf)
 
 module.exports = router;

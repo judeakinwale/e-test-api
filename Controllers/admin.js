@@ -80,6 +80,12 @@ exports.updateAdmin = asyncHandler(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
+  // temporary fix for password update
+  if ("password" in req.body) {
+    const adminHelper = await Admin.findById(req.params.id);
+    adminHelper.password = req.body.password
+    await adminHelper.save()
+  }
 
   if (!admin) {
     return res.status(400).json({
@@ -115,6 +121,7 @@ exports.deleteAdmin = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/admin/self
 // @access  Private
 exports.getSelf = asyncHandler(async (req, res, next) => {
+  console.log(req.admin)
   const admin = await Admin.findById(req.admin._id);
 
   if (!admin) {

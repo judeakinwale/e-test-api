@@ -2,29 +2,34 @@ const Question = require("../Models/question");
 const Section = require("../Models/section");
 const Test = require("../Models/test");
 const TestScore = require("../Models/testScore");
-const {ErrorResponseJSON} = require("../Utils/errorResponse");
+const {ErrorResponseJSON, SuccessResponseJSON} = require("../Utils/errorResponse");
 const asyncHandler = require("../Middleware/async");
+const {populateSectionDetails} = require("./section")
 
 // @desc    Get all questions
 // @route   GET    /api/v1/question
 // @access  Private
 exports.getAllQuestions = asyncHandler(async (req, res, next) => {
-  // res.status(200).json(res.advancedResults);
+  const {testId, sectionId} = req.params
+  if (testId) {
+    const sections = await Section.find({test: testId}).populate(populateSectionDetails);
+    if (sections.length < 1) return new ErrorResponseJSON(res, "Sections not found!", 404);
 
-  const questions = await Question.find()
-    .select("-correct_answers")
-    .populate({path: "section", select: "title timer instruction test"});
+    let allQuestions = [];
+    for (const [key, section] of Object.entries(sections)) {
+      const questions = await Question.find({section: section._id}).populate("section");
+      allQuestions.push({section, questions});
+    }
 
-  if (!questions || questions.length < 1) {
-    return res.status(404).json({
-      success: false,
-      message: "There are no questions",
-    });
+    if (allQuestions.length < 1) return new ErrorResponseJSON(res, "Questions not found!", 404);
+    return new SuccessResponseJSON(res, allQuestions);
   }
-  res.status(200).json({
-    success: true,
-    data: questions,
-  });
+
+  if (sectionId) {
+    const questions = await Question.find({section: section._id}).populate("section");
+    return new SuccessResponseJSON(res, questions);
+  }
+  res.status(200).json(res.advancedResults);
 });
 
 // @desc    Create question

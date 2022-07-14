@@ -16,14 +16,16 @@ const {
 
 const router = express.Router();
 
-router.route("/api/v1/candidate").get(advancedResults(Candidate), getAllCandidates);
-router.route("/api/v1/candidate").post(createCandidate);
-router.route("/api/v1/candidate/self").get(protect, authorize, getSelf);
-router.route("/api/v1/candidate/self").put(protect, authorize, updateSelf);
-router.route("/api/v1/candidate/passed").get(getPassedCandidates);
-router.route("/api/v1/candidate/failed").get(getFailedCandidates);
-router.route("/api/v1/candidate/:id").get(getCandidate);
-router.route("/api/v1/candidate/:id").put(protect, authorize, updateCandidate);
-router.route("/api/v1/candidate/:id").delete(protect, authorize, deleteCandidate);
+let baseRoute = "/api/v1/candidate";
+
+router.route("").get(advancedResults(Candidate), getAllCandidates);
+router.route("").post(createCandidate);
+router.route("/self").get(protect, authorize, getSelf);
+router.route("/self").put(protect, authorize, updateSelf);
+router.route("/passed").get(getPassedCandidates);
+router.route("/failed").get(getFailedCandidates);
+router.route("/:id").get(getCandidate);
+router.route("/:id").put(protect, authorize, updateCandidate);
+router.route("/:id").delete(protect, authorize, deleteCandidate);
 
 module.exports = router;

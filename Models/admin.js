@@ -21,7 +21,7 @@ const AdminInformation = new Schema({
   },
   password: {
     type: String,
-    minLength: 6,
+    minLength: 5,
     required: true,
     select: false,
   },

@@ -81,7 +81,12 @@ exports.updateCandidate = asyncHandler(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
-
+  // temporary fix for password update
+  if ("password" in req.body) {
+    const candidateHelper = await Candidate.findById(req.params.id);
+    candidateHelper.password = req.body.password
+    await candidateHelper.save()
+  }
   if (!candidate) {
     return res.status(400).json({
       success: false,

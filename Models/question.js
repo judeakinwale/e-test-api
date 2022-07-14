@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const QuestionInformation = new Schema({
+const QuestionSchema = new Schema({
   question: {
     type: String,
     required: [true, "Please enter question"],
@@ -23,6 +23,17 @@ const QuestionInformation = new Schema({
     type: Date,
     default: Date.now,
   },
+},
+{
+  toJSON: {virtuals: true},
+  toObject: {virtuals: true},
 });
 
-module.exports = mongoose.model("question", QuestionInformation);
+// QuestionSchema.pre("remove", async function(next) {
+//   console.log("Deleting answers ...".brightblue);
+//   await this.model("answer").deleteMany({question: this._id});
+//   console.log("Answers Deleted.".bgred);
+//   next();
+// });
+
+module.exports = mongoose.model("question", QuestionSchema);

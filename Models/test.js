@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Section = require("./section");
+// const Section = require("./section");
 
-const TestDetails = new Schema({
+const TestSchema = new Schema({
   title: {
     type: String,
+    unique: true,
     required: [true, "Please enter test title"],
   },
   timer: {
@@ -22,13 +23,25 @@ const TestDetails = new Schema({
     type: Date,
     default: Date.now,
   },
+}, 
+{
+  toJSON: {virtuals: true},
+  toObject: {virtuals: true},
 });
 
-TestDetails.pre("remove", async function (next) {
-  // 'this' is the client being removed. Provide callbacks here if you want
-  // to be notified of the calls' result.
-  Section.remove({test: this._id}).exec();
+TestSchema.pre("remove", async function (next) {
+  console.log("Deleting Sections ...".brightBlue);
+  await this.model("section").deleteMany({test: this._id});
+  console.log("Sections Deleted.".bgRed)
   next();
 });
 
-module.exports = mongoose.model("test", TestDetails);
+// Reverse Populate with Virtuals
+TestSchema.virtual("sections", {
+  ref: "section",
+  localField: "_id",
+  foreignField: "test",
+  justOne: false,
+});
+
+module.exports = mongoose.model("test", TestSchema);

@@ -17,6 +17,7 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
   }
   //check for user
   const admin = await Admin.findOne({email: email}).select("+password");
+  console.log(admin)
 
   if (!admin) {
     return next(new ErrorResponseJSON(res, "Invalid credentials", 400));
@@ -24,6 +25,7 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
 
   //check if password match
   const isMatch = await admin.matchPassword(password);
+  console.log(isMatch)
 
   if (!isMatch) {
     return next(new ErrorResponseJSON(res, "Invalid credentials", 401));

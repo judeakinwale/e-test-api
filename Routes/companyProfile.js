@@ -12,12 +12,14 @@ const {
 
 const router = express.Router();
 
-router.route("/api/v1/company/").get(getCompanyProfile);
-router.route("/api/v1/company/").post(protect, authorizeAdmin, createCompanyProfile);
-router.route("/api/v1/company/all").get(getAllCompanyProfile);
-router.route("/api/v1/company/upload-logo").post(protect, uploadLogo);
-router.route("/api/v1/company/:id").get(getCompanyProfileById);
-router.route("/api/v1/company/:id").put(protect, authorizeAdmin, updateCompanyProfile);
-router.route("/api/v1/company/:id").delete(protect, authorizeAdmin, deleteCompanyProfile);
+let baseRoute = "/api/v1/company";
+
+router.route("/").get(getCompanyProfile);
+router.route("/").post(protect, authorizeAdmin, createCompanyProfile);
+router.route("/all").get(getAllCompanyProfile);
+router.route("/upload-logo").post(protect, uploadLogo);
+router.route("/:id").get(getCompanyProfileById);
+router.route("/:id").put(protect, authorizeAdmin, updateCompanyProfile);
+router.route("/:id").delete(protect, authorizeAdmin, deleteCompanyProfile);
 
 module.exports = router;
