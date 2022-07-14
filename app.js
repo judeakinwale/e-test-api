@@ -1,5 +1,6 @@
-require("dotenv").config({path: "./.env"});
+// require("dotenv").config({path: "./.env"});
 const path = require("path");
+const dotenv = require("dotenv")
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
@@ -9,6 +10,7 @@ const fileupload = require("express-fileupload");
 const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
 const errorHandler = require("./Middleware/error");
+const connectDB = require("./config/db")
 const bodyParser = require("body-parser");
 const colors = require("colors");
 
@@ -32,25 +34,28 @@ const candidateResponse = require("./Routes/candidateResponse");
 const authentication = require("./Routes/authentication");
 
 const app = express();
+dotenv.config({path: "./config/.env"});
 
-const PORT = process.env.PORT || 5000;
-const MONGO_CLOUD_URI = process.env.MONGO_CLOUD_URI;
+// const PORT = process.env.PORT || 5000;
+// const MONGO_CLOUD_URI = process.env.MONGO_CLOUD_URI;
 
 // Middlewares
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.json());
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 app.use(cors()); //enable CORS
 // app.use(errorHandler);
 app.use(fileupload()); //file uploads
 
-// // Dev middleware
-// if (process.env.NODE_ENV === "development") {
-//     app.use(morgan("dev"));
-// }
+// Dev middleware
+if (process.env.NODE_ENV === "development") {
+    app.use(morgan("dev"));
+} else { // else block is temporary
+  app.use(morgan("tiny"))
+}
 
-// //Rate limiting
+//Rate limiting
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, // 10 mins
   max: 10000,
@@ -76,25 +81,27 @@ app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile, {explorer: tru
 
 app.use(express.static(path.join(__dirname, "/public"))); //Set static folder
 
-app.use(errorHandler)
 
-mongoose
-  .connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})
-  .then(result => {
-    console.log("Connected to MongoDB!");
-    app.listen(PORT);
-    console.log(`Listening to port ${PORT}`);
-  })
-  .catch(err => {
-    console.log("Error connecting to MongoDB!");
-  });
+connectDB()  // connect to db
+
+// mongoose
+//   .connect(MONGO_CLOUD_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+//   .then(result => {
+//     console.log("Connected to MongoDB!");
+//     app.listen(PORT);
+//     console.log(`Listening to port ${PORT}`);
+//   })
+//   .catch(err => {
+//     console.log("Error connecting to MongoDB!");
+//   });
 
 // For emulating .htaccess
-app.use(function (req, res, next) {
-  console.log("%s %s", req.method, req.url);
-  next();
-});
+// app.use(function (req, res, next) {
+//   console.log("%s %s", req.method, req.url);
+//   next();
+// });
 
+// enable proper page reloading in a react build
 app.engine(".html", require("ejs").__express);
 app.set("view engine", "html");
 app.set("views", __dirname + "/public");
@@ -108,6 +115,17 @@ app.get("/*", function (req, res) {
     res.render("index");
   }
 });
+
+app.use(errorHandler)
+
+const PORT = process.env.PORT || 8000
+const server = app.listen(PORT, console.log(`Server running on port ${PORT}`.yellow))
+
+// handle unhandled promise rejections
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Error: ${err.message}`.red)
+  server.close(() => {process.exit(1)})
+})
 
 // // Error handling
 // app.use((req, res) => {

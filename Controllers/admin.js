@@ -121,7 +121,6 @@ exports.deleteAdmin = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/admin/self
 // @access  Private
 exports.getSelf = asyncHandler(async (req, res, next) => {
-  console.log(req.admin)
   const admin = await Admin.findById(req.admin._id);
 
   if (!admin) {
