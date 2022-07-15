@@ -88,10 +88,10 @@ exports.deleteSection = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Get all sections in a test
-// @route   GET    /api/v1/section/test/:test_id
+// @route   GET    /api/v1/section/test/:testId
 // @access  Private
 exports.getTestSections = asyncHandler(async (req, res, next) => {
-  const sections = await Section.find({test: req.params.test_id}).populate(this.populateSectionDetails);
+  const sections = await Section.find({test: req.params.testId}).populate(this.populateSectionDetails);
 
   return new SuccessResponseJSON(res, sections);
 });
@@ -100,8 +100,8 @@ exports.getTestSections = asyncHandler(async (req, res, next) => {
 // @route   GET    /api/v1/section/assigned
 // @access  Private
 exports.getAssignedTestSections = asyncHandler(async (req, res, next) => {
-  const {examType} = req.candidate;
-  if (!examType) return new ErrorResponseJSON(res, "Assigned Test not Configured!", 404);
+  // const {examType} = req.candidate;
+  if (!req.candidate.examType) return new ErrorResponseJSON(res, "Assigned Test not Configured!", 404);
   
   const sections = await Section.find({test: examType});
 

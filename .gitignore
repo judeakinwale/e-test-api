@@ -5,6 +5,7 @@
 dependency_store.js
 endpoints.md
 .env
+_data
 Controllers/auth.js
 
 ### Node ###
