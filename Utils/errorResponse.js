@@ -15,12 +15,13 @@ class ErrorResponseJSON {
 }
 
 class SuccessResponseJSON {
-  constructor(res, data={}, statusCode = 200, message) {
+  constructor(res, data = undefined, statusCode = 200, message) {
     const payload = {
       success: true,
       count: data.length,
       data: data,
     };
+    if (!data) payload.statusCode = 204
     if (!Array.isArray(data)) payload.count = undefined
     if (message) payload.message = message;
     return res.status(statusCode).json(payload);
