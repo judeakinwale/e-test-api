@@ -8,7 +8,7 @@ const {
   deleteCompanyProfile,
   getAllCompanyProfile,
   uploadLogo,
-} = require("../Controllers/companyProfile");
+} = require("../Controllers/company");
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 const Question = require("../Models/question");
 const Section = require("../Models/section");
-const CandidateResponse = require("../Models/candidateResponse");
+const CandidateResponse = require("../Models/response");
 const SectionScore = require("../Models/sectionScore");
 const {getTestScore} = require("./getTestScore");
 

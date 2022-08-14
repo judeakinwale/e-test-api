@@ -2,6 +2,8 @@ const Candidate = require("../Models/candidate");
 const TestScore = require("../Models/testScore");
 const {ErrorResponseJSON} = require("../Utils/errorResponse");
 const asyncHandler = require("../Middleware/async");
+const {checkInstance} = require("../Utils/queryUtils")
+
 
 // @desc    Get all candidate
 // @route   GET     /api/v1/candidate
@@ -22,6 +24,7 @@ exports.getAllCandidates = asyncHandler(async (req, res, next) => {
     data: candidates,
   });
 });
+
 
 // @desc    Create candidate
 // @route   POST    /api/v1/candidate
@@ -55,6 +58,7 @@ exports.createCandidate = asyncHandler(async (req, res, next) => {
   });
 });
 
+
 // @desc    Get candidate
 // @route   GET     /api/v1/candidate/:id
 // @access  Private
@@ -72,6 +76,7 @@ exports.getCandidate = asyncHandler(async (req, res, next) => {
     data: candidate,
   });
 });
+
 
 // @desc    Update candidate
 // @route   PUT    /api/v1/candidate/:id
@@ -99,6 +104,7 @@ exports.updateCandidate = asyncHandler(async (req, res, next) => {
   });
 });
 
+
 // @desc    Delete candidate
 // @route   DELETE    /api/v1/candidate/:id
 // @access  Private
@@ -117,6 +123,7 @@ exports.deleteCandidate = asyncHandler(async (req, res, next) => {
   });
 });
 
+
 // @desc    Get currently authenticated candidate
 // @route   GET    /api/v1/candidate/self
 // @access  Private
@@ -134,6 +141,7 @@ exports.getSelf = asyncHandler(async (req, res, next) => {
     data: candidate,
   });
 });
+
 
 // @desc    Get currently authenticated candidate
 // @route   PUT    /api/v1/candidate/self
@@ -155,6 +163,7 @@ exports.updateSelf = asyncHandler(async (req, res, next) => {
     data: candidate,
   });
 });
+
 
 // @desc    Get candidates that passed their test
 // @route   GET    /api/v1/candidate/passed
@@ -186,6 +195,7 @@ exports.getPassedCandidates = asyncHandler(async (req, res, next) => {
   });
 });
 
+
 // @desc    Get candidates that failed their test
 // @route   GET    /api/v1/candidate/failed
 // @access  Private
@@ -215,3 +225,8 @@ exports.getFailedCandidates = asyncHandler(async (req, res, next) => {
     data: candidates,
   });
 });
+
+
+exports.checkSectionInstance = async (req, res, query = {}) => {
+  return await checkInstance(req, res, Section, this.populateSection, query, "Section")
+}

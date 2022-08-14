@@ -4,6 +4,8 @@ const Admin = require("../Models/admin");
 // const otpGenerator = require("otp-generator");
 const sendEmail = require("../Utils/sendEmail");
 const crypto = require("crypto");
+const {checkInstance} = require("../Utils/queryUtils")
+
 
 // @desc    Login admin user
 // @route   POST    /api/v1/auth/admin
@@ -34,6 +36,7 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
   sendTokenResponse(admin, 200, res);
 });
 
+
 // @desc    Log admin user out / clear cookie
 // @route   GET  /api/v1/auth/admin/logout
 // @access  Private
@@ -48,6 +51,7 @@ exports.adminLogout = asyncHandler(async (req, res, next) => {
   });
 });
 
+
 // @desc    Get current logged in admin user
 // @route   POST    /api/v1/auth/admin/account
 // @access  Private
@@ -58,6 +62,7 @@ exports.adminAccount = asyncHandler(async (req, res, next) => {
     data: admin,
   });
 });
+
 
 // @desc    Reset Password
 // @route   PUT     /api/v1/auth/admin/resetpassword/:resettoken
@@ -80,6 +85,7 @@ exports.adminResetPassword = asyncHandler(async (req, res, next) => {
 
   sendTokenResponse(user, 200, res);
 });
+
 
 // @desc    Forgot Password
 // @route   POST    /api/v1/auth/admin/forgotpassword
@@ -212,3 +218,8 @@ const sendTokenResponse = (admin, statusCode, res) => {
     token,
   });
 };
+
+
+exports.checkSectionInstance = async (req, res, query = {}) => {
+  return await checkInstance(req, res, Section, this.populateSection, query, "Section")
+}

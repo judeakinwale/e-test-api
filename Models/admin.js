@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Schema = mongoose.Schema;
 
-const AdminInformation = new Schema({
+const Admin = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -37,7 +37,7 @@ const AdminInformation = new Schema({
 });
 
 //Encrypt password using bcrypt
-AdminInformation.pre("save", async function (next) {
+Admin.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
@@ -46,19 +46,19 @@ AdminInformation.pre("save", async function (next) {
 });
 
 //Sign JWT and return
-AdminInformation.methods.getSignedJwtToken = function () {
+Admin.methods.getSignedJwtToken = function () {
   return jwt.sign({id: this._id}, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };
 
 //match user entered password to hashed password in db
-AdminInformation.methods.matchPassword = async function (enteredPassword) {
+Admin.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
 // REset Password
-AdminInformation.methods.getResetPasswordToken = function () {
+Admin.methods.getResetPasswordToken = function () {
   //Generate token
   const resetToken = crypto.randomBytes(20).toString("hex");
   //Hash token and set to resetPasswordToken field
@@ -69,4 +69,4 @@ AdminInformation.methods.getResetPasswordToken = function () {
   return resetToken;
 };
 
-module.exports = mongoose.model("admin", AdminInformation);
+module.exports = mongoose.model("admin", Admin);

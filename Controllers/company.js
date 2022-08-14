@@ -1,135 +1,68 @@
-const CompanyProfile = require("../Models/companyProfile");
-const {ErrorResponseJSON} = require("../Utils/errorResponse");
-const asyncHandler = require("../Middleware/async");
 const path = require("path");
+const CompanyProfile = require("../Models/company");
+const {ErrorResponseJSON, SuccessResponseJSON} = require("../Utils/errorResponse");
+const asyncHandler = require("../Middleware/async");
+const {checkInstance} = require("../Utils/queryUtils")
+
+
+exports.populateCompany = ""
+
 
 // @desc    Get Company Profile
 // @route   GET     /api/v1/company
 // @access  Publi/All
 exports.getCompanyProfile = asyncHandler(async (req, res, next) => {
-  const company = await CompanyProfile.findOne({});
-
-  if (!company) {
-    return res.status(404).json({
-      success: false,
-      message: "Company information not found",
-    });
-  }
-  res.status(200).json({
-    success: true,
-    data: company,
-  });
+  const company = await CompanyProfile.findOne();
+  return new SuccessResponseJSON(res, company);
+  // res.status(200).json(req.company);
 });
+
 
 // @desc    Create company profile
 // @route   POST    /api/v1/company
 // @access  Private
 exports.createCompanyProfile = asyncHandler(async (req, res, next) => {
-  const existingCompany = await CompanyProfile.findOne({
-    title: req.body.title,
-  });
-
-  if (existingCompany) {
-    return res.status(400).json({
-      success: false,
-      message: "This company profile already exists. Update it instead",
-    });
-  }
+  await this.checkCompanyInstance(req, res, {title: req.body.title})
 
   const company = await CompanyProfile.create(req.body);
-
-  if (!company) {
-    return res.status(400).json({
-      success: false,
-      message: "Invalid company information",
-    });
-    // return next(new ErrorResponseJSON(res, "An Error Occured, Please Tray Again", 400));
-  }
-  res.status(201).json({
-    success: true,
-    data: company,
-  });
+  return new SuccessResponseJSON(res, company, 201)
 });
+
 
 // @desc    Get all company profiles
 // @route   GET     /api/v1/company/all
 // @access  Private
 exports.getAllCompanyProfile = asyncHandler(async (req, res, next) => {
-  const company = await CompanyProfile.find();
-
-  if (!company) {
-    return res.status(404).json({
-      success: false,
-      message: "Company information not found",
-    });
-  } else if (company.length < 1) {
-    return res.status(404).json({
-      success: false,
-      message: "Company information not found",
-    });
-  }
-  res.status(200).json({
-    success: true,
-    data: company,
-  });
+  res.status(200).json(res.advancedResults);
 });
+
 
 // @desc    Get company profile by id
 // @route   GET    /api/v1/company/:id
 // @access  Private
 exports.getCompanyProfileById = asyncHandler(async (req, res, next) => {
-  const company = await CompanyProfile.findById(req.params.id);
-
-  if (!company) {
-    return res.status(404).json({
-      success: false,
-      message: "Company information not found",
-    });
-  }
-  res.status(200).json({
-    success: true,
-    data: company,
-  });
+  const company = await this.checkCompanyInstance(req, res)
+  return new SuccessResponseJSON(res, company)
 });
+
 
 // @desc    Update company profile
 // @route   PUT    /api/v1/company/:id
 // @access  Private
 exports.updateCompanyProfile = asyncHandler(async (req, res, next) => {
-  const company = await CompanyProfile.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-
-  if (!company) {
-    return res.status(400).json({
-      success: false,
-      message: "Invalid company information",
-    });
-  }
-  res.status(200).json({
-    success: true,
-    data: company,
-  });
+  const company = await CompanyProfile.findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true});
+  return new SuccessResponseJSON(res, company)
 });
+
 
 // @desc    Delete company profile
 // @route   DELETE    /api/v1/company/:id
 // @access  Private
 exports.deleteCompanyProfile = asyncHandler(async (req, res, next) => {
-  const company = await CompanyProfile.findByIdAndUpdate(req.params.id);
-
-  if (!company) {
-    return res.status(404).json({
-      success: false,
-      message: "Company information not found",
-    });
-  }
-  res.status(200).json({
-    success: true,
-    data: {},
-  });
+  await CompanyProfile.findByIdAndUpdate(req.params.id);
+  return new SuccessResponseJSON(res)
 });
+
 
 // @desc    Upload company logo
 // @route   POST    /api/v1/company/upload-logo
@@ -175,3 +108,8 @@ exports.uploadLogo = asyncHandler(async (req, res, next) => {
     });
   });
 });
+
+
+exports.checkCompanyInstance = async (req, res, query = {}) => {
+  return await checkInstance(req, res, Company, this.populateCompany, query, "Company")
+}

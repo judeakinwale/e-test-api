@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 // const Section = require("./section");
 
-const TestSchema = new Schema({
+const Test = new Schema({
   title: {
     type: String,
     unique: true,
@@ -29,7 +29,7 @@ const TestSchema = new Schema({
   toObject: {virtuals: true},
 });
 
-TestSchema.pre("remove", async function (next) {
+Test.pre("remove", async function (next) {
   console.log("Deleting Sections ...".brightBlue);
   await this.model("section").deleteMany({test: this._id});
   console.log("Sections Deleted.".bgRed)
@@ -37,11 +37,11 @@ TestSchema.pre("remove", async function (next) {
 });
 
 // Reverse Populate with Virtuals
-TestSchema.virtual("sections", {
+Test.virtual("sections", {
   ref: "section",
   localField: "_id",
   foreignField: "test",
   justOne: false,
 });
 
-module.exports = mongoose.model("test", TestSchema);
+module.exports = mongoose.model("test", Test);

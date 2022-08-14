@@ -1,6 +1,8 @@
 const Admin = require("../Models/admin");
 const {ErrorResponseJSON} = require("../Utils/errorResponse");
 const asyncHandler = require("../Middleware/async");
+const {checkInstance} = require("../Utils/queryUtils")
+
 
 // @desc    Get all admins
 // @route   GET     /api/v1/admin
@@ -21,6 +23,7 @@ exports.getAllAdmins = asyncHandler(async (req, res, next) => {
     data: admins,
   });
 });
+
 
 // @desc    Create admin
 // @route   POST    /api/v1/admin
@@ -54,6 +57,7 @@ exports.createAdmin = asyncHandler(async (req, res, next) => {
   });
 });
 
+
 // @desc    Get admin
 // @route   GET     /api/v1/admin/:id
 // @access  Private
@@ -71,6 +75,7 @@ exports.getAdmin = asyncHandler(async (req, res, next) => {
     data: admin,
   });
 });
+
 
 // @desc    Update admin
 // @route   PUT    /api/v1/admin/:id
@@ -99,6 +104,7 @@ exports.updateAdmin = asyncHandler(async (req, res, next) => {
   });
 });
 
+
 // @desc    Delete admin
 // @route   DELETE    /api/v1/admin/:id
 // @access  Private
@@ -117,6 +123,7 @@ exports.deleteAdmin = asyncHandler(async (req, res, next) => {
   });
 });
 
+
 // @desc    Get currently authenticated admin
 // @route   GET    /api/v1/admin/self
 // @access  Private
@@ -134,6 +141,7 @@ exports.getSelf = asyncHandler(async (req, res, next) => {
     data: admin,
   });
 });
+
 
 // @desc    Get currently authenticated admin
 // @route   PUT    /api/v1/admin/self
@@ -155,6 +163,7 @@ exports.updateSelf = asyncHandler(async (req, res, next) => {
     data: admin,
   });
 });
+
 
 // @desc    Upload profile picture for admin
 // @route   POST    /api/v1/admin/upload-profile
@@ -201,3 +210,8 @@ exports.uploadProfilePicture = asyncHandler(async (req, res, next) => {
     });
   });
 });
+
+
+exports.checkSectionInstance = async (req, res, query = {}) => {
+  return await checkInstance(req, res, Section, this.populateSection, query, "Section")
+}

@@ -4,6 +4,8 @@ const Candidate = require("../Models/candidate");
 // const otpGenerator = require("otp-generator");
 const sendEmail = require("../Utils/sendEmail");
 const crypto = require("crypto");
+const {checkInstance} = require("../Utils/queryUtils")
+
 
 // @desc    Login User
 // @route   POST    /api/v1/auth/
@@ -32,6 +34,7 @@ exports.login = asyncHandler(async (req, res, next) => {
   sendTokenResponse(candidate, 200, res);
 });
 
+
 // @desc    Log user out / clear cookie
 // @route   GET     /api/v1/auth/logout
 // @access  Private
@@ -46,6 +49,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
   });
 });
 
+
 // @desc    Get current logged in user
 // @route   POST    /api/v1/auth/account
 // @access   Private
@@ -56,6 +60,7 @@ exports.account = asyncHandler(async (req, res, next) => {
     data: candidate,
   });
 });
+
 
 // @desc    Reset Password
 // @route   PUT     /api/v1/auth/resetpassword/:resettoken
@@ -78,6 +83,7 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
 
   sendTokenResponse(user, 200, res);
 });
+
 
 // @desc    Forgot Password
 // @route   POST    /api/v1/auth/forgotpassword
@@ -210,3 +216,8 @@ const sendTokenResponse = (candidate, statusCode, res) => {
     token,
   });
 };
+
+
+exports.checkSectionInstance = async (req, res, query = {}) => {
+  return await checkInstance(req, res, Section, this.populateSection, query, "Section")
+}

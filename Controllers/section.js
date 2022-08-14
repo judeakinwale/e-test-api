@@ -21,7 +21,7 @@ exports.populateSectionDetails = {path: "test questions", select: "-correct_answ
 exports.getAllSections = asyncHandler(async (req, res, next) => {
   if (!req.params.testId) return res.status(200).json(res.advancedResults);
 
-  const sections = await Section.find({test: testId}).populate(this.populateSectionDetails);
+  const sections = await Section.find({test: req.params.testId}).populate(this.populateSectionDetails);
   return new SuccessResponseJSON(res, sections);
 });
 
@@ -93,5 +93,5 @@ exports.getAssignedTestSections = asyncHandler(async (req, res, next) => {
 
 
 exports.checkSectionInstance = async (req, res, query = {}) => {
-  return await checkInstance(req, res, Section, populateSection, query, "Section")
+  return await checkInstance(req, res, Section, this.populateSection, query, "Section")
 }

@@ -114,5 +114,5 @@ exports.getSelfSectionScores = asyncHandler(async (req, res, next) => {
 
 
 exports.checkSectionScoreInstance = async (req, res, query = {}) => {
-  return await checkInstance(req, res, SectionScore, populateSectionScore, query, "Section Score")
+  return await checkInstance(req, res, SectionScore, this.populateSectionScore, query, "Section Score")
 }

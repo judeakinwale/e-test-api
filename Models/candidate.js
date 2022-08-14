@@ -3,11 +3,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Schema = mongoose.Schema;
-const CandidateResponse = require("./candidateResponse");
+const CandidateResponse = require("./response");
 const SectionScore = require("./sectionScore");
 const TestScore = require("./testScore");
 
-const CandidateInformation = new Schema({
+const Candidate = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -45,7 +45,7 @@ const CandidateInformation = new Schema({
 });
 
 //Encrypt password using bcrypt
-CandidateInformation.pre("save", async function (next) {
+Candidate.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
@@ -54,19 +54,19 @@ CandidateInformation.pre("save", async function (next) {
 });
 
 //Sign JWT and return
-CandidateInformation.methods.getSignedJwtToken = function () {
+Candidate.methods.getSignedJwtToken = function () {
   return jwt.sign({id: this._id}, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };
 
 //match user entered password to hashed password in db
-CandidateInformation.methods.matchPassword = async function (enteredPassword) {
+Candidate.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
 // REset Password
-CandidateInformation.methods.getResetPasswordToken = function () {
+Candidate.methods.getResetPasswordToken = function () {
   //Generate token
   const resetToken = crypto.randomBytes(20).toString("hex");
   //Hash token and set to resetPasswordToken field
@@ -77,7 +77,7 @@ CandidateInformation.methods.getResetPasswordToken = function () {
   return resetToken;
 };
 
-CandidateInformation.pre("remove", async function (next) {
+Candidate.pre("remove", async function (next) {
   // 'this' is the client being removed. Provide callbacks here if you want
   // to be notified of the calls' result.
   CandidateResponse.remove({candidate: this._id}).exec();
@@ -86,4 +86,4 @@ CandidateInformation.pre("remove", async function (next) {
   next();
 });
 
-module.exports = mongoose.model("candidate", CandidateInformation);
+module.exports = mongoose.model("candidate", Candidate);

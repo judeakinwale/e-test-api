@@ -1,5 +1,5 @@
-const { RestError } = require("@azure/core-http");
-const {ErrorResponse, ErrorResponseJSON} = require("../utils/errorResponse");
+// const { RestError } = require("@azure/core-http");
+const {ErrorResponse, ErrorResponseJSON} = require("./errorResponse");
 
 
 exports.getUserEmail = (user = undefined) => {

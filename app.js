@@ -22,7 +22,7 @@ const swaggerOptions = require("./swagger-options");
 const swaggerFile = require("./swagger.json");
 
 // Routes
-const companyProfile = require("./Routes/companyProfile");
+const company = require("./Routes/company");
 const test = require("./Routes/test");
 const question = require("./Routes/question");
 const section = require("./Routes/section");
@@ -30,7 +30,7 @@ const testScore = require("./Routes/testScore");
 const sectionScore = require("./Routes/sectionScore");
 const admin = require("./Routes/admin");
 const candidate = require("./Routes/candidate");
-const candidateResponse = require("./Routes/candidateResponse");
+const response = require("./Routes/response");
 const authentication = require("./Routes/authentication");
 
 const app = express();
@@ -63,7 +63,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Routes
-app.use("/api/v1/company", companyProfile);
+app.use("/api/v1/company", company);
 app.use("/api/v1/test", test);
 app.use("/api/v1/question", question);
 app.use("/api/v1/section", section);
@@ -71,7 +71,7 @@ app.use("/api/v1/test-score", testScore);
 app.use("/api/v1/section-score", sectionScore);
 app.use("/api/v1/admin", admin);
 app.use("/api/v1/candidate", candidate);
-app.use("/api/v1/candidate-response", candidateResponse);
+app.use("/api/v1/candidate-response", response);
 app.use("/api/v1/auth", authentication);
 
 const specs = swaggerJsdoc(swaggerOptions); // for swagger-autogen

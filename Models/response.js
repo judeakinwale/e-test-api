@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ErrorResponse = require("../Utils/errorResponse");
 
-const CandidateResponse = new Schema({
+
+// Candidate Response
+const Response = new Schema({
   candidate: {
     type: mongoose.Schema.ObjectId,
     ref: "candidate",
@@ -31,10 +33,10 @@ const CandidateResponse = new Schema({
   ],
 });
 
-// CandidateResponse.pre("save", async (next) => [
+// Response.pre("save", async (next) => [
 //     if (!req.candidate) {
 //         ErrorResponse
 //     }
 // ])
 
-module.exports = mongoose.model("candidate_response", CandidateResponse);
+module.exports = mongoose.model("candidate_response", Response);

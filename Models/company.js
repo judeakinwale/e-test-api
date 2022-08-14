@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const CompanySchema = new Schema({
+const Company = new Schema({
   title: {
     type: String,
     required: [true, "Please input the title/name"],
@@ -21,4 +21,4 @@ const CompanySchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("company", CompanySchema);
+module.exports = mongoose.model("company", Company);
