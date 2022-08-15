@@ -21,6 +21,7 @@ exports.getAllResponses = asyncHandler(async (req, res, next) => {
 // @route   POST    /api/v1/candidate-response
 // @access  Private
 exports.createResponse = asyncHandler(async (req, res, next) => {
+
   const existingResponse = await Response.findOne({
     candidate: req.candidate.id,
     question: req.body.question,
@@ -277,6 +278,6 @@ exports.getResponseByQuestion = asyncHandler(async (req, res, next) => {
 // })
 
 
-exports.checkSectionInstance = async (req, res, query = {}) => {
-  return await checkInstance(req, res, Section, this.populateSection, query, "Section")
+exports.checkSectionInstance = async (req, res, query = {}, throwErr = true) => {
+  return await checkInstance(req, res, Section, this.populateSection, query, "Section", throwErr)
 }

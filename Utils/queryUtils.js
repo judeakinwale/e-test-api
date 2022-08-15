@@ -27,17 +27,18 @@ exports.addUserDetails = async (req, updated = false) => {
 }
 
 
-exports.checkInstance = async (req, res, model, populate, query = {}, instanceName = "Instance") => {
+exports.checkInstance = async (req, res, model, populate, query = {}, instanceName = "Instance", throwErr = true) => {
     /**
    * @summary
    *  check if model instance exists, check if req.params.id exists and perform logic based on that
    * 
-   * @param req - request object
-   * @param res - response object
+   * @param req {req} - request object
+   * @param res {res} - response object
    * @param model - model for creating model instance
-   * @param populate - query for populating model
-   * @param query - query for filtering the model
-   * @param instanceName - name to be used in error responses
+   * @param populate {string / object} - query for populating model
+   * @param query {object} - query for filtering the model
+   * @param instanceName {string} - name to be used in error responses
+   * @param throwErr {bool} - specify if errors should be thrown
    * 
    * @throws `Instance not Found!`, 404
    * @throws `This Instance already exists, update it instead!`, 400
@@ -53,10 +54,10 @@ exports.checkInstance = async (req, res, model, populate, query = {}, instanceNa
     instance = await model.find(query).populate(populate)
   }
   
-  if (req.params.id && !instance) {
+  if (req.params.id && !instance && throwErr) {
     throw new ErrorResponse(`${instanceName} not Found!`, 404)
     // return  new ErrorResponseJSON(res, `${instanceName} not Found!`, 404);
-  } else if (!req.params.id && instance.length > 0) {
+  } else if (!req.params.id && instance.length > 0 && throwErr) {
     throw new ErrorResponse(`This ${instanceName} already exists, update it instead!`, 400)
     // return  new ErrorResponseJSON(res, `This ${instanceName} already exists, update it instead!`, 400);
   }
